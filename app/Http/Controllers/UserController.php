@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function logar(){
-        return view("paglogin");
-    } 
-
     public function autenticar(Request $request){
 
         $this->validate($request, [
@@ -23,7 +19,7 @@ class UserController extends Controller
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             
-            return redirect()->intended('/dash');
+            return redirect()->intended('/home');
 
         }else{
             return redirect()->back()->with('danger', 'Combinação e-mail e senha inválida.');

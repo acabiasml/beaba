@@ -18,6 +18,11 @@
 </head>
 
 <body>
+
+  @php
+  $avatar = 'https://www.gravatar.com/avatar/'.md5(strtolower(trim(Auth::user()->email)));
+  @endphp
+
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -33,7 +38,7 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="{{route('dash')}}">
+              <a class="nav-link" href="{{route('home')}}">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Home</span>
               </a>
@@ -113,14 +118,14 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">@yield('title')</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item active" aria-current="page"><a href="#"><i class="fas fa-home"></i></a></li>
-                </ol>
-              </nav>
-            </div>
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">@yield('title')</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                <li class="breadcrumb-item active" aria-current="page"><a href="#"><i class="fas fa-home"></i></a></li>
+              </ol>
+            </nav>
+          </div>
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -153,7 +158,7 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{{$avatar}}" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -179,7 +184,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="{{$avatar}}">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
@@ -216,7 +221,7 @@
       <div class="row">
         <div class="col">
           <div class="card border-0">
-          @yield('content')
+            @yield('content')
           </div>
         </div>
       </div>
