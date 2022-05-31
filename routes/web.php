@@ -6,7 +6,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
-    return view('layouts.main');
+    #return view('layouts.main');
+    if (Auth::check()){
+        return redirect('home');
+    }else{
+        return view("paglogin");
+    }
 });
 
 //Tentativa de abrir página de login. Se estiver logado, vai pra home.
