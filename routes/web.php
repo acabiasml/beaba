@@ -31,4 +31,11 @@ Route::get('/auth', function(){return redirect('login');});
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/home', [DashboardController::class,'home'])->name('home');
+    Route::get('/biblioteca', [DashboardController::class,'biblioteca'])->name('biblioteca');
+    Route::get('/escola', [DashboardController::class,'escola'])->name('escola');
+    Route::get('/pessoas', [DashboardController::class,'pessoas'])->name('pessoas');
+    Route::get('/diarios', [DashboardController::class,'diarios'])->name('diarios');
+    Route::get('/relatorios', [DashboardController::class,'relatorios'])->name('relatorios');
+    Route::get('/turmas', [DashboardController::class,'turmas'])->name('turmas');
+    Route::get('/conceitos', [DashboardController::class,'conceitos'])->name('conceitos');
 });

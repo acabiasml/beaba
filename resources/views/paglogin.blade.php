@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Login / bê-á-bá</title>
+    <title>Login / bêabá</title>
 
     <!-- Favicon -->
     <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
@@ -34,7 +34,8 @@
         <!-- Page content -->
         <div class="container mt--8 pb-5">
             <div class="row justify-content-center">
-                <div class="col-lg-5 col-md-7">
+                <div class="col-lg-5 col-md-7" style="text-align: center">
+                <img src="../assets/img/brand/logo-horizontal.png" alt="..." style="margin-top: -50px; width: 200px"><br/>
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-body px-lg-5 py-lg-5">
                             @if ($errors->any())

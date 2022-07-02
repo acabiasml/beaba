@@ -28,35 +28,31 @@
 var Layout = (function() {
 
     function pinSidenav() {
-        $('.sidenav-toggler').addClass('active');
-        $('.sidenav-toggler').data('action', 'sidenav-unpin');
-        $('body').removeClass('g-sidenav-hidden').addClass('g-sidenav-show g-sidenav-pinned');
-        $('body').append('<div class="backdrop d-xl-none" data-action="sidenav-unpin" data-target='+$('#sidenav-main').data('target')+' />');
-
+		$('.sidenav-toggler').data('action', 'sidenav-unpin');
+		
         // Store the sidenav state in a cookie session
         Cookies.set('sidenav-state', 'pinned');
     }
 
     function unpinSidenav() {
-        $('.sidenav-toggler').removeClass('active');
         $('.sidenav-toggler').data('action', 'sidenav-pin');
-        $('body').removeClass('g-sidenav-pinned').addClass('g-sidenav-hidden');
-        $('body').find('.backdrop').remove();
-
+        
         // Store the sidenav state in a cookie session
         Cookies.set('sidenav-state', 'unpinned');
     }
 
     // Set sidenav state from cookie
-
+	
     var $sidenavState = Cookies.get('sidenav-state') ? Cookies.get('sidenav-state') : 'pinned';
 
     if($(window).width() > 1200) {
         if($sidenavState == 'pinned') {
+			
             pinSidenav()
         }
 
         if(Cookies.get('sidenav-state') == 'unpinned') {
+			
             unpinSidenav()
         }
 
@@ -68,6 +64,7 @@ var Layout = (function() {
     }
 
     if($(window).width() < 1200){
+		
       $('body').removeClass('g-sidenav-hide').addClass('g-sidenav-hidden');
       $('body').removeClass('g-sidenav-show');
       $(window).resize(function() {
@@ -143,7 +140,7 @@ var Layout = (function() {
     $('.sidenav').on('mouseleave', function() {
         if(! $('body').hasClass('g-sidenav-pinned')) {
             $('body').removeClass('g-sidenav-show').addClass('g-sidenav-hide');
-
+			
             setTimeout(function() {
                 $('body').removeClass('g-sidenav-hide').addClass('g-sidenav-hidden');
             }, 300);

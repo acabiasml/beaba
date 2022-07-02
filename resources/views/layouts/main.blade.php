@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>@yield('title') | bê-á-bá</title>
+  <title>@yield('title') | bêabá</title>
   <!-- Favicon -->
   <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -29,7 +29,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+          <img src="../assets/img/brand/logo-horizontal.png" class="navbar-brand-img" alt="...">
         </a>
       </div>
       <div class="navbar-inner">
@@ -44,7 +44,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('biblioteca')}}">
                 <i class="ni ni-books text-orange"></i>
                 <span class="nav-link-text">Biblioteca</span>
               </a>
@@ -59,13 +59,13 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('escola')}}">
                 <i class="ni ni-shop text-green"></i>
                 <span class="nav-link-text">Escola</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('pessoas')}}">
                 <i class="ni ni-single-02 text-yellow"></i>
                 <span class="nav-link-text">Pessoas</span>
               </a>
@@ -80,13 +80,18 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('diarios')}}">
+                <i class="ni ni-collection text-orange"></i>
+                <span class="nav-link-text">Diários</span>
+            </a>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('relatorios')}}">
                 <i class="ni ni-paper-diploma text-blue"></i>
                 <span class="nav-link-text">Relatórios</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('turmas')}}">
                 <i class="ni ni-align-left-2 text-info"></i>
                 <span class="nav-link-text">Turmas</span>
               </a>
@@ -101,7 +106,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('conceitos')}}">
                 <i class="ni ni-ui-04 text-pink"></i>
                 <span class="nav-link-text">Conceitos</span>
               </a>
@@ -119,30 +124,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">@yield('title')</h6>
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-              <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                <li class="breadcrumb-item active" aria-current="page"><a href="#"><i class="fas fa-home"></i></a></li>
-              </ol>
-            </nav>
+            <i class="ni @yield('icon') text-amarelo" style="width: 20px"></i>
+            <h6 class="h2 text-white d-inline-block mb-0"> @yield('title')</h6>
           </div>
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
-            <li class="nav-item d-xl-none">
-              <!-- Sidenav toggler -->
-              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item d-sm-none">
-              <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                <i class="ni ni-zoom-split-in"></i>
-              </a>
-            </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="ni ni-bell-55"></i>
@@ -176,6 +162,16 @@
                 </div>
                 <!-- View all -->
                 <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
+              </div>
+            </li>
+            <li class="nav-item d-xl-none">
+              <!-- Sidenav toggler -->
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
               </div>
             </li>
           </ul>

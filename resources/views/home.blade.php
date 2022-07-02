@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
-@section('title', 'Dashboard')
+@section('title', 'HOME')
+@section('icon', 'ni-tv-2')
 
 @section('content')
             <p>

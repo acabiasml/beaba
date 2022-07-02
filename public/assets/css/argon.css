@@ -3351,15 +3351,15 @@ fieldset:disabled a.btn
 .btn-primary
 {
     color: #fff;
-    border-color: #5e72e4;
-    background-color: #5e72e4;
+    border-color: #AA6149;
+    background-color: #AA6149;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
 .btn-primary:hover
 {
     color: #fff;
-    border-color: #5e72e4; 
-    background-color: #5e72e4;
+    border-color: #6B3D2E; 
+    background-color: #6B3D2E;
 }
 .btn-primary:focus,
 .btn-primary.focus
@@ -3378,8 +3378,8 @@ fieldset:disabled a.btn
 .show > .btn-primary.dropdown-toggle
 {
     color: #fff;
-    border-color: #5e72e4; 
-    background-color: #324cdd;
+    border-color: #AA6149; 
+    background-color: #AA6149;
 }
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -8873,7 +8873,7 @@ button.bg-dark:focus
 
 .bg-default
 {
-    background-color: #172b4d !important;
+    background-color: #6B3D2E !important;
 }
 
 a.bg-default:hover,
@@ -17749,13 +17749,13 @@ button.bg-darker:focus
 
 .text-primary
 {
-    color: #5e72e4 !important;
+    color: #DB6B30 !important;
 }
 
 a.text-primary:hover,
 a.text-primary:focus
 {
-    color: #233dd2 !important;
+    color: #55270F !important;
 }
 
 .text-secondary
@@ -24153,7 +24153,7 @@ button.bg-lighter:focus
 
 .bg-gradient-primary
 {
-    background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+    background: linear-gradient(87deg, #DB6B30 0, #E39063 100%) !important;
 }
 
 .bg-gradient-secondary
@@ -24509,7 +24509,7 @@ button.section-darker:focus
 
 .bg-gradient-primary
 {
-    background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+    background: linear-gradient(87deg, #DB6B30 0, #E39063 100%) !important;
 }
 
 .bg-gradient-secondary
@@ -24649,7 +24649,7 @@ button.section-darker:focus
 
 .fill-default
 {
-    fill: #172b4d;
+    fill: #6B3D2E;
 }
 
 .stroke-default
@@ -25608,6 +25608,11 @@ a.text-orange:hover,
 a.text-orange:focus
 {
     color: #ea3005 !important;
+}
+
+.text-amarelo
+{
+    color: #F1E6B2 !important;
 }
 
 .text-yellow
