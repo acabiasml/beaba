@@ -75,12 +75,6 @@
                                         <input class="form-control" placeholder="Senha" type="password" name="password">
                                     </div>
                                 </div>
-                                <div class="custom-control custom-control-alternative custom-checkbox">
-                                    <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                                    <label class="custom-control-label" for=" customCheckLogin">
-                                        <span class="text-muted">Lembrar nesse dispositivo</span>
-                                    </label>
-                                </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary my-4">Entrar</button>
                                 </div>
