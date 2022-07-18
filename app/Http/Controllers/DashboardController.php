@@ -7,34 +7,34 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function home(){
-        return view("home");
+        return view("principais.home");
     }
 
     public function biblioteca(){
-        return view("biblioteca.biblioteca");
+        return view("principais.biblioteca");
     }
 
     public function escola(){
-        return view("escola");
+        return view("principais.escola");
     }
 
     public function pessoas(){
-        return view("pessoas");
+        return view("principais.pessoas");
     }
 
     public function diarios(){
-        return view("diarios");
+        return view("principais.diarios");
     }
 
     public function relatorios(){
-        return view("relatorios");
+        return view("principais.relatorios");
     }
 
     public function turmas(){
-        return view("turmas");
+        return view("principais.turmas");
     }
 
     public function conceitos(){
-        return view("conceitos");
+        return view("principais.conceitos");
     }
 }
