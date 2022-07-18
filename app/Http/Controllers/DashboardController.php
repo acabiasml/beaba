@@ -11,7 +11,7 @@ class DashboardController extends Controller
     }
 
     public function biblioteca(){
-        return view("biblioteca");
+        return view("biblioteca.biblioteca");
     }
 
     public function escola(){
