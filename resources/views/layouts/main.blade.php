@@ -43,13 +43,16 @@
                 <span class="nav-link-text">Home</span>
               </a>
             </li>
+            @if(Auth::user()->tipo != 'prof')
             <li class="nav-item">
               <a class="nav-link" href="{{route('biblioteca')}}">
                 <i class="ni ni-books text-orange"></i>
                 <span class="nav-link-text">Biblioteca</span>
               </a>
             </li>
+            @endif
           </ul>
+          @if(Auth::user()->tipo == 'gestao')
           <!-- Divider -->
           <hr class="my-3">
           <!-- Heading -->
@@ -71,6 +74,8 @@
               </a>
             </li>
           </ul>
+          @endif
+          @if(Auth::user()->tipo != 'bibli')
           <!-- Divider -->
           <hr class="my-3">
           <!-- Heading -->
@@ -90,6 +95,8 @@
                 <span class="nav-link-text">Relatórios</span>
               </a>
             </li>
+            @endif
+            @if(Auth::user()->tipo == 'gestao')
             <li class="nav-item">
               <a class="nav-link" href="{{route('turmas')}}">
                 <i class="ni ni-align-left-2 text-info"></i>
@@ -112,6 +119,7 @@
               </a>
             </li>
           </ul>
+          @endif
         </div>
       </div>
     </div>

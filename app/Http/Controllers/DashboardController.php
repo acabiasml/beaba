@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use \App\Tables\UsersTable;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -19,7 +21,11 @@ class DashboardController extends Controller
     }
 
     public function pessoas(){
-        return view("principais.pessoas");
+        #$users = User::all();
+        #return view("principais.pessoas", compact("users"));
+
+        $table = (new UsersTable())->setup();
+        return view("principais.pessoas", compact("table"));
     }
 
     public function diarios(){

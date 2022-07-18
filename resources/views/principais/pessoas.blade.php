@@ -4,7 +4,9 @@
 @section('icon', 'ni-single-02')
 
 @section('content')
-            <p>
-                <h1>Pessoas! Em construção...</h1>
-            </p>
+
+<h1>CADASTROS</h1>
+
+{{ $table }}
+
 @endsection
