@@ -14,44 +14,38 @@
     <!-- Icons -->
     <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-        
+
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
 </head>
 
-<body class="bg-default">
-
+<body style="background-color: white">
     <!-- Main content -->
     <div class="main-content">
-        <!-- Header -->
-        <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
-            <div class="separator separator-bottom separator-skew zindex-100">
-                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-                </svg>
-            </div>
-        </div>
         <!-- Page content -->
         <div class="container mt--8 pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7" style="text-align: center">
-                <img src="../assets/img/brand/logo-horizontal.png" alt="..." style="margin-top: -50px; width: 200px"><br/>
+                    <a href="{{ url('/') }}">
+                        <img src="../assets/img/ctjj.png" alt="..." style="margin-top: 150px; margin-bottom: 10px; width: 150px">
+                    </a>
+                    <br />
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-body px-lg-5 py-lg-5">
                             @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             @endif
 
                             @if(session('danger'))
-                                <div class="alert alert-danger">
-                                    {{session('danger')}}
-                                </div>
+                            <div class="alert alert-danger">
+                                {{session('danger')}}
+                            </div>
                             @endif
 
                             <div class="text-center text-muted mb-4">
