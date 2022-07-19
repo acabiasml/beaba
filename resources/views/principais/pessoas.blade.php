@@ -5,8 +5,8 @@
 
 @section('content')
 
-<h1>CADASTROS</h1>
+    <h1>CADASTROS</h1>
 
-{{ $table }}
-
+    {{ $table }}
+    
 @endsection

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>@yield('title') | bêabá</title>
   <!-- Favicon -->
-  <link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{{Auth::user()->escola->imagem_peq}}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -29,7 +29,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="../assets/img/brand/logo-horizontal.png" class="navbar-brand-img" alt="...">
+          <img src="{{Auth::user()->escola->imagem_gra}}" class="navbar-brand-img" alt="...">
         </a>
       </div>
       <div class="navbar-inner">
@@ -225,7 +225,9 @@
       <div class="row">
         <div class="col">
           <div class="card border-0">
-            @yield('content')
+            <div style="margin-right: 10px; margin-left: 10px; margin-bottom: 10px; margin-top: 10px">
+              @yield('content')
+            </div>
           </div>
         </div>
       </div>

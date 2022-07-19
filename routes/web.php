@@ -38,4 +38,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/relatorios', [DashboardController::class,'relatorios'])->name('relatorios');
     Route::get('/turmas', [DashboardController::class,'turmas'])->name('turmas');
     Route::get('/conceitos', [DashboardController::class,'conceitos'])->name('conceitos');
+
+    Route::get('/usercreate', [UserController::class,'usercreate'])->name('usercreate');
+    Route::post('/useredit', [UserController::class,'useredit'])->name('useredit');
+    Route::post('/userdestroy', [UserController::class,'userdestroy'])->name('userdestroy');
 });

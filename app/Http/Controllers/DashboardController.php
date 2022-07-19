@@ -5,6 +5,7 @@ use \App\Tables\UsersTable;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -20,11 +21,12 @@ class DashboardController extends Controller
         return view("principais.escola");
     }
 
-    public function pessoas(){
+    public function pessoas(Request $request){
         #$users = User::all();
         #return view("principais.pessoas", compact("users"));
 
-        $table = (new UsersTable())->setup();
+        #Passando como parâmetro a requisição e o código do atual usuário.
+        $table = (new UsersTable($request, Auth::user()->escolafkid))->setup();
         return view("principais.pessoas", compact("table"));
     }
 

@@ -4,6 +4,8 @@ namespace App\Tables;
 
 use App\Models\User;
 use Okipa\LaravelTable\Abstracts\AbstractTable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Okipa\LaravelTable\Table;
 
 class UsersTable extends AbstractTable
@@ -14,20 +16,32 @@ class UsersTable extends AbstractTable
      * @return \Okipa\LaravelTable\Table
      * @throws \ErrorException
      */
+    protected Request $request;
+    protected int $idescola;
+
+    public function __construct(Request $request, int $idescola)
+    {
+        $this->request = $request;
+        $this->idescola = $idescola;
+    }
+
     protected function table(): Table
     {
         return (new Table())->model(User::class)
             ->routes([
                 'index'   => ['name' => 'pessoas'],
-                'create'  => ['name' => 'pessoas'],
-                'edit'    => ['name' => 'pessoas'],
-                'destroy' => ['name' => 'pessoas'],
+                'create'  => ['name' => 'usercreate'],
+                'edit'    => ['name' => 'useredit'],
+                'destroy' => ['name' => 'userdestroy'],
             ])
             ->destroyConfirmationHtmlAttributes(fn(User $user) => [
-                'data-confirm' => __('Are you sure you want to delete the entry :entry?', [
+                'data-confirm' => __('Apagar a entrada :entry?', [
                     'entry' => $user->database_attribute,
                 ]),
-            ]);
+            ])
+            ->query(function (Builder $query){
+                $query->where("escolafkid", $this->idescola);
+            });
     }
 
     /**

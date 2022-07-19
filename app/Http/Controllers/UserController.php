@@ -30,4 +30,16 @@ class UserController extends Controller
         Auth::logout();
         return redirect('login');
     }
+
+    public function usercreate(Request $request){
+        return view("user.create");
+    }
+
+    public function useredit(Request $request){
+
+    }
+
+    public function userdestroy(Request $request){
+
+    }
 }
