@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>@yield('title') | bêabá</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{Auth::user()->escola->imagem_peq}}" type="image/png">
+  <link rel="icon" href="../assets/img/ctjj.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -28,8 +28,8 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="javascript:void(0)">
-          <img src="{{Auth::user()->escola->imagem_gra}}" class="navbar-brand-img" alt="...">
+        <a class="navbar-brand" href="{{route('home')}}">
+          <img src="../assets/img/ctjj.png" class="navbar-brand-img" alt="...">
         </a>
       </div>
       <div class="navbar-inner">
@@ -52,7 +52,7 @@
             </li>
             @endif
           </ul>
-          @if(Auth::user()->tipo == 'gestao')
+          @if(Auth::user()->tipo == 'gestao' || Auth::user()->tipo == 'admin')
           <!-- Divider -->
           <hr class="my-3">
           <!-- Heading -->
@@ -88,7 +88,7 @@
               <a class="nav-link" href="{{route('diarios')}}">
                 <i class="ni ni-collection text-orange"></i>
                 <span class="nav-link-text">Diários</span>
-            </a>
+              </a>
             <li class="nav-item">
               <a class="nav-link" href="{{route('relatorios')}}">
                 <i class="ni ni-paper-diploma text-blue"></i>
@@ -96,7 +96,7 @@
               </a>
             </li>
             @endif
-            @if(Auth::user()->tipo == 'gestao')
+            @if(Auth::user()->tipo == 'gestao' || Auth::user()->tipo == 'admin')
             <li class="nav-item">
               <a class="nav-link" href="{{route('turmas')}}">
                 <i class="ni ni-align-left-2 text-info"></i>
@@ -196,7 +196,7 @@
                 </div>
               </a>
               <div class="dropdown-menu  dropdown-menu-right ">
-                <a href="#!" class="dropdown-item">
+                <a href="{{route('user.show', Auth::user()->id)}}" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>Meu perfil</span>
                 </a>
@@ -259,6 +259,22 @@
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
+
+  <script>
+    // Example of javascript snippet to ask a confirmation before executing the destroy action
+    // This js snippet uses the `data-confirm` attribute value provided in the use case example above
+    const destroyButtons = $('table form.destroy-action button[data-confirm]');
+    destroyButtons.click((event) => {
+      event.preventDefault();
+      const $this = $(event.target);
+      const $destroyButton = $this.is('button') ? $this : $this.closest('button');
+      const message = $destroyButton.data('confirm');
+      const form = $destroyButton.closest('form');
+      if (message && confirm(message)) {
+        form.submit();
+      }
+    });
+  </script>
 </body>
 
 </html>

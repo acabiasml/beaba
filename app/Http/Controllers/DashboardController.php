@@ -22,11 +22,7 @@ class DashboardController extends Controller
     }
 
     public function pessoas(Request $request){
-        #$users = User::all();
-        #return view("principais.pessoas", compact("users"));
-
-        #Passando como parâmetro a requisição e o código do atual usuário.
-        $table = (new UsersTable($request, Auth::user()->escolafkid))->setup();
+        $table = (new UsersTable($request))->setup();
         return view("principais.pessoas", compact("table"));
     }
 

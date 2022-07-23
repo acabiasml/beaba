@@ -2,11 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 
+Route::post('/incluir', [UserController::class, 'storeFirst'])->name('user.store.first');
+
 Route::get('/', function () {
-    #return view('layouts.main');
+    if(User::count() == 0){
+        return view("instalacao.passo1");
+    }
+
     if (Auth::check()){
         return redirect('home');
     }else{
@@ -14,7 +20,6 @@ Route::get('/', function () {
     }
 });
 
-//Tentativa de abrir página de login. Se estiver logado, vai pra home.
 Route::get('/login', function(){
     if (Auth::check()){
         return redirect('home');
@@ -39,7 +44,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/turmas', [DashboardController::class,'turmas'])->name('turmas');
     Route::get('/conceitos', [DashboardController::class,'conceitos'])->name('conceitos');
 
-    Route::get('/usercreate', [UserController::class,'usercreate'])->name('usercreate');
-    Route::post('/useredit', [UserController::class,'useredit'])->name('useredit');
-    Route::post('/userdestroy', [UserController::class,'userdestroy'])->name('userdestroy');
+    Route::get('/createuser', [UserController::class, 'create'])->name('user.create');
+    Route::get('/showuser/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/edituser/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/destroyuser/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
