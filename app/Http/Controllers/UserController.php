@@ -198,6 +198,6 @@ class UserController extends Controller
     public function print($id){
         $usuario = User::findOrFail($id);
         $arquivo = Pdf::loadView("user.print", ['usuario' => $usuario])->setPaper('a4', 'portrait');
-        return $arquivo->download('invoice.pdf');
+        return $arquivo->download('ficha-user'.$usuario->id.time().'.pdf');
     }
 }

@@ -49,7 +49,6 @@ class UsersTable extends AbstractTable
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
         $table->column('tipo')->title("Função")->sortable();
-        $table->column('email')->title("E-mail");
         $table->column('telefone1')->title("Telefone");
         $table->column('cpf')->title("CPF");
     }
