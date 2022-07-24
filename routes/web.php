@@ -47,5 +47,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/createuser', [UserController::class, 'create'])->name('user.create');
     Route::get('/showuser/{id}', [UserController::class, 'show'])->name('user.show');
     Route::get('/edituser/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::get('/destroyuser/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/printuser/{id}', [UserController::class, 'print'])->name('user.print');
+    Route::delete('/destroyuser/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::post('/inclui', [UserController::class, 'storeUser'])->name('user.store.user');
+    Route::post('/atualiza', [UserController::class, 'update'])->name('user.update.user');
 });
