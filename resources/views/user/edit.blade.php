@@ -13,7 +13,7 @@
             <x:form::input type="hidden" name="id"/>
             <x:form::input id="nome" name="nome" label="Nome completo" />
             <x:form::input name="nomesocial" label="Nome social" />
-            <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'gestao' => 'Gestão', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio']" />
+            <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio']" />
             <x:form::input id="email" type="email" name="email" label="E-mail" />
             <x:form::input id="password" type="password" name="password" label="Senha" />
             <x:form::input name="cpf" label="CPF" />
@@ -55,13 +55,13 @@
             <x:form::input name="endnumero" label="Número do logradouro" />
             <x:form::input name="endbairro" label="Bairro" />
             <x:form::input name="endcidade" label="Cidade" />
+            <x:form::select name="enduf" label="Estado do endereço: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']"/>
             <x:form::input name="endcomplemento" label="Complemento do endereço" />
             <x:form::input name="endcep" label="CEP" />
-            <x:form::select name="enduf" label="Estado do endereço: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']"/>
             <x:form::input name="titulo" label="Título de eleitor" />
             <x:form::input name="titulozona" label="Zona do título de eleitor" />
             <x:form::input name="titulosessao" label="Sessão do título de eleitor" />
-            <x:form::select name="titulouf" label="Estado de naturalidade: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']"/>
+            <x:form::select name="titulouf" label="Estado do título: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']"/>
             <x:form::input name="docmilitar" label="Documento militar" />
             <x:form::input name="banco" label="Banco" />
             <x:form::input name="agencia" label="Agência" />

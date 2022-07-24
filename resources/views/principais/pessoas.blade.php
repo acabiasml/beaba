@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <h1>CADASTROS</h1>
+    <h1>Cadastro de Pessoal</h1>
 
     {{ $table }}
     

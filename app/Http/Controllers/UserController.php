@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -40,6 +40,7 @@ class UserController extends Controller
             "responcpf" => $request->responcpf,
             "respontel1" => $request->respontel1,
             "respontel2" => $request->respontel2,
+            "nacionalidade" => $request->nacionalidade,
             "naturalidade" => $request->naturalidade,
             "naturaif" => $request->naturaif,
             "identidade" => $request->identidade,
@@ -95,10 +96,13 @@ class UserController extends Controller
     public function update(Request $request){
         $usuario = User::findOrFail($request->id);
 
+        if($request->senha != NULL && $request->senha != $usuario->senha){
+            $usuario->update(["password" => Hash::make($request->password)]);
+        }
+
         $usuario->update([
             "nome" => $request->nome,
             "email" => $request->email,
-            "password" => Hash::make($request->password),
             "codigo" => $request->codigo,
             "tipo" => $request->tipo,
             "inep" => $request->inep,
@@ -113,6 +117,7 @@ class UserController extends Controller
             "responcpf" => $request->responcpf,
             "respontel1" => $request->respontel1,
             "respontel2" => $request->respontel2,
+            "nacionalidade" => $request->nacionalidade,
             "naturalidade" => $request->naturalidade,
             "naturaif" => $request->naturaif,
             "identidade" => $request->identidade,
@@ -186,7 +191,7 @@ class UserController extends Controller
     public function storeFirst(Request $request){
         if(User::count() == 0){
             $this->store($request);
-            return redirect('paglogin');
+            return redirect('login');
         }
     }
 

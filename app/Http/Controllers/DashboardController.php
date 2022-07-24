@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 use \App\Tables\UsersTable;
+use \App\Tables\EscolasTable;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -17,8 +16,9 @@ class DashboardController extends Controller
         return view("principais.biblioteca");
     }
 
-    public function escola(){
-        return view("principais.escola");
+    public function escolas(Request $request){
+        $table = (new EscolasTable($request))->setup();
+        return view("principais.escolas", compact("table"));
     }
 
     public function pessoas(Request $request){

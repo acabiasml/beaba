@@ -23,7 +23,7 @@
             <x:form::input type="hidden" name="id" />
             <x:form::input readonly id="nome" name="nome" label="Nome completo" />
             <x:form::input readonly name="nomesocial" label="Nome social" />
-            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'gestao' => 'Gestão', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio']" />
+            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio']" />
             <x:form::input readonly id="email" type="email" name="email" label="E-mail" />
             <x:form::input readonly id="password" type="password" name="password" label="Senha" />
             <x:form::input readonly name="cpf" label="CPF" />
@@ -65,13 +65,13 @@
             <x:form::input readonly name="endnumero" label="Número do logradouro" />
             <x:form::input readonly name="endbairro" label="Bairro" />
             <x:form::input readonly name="endcidade" label="Cidade" />
+            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="enduf" label="Estado do endereço: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']" />
             <x:form::input readonly name="endcomplemento" label="Complemento do endereço" />
             <x:form::input readonly name="endcep" label="CEP" />
-            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="enduf" label="Estado do endereço: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']" />
             <x:form::input readonly name="titulo" label="Título de eleitor" />
             <x:form::input readonly name="titulozona" label="Zona do título de eleitor" />
             <x:form::input readonly name="titulosessao" label="Sessão do título de eleitor" />
-            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="titulouf" label="Estado de naturalidade: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']" />
+            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="titulouf" label="Estado do título: " :options="['MT' => 'MT', 'AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']" />
             <x:form::input readonly name="docmilitar" label="Documento militar" />
             <x:form::input readonly name="banco" label="Banco" />
             <x:form::input readonly name="agencia" label="Agência" />

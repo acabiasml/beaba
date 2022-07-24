@@ -106,7 +106,7 @@
                     <p><b>Genitor:</b> {{$usuario->genitor}}</p>
                     <p><b>Responsável:</b> {{$usuario->responsavel}}</p>
                     <p><b>CPF do responsável:</b> {{$usuario->responcpf}}</p>
-                    <p><b>Endereço:</b> {{$usuario->endereco}}, {{$usuario->endnumero}}, {{$usuario->endbairro}}, {{$usuario->endcidade}}, {{$usuario->enduf}}, {{$usuario->endcomplemento}}, {{$usuario->cep}}</p>
+                    <p><b>Endereço:</b> {{$usuario->endereco}}, {{$usuario->endnumero}}, bairro {{$usuario->endbairro}}, {{$usuario->endcidade}} - {{$usuario->enduf}}, CEP {{$usuario->endcep}}, {{$usuario->endcomplemento}}</p>
                 </div>
                 <div style="margin-left:320pt">
                     <p><b>Cor (autodeclarado):</b> {{$usuario->cor}}</p>
@@ -121,14 +121,14 @@
                 <div style="position:absolute; left:0pt; width: 350px">
                     <p><b>Nacionalidade:</b> {{$usuario->nacionalidade}}</p>
                     <p><b>Naturalidade:</b> {{$usuario->naturalidade}}, {{$usuario->naturaif}}</p>
-                    <p><b>Identidade:</b> {{$usuario->identidade}}, {{$usuario->identemissor}}, {{$usuario->identuf}}, expedido em {{$usuario->identemissao}}</p>
+                    <p><b>Identidade:</b> {{$usuario->identidade}}, {{$usuario->identemissor}}-{{$usuario->identuf}}, expedido em {{$usuario->identemissao}}</p>
                     <p><b>Documento extrangeiro:</b> {{$usuario->docextrangeiro}}</p>
                     <p><b>Necessidades nutricionais:</b> {{$usuario->nutricionais}}</p>
                     <p><b>Habilitação:</b> {{$usuario->habilitacao}}, categoria {{$usuario->habilcategoria}}, validade {{$usuario->habilvalidade}}</p>
                 </div>
                 <div style="margin-left:360px">
                     <p><b>Certidão</b> {{$usuario->certidao}}, folha {{$usuario->certifolha}}, livro {{$usuario->certilivro}}, emitido em {{$usuario->certiemissao}}</p>
-                    <p><b>Título de eleitor</b> {{$usuario->titulo}}, zona {{$usuario->titulozona}}, sessao {{$usuario->titulosessao}}, estado {{$usuario->titulouf}}</p>
+                    <p><b>Título de eleitor</b> {{$usuario->titulo}}, zona {{$usuario->titulozona}}, sessao {{$usuario->titulosessao}}, UF {{$usuario->titulouf}}</p>
                     <p><b>Documento militar:</b> {{$usuario->docmilitar}}</p>
                     <p><b>Cartão SUS:</b> {{$usuario->cartaosus}}</p>
                     <p><b>Conta bancária:</b> {{$usuario->banco}}, agência {{$usuario->agencia}}, conta {{$usuario->conta}}</p>

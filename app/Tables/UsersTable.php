@@ -4,24 +4,18 @@ namespace App\Tables;
 
 use App\Models\User;
 use Okipa\LaravelTable\Abstracts\AbstractTable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Okipa\LaravelTable\Table;
-use Illuminate\Support\Facades\Auth;
 
-class UsersTable extends AbstractTable
-{
+class UsersTable extends AbstractTable{
     
     protected Request $request;
-    protected int $idescola;
 
-    public function __construct(Request $request)
-    {
+    public function __construct(Request $request){
         $this->request = $request;
     }
 
-    protected function table(): Table
-    {
+    protected function table(): Table{
         return (new Table())->model(User::class)
             ->routes([
                 'index'   => ['name' => 'pessoas'],
@@ -37,15 +31,7 @@ class UsersTable extends AbstractTable
             ]);
     }
 
-    /**
-     * Configure the table columns.
-     *
-     * @param \Okipa\LaravelTable\Table $table
-     *
-     * @throws \ErrorException
-     */
-    protected function columns(Table $table): void
-    {
+    protected function columns(Table $table): void{
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
         $table->column('tipo')->title("Função")->sortable();
@@ -53,11 +39,6 @@ class UsersTable extends AbstractTable
         $table->column('cpf')->title("CPF");
     }
 
-    /**
-     * Configure the table result lines.
-     *
-     * @param \Okipa\LaravelTable\Table $table
-     */
     protected function resultLines(Table $table): void
     {
         //
