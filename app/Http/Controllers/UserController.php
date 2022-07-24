@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -196,7 +195,9 @@ class UserController extends Controller
         return redirect('pessoas');
     }
 
-    public function print(Request $request){
-        //
+    public function print($id){
+        $usuario = User::findOrFail($id);
+        $arquivo = Pdf::loadView("user.print", ['usuario' => $usuario])->setPaper('a4', 'portrait');
+        return $arquivo->download('invoice.pdf');
     }
 }
