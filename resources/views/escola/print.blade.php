@@ -62,7 +62,7 @@
 
         @php
             $agora = new DateTime(null, new DateTimeZone('America/Cuiaba'));
-            $funda = new DateTime('$escola->fundacao');
+            $funda = new DateTime($escola->fundacao);
         @endphp
 
         <footer style="margin-top: 10pt;">
