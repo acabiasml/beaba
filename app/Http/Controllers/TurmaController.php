@@ -10,7 +10,7 @@ class TurmaController extends Controller
 {
     public function index()
     {
-        //
+        ////
     }
 
     /**

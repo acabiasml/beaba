@@ -96,6 +96,8 @@ class UserController extends Controller
     public function update(Request $request){
         $usuario = User::findOrFail($request->id);
 
+        dd($request->senha . "|".$request->password);
+
         if($request->senha != $usuario->senha){
             $usuario->update(["password" => Hash::make($request->password)]);
         }
