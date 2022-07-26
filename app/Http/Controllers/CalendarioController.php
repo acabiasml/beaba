@@ -5,82 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\Calendario;
 use App\Http\Requests\StoreCalendarioRequest;
 use App\Http\Requests\UpdateCalendarioRequest;
+use Illuminate\Http\Request;
 
-class CalendarioController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+class CalendarioController extends Controller{
+
+    public function index(Request $request){
+        dd($request);
+    }
+
+    public function create(){
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function store(StoreCalendarioRequest $request){
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCalendarioRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCalendarioRequest $request)
-    {
+    public function show(Calendario $calendario){
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Calendario  $calendario
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Calendario $calendario)
-    {
+    public function edit(Calendario $calendario){
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Calendario  $calendario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Calendario $calendario)
-    {
+    public function update(UpdateCalendarioRequest $request, Calendario $calendario){
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCalendarioRequest  $request
-     * @param  \App\Models\Calendario  $calendario
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCalendarioRequest $request, Calendario $calendario)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Calendario  $calendario
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Calendario $calendario)
-    {
+    public function destroy(Calendario $calendario){
         //
     }
 }

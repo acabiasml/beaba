@@ -15,4 +15,8 @@ class Escola extends Model{
     protected $fillable = ['id', 'nome', 'fundacao', 'info', 'razao', 'cnpj', 'telefone', 'email',
                             'site', 'endereco', 'bairro', 'numero', 'cidade', 'estado', 'cep', 
                             'diretor', 'coordenador', 'secretario'];
+
+    public function calendarios(){
+        return $this->hasMany(Calendario::class);
+    }
 }

@@ -35,7 +35,10 @@ class EscolasTable extends AbstractTable{
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
         $table->column('cnpj')->title("CNPJ");
+        $table->column()->link(route('escolas'));
         $table->column('telefone')->title("Telefone");
+
+        $table->column()->link(route('home'))->title("link");
     }
 
     protected function resultLines(Table $table): void {
