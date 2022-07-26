@@ -22,6 +22,7 @@ class UserController extends Controller
 
     
     public function store(Request $request){
+
         User::create([
             "nome" => $request->nome,
             "email" => $request->email,
@@ -96,7 +97,9 @@ class UserController extends Controller
     public function update(Request $request){
         $usuario = User::findOrFail($request->id);
 
-        if($request->senha != NULL && $request->senha != $usuario->senha){
+        dd($request->password);
+
+        if($request->senha != $usuario->senha){
             $usuario->update(["password" => Hash::make($request->password)]);
         }
 
