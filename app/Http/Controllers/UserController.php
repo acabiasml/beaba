@@ -92,12 +92,9 @@ class UserController extends Controller
         $usuario = User::findOrFail($id);
         return view("user.edit", ['usuario' => $usuario]);
     }
-
     
     public function update(Request $request){
         $usuario = User::findOrFail($request->id);
-
-        dd($request->password);
 
         if($request->senha != $usuario->senha){
             $usuario->update(["password" => Hash::make($request->password)]);
