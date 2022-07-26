@@ -62,6 +62,7 @@
 
         @php
             $agora = new DateTime(null, new DateTimeZone('America/Cuiaba'));
+            $funda = new DateTime('$escola->fundacao');
         @endphp
 
         <footer style="margin-top: 10pt;">
@@ -78,7 +79,7 @@
             <div style="clear:both; position:relative">
                 <div style="position:absolute; left:0pt; width: 350px">
                     <p><b>Nome:</b> <b>{{$escola->nome}}</b></p>
-                    <p><b>Fundação:</b> {{$escola->fundacao}}</p>
+                    <p><b>Fundação:</b> {{$funda->format('d/m/Y')}}</p>
                     <p><b>Atos de autorização:</b> {{$escola->info}}</p>
                     <p><b>Razão social:</b> {{$escola->razao}}</p>
                     <p><b>CNPJ:</b> {{$escola->cnpj}}</p>
