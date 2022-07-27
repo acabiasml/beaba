@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'EDITAR CADASTRO DE ESCOLA')
 @section('icon', 'ni-shop')

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'TURMAS')
 @section('icon', 'ni-align-left-2')

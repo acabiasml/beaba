@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'CRIAR REGISTRO')
 @section('icon', 'ni-single-02')

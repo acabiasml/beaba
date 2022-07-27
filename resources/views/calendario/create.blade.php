@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'NOVO CALENDÁRIO')
 @section('icon', 'ni-calendar-grid-58')

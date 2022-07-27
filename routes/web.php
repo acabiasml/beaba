@@ -18,7 +18,7 @@ Route::get('/', function () {
     if (Auth::check()){
         return redirect('home');
     }else{
-        return view("paglogin");
+        return view("principais.login");
     }
 });
 
@@ -26,7 +26,7 @@ Route::get('/login', function(){
     if (Auth::check()){
         return redirect('home');
     }else{
-        return view("paglogin");
+        return view("principais.login");
     }
 })->name('login');
 

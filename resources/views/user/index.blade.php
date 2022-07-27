@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'PESSOAS')
 @section('icon', 'ni-single-02')

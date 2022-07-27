@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'CONCEITOS')
 @section('icon', 'ni-ui-04')

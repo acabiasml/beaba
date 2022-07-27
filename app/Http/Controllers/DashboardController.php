@@ -18,12 +18,12 @@ class DashboardController extends Controller
 
     public function escolas(Request $request){
         $table = (new EscolasTable($request))->setup();
-        return view("principais.escolas", compact("table"));
+        return view("escola.index", compact("table"));
     }
 
     public function pessoas(Request $request){
         $table = (new UsersTable($request))->setup();
-        return view("principais.pessoas", compact("table"));
+        return view("user.index", compact("table"));
     }
 
     public function diarios(){

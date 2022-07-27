@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'RELATÓRIOS')
 @section('icon', 'ni-paper-diploma')

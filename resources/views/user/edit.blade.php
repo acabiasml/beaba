@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'EDITAR CADASTRO')
 @section('icon', 'ni-single-02')

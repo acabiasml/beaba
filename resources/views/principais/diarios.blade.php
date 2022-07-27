@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('principais.layout')
 
 @section('title', 'DIÁRIOS')
 @section('icon', 'ni-collection')
