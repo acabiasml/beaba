@@ -3,26 +3,28 @@
 namespace App\Tables;
 
 use App\Models\Calendario;
+use App\Models\Escola;
 use Okipa\LaravelTable\Abstracts\AbstractTable;
 use Okipa\LaravelTable\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class CalendariosTable extends AbstractTable
 {
-    protected String $id;
+    protected Escola $escola;
 
-    public function __construct(String $id){
-        $this->id = $id;
+    public function __construct($id){
+        $this->escola = Escola::findOrFail($id);
     }
 
     protected function table(): Table{
+
         return (new Table())
             ->model(Calendario::class)
             ->query(function(Builder $query) {
-            $query->select('calendarios.*')->where("escolas_id", "=", $this->id);})
+            $query->select('calendarios.*')->where("escolas_id", "=", $this->escola->id);})
             ->routes([
                 'index'   => ['name' => 'escolas'],
-                'create'  => ['name' => 'calendario.create'],
+                'create'  => ['name' => 'calendario.create', 'params' => ["id" => $this->escola->id]],
                 'edit'    => ['name' => 'calendario.edit'],
                 'destroy' => ['name' => 'calendario.destroy'],
             ])

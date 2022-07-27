@@ -32,7 +32,6 @@ class EscolasTable extends AbstractTable{
     }
 
     protected function columns(Table $table): void{
-
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
         $table->column('cnpj')->title("CNPJ");

@@ -63,9 +63,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/atualizaescola', [EscolaController::class, 'update'])->name('escola.update.escola');
 
     Route::get('/calendarios/{id}', [CalendarioController::class, 'index'])->name('calendarios');
-    Route::get('/createcalendario', [CalendarioController::class, 'create'])->name('calendario.create');
+    Route::get('/createcalendario/{id}', [CalendarioController::class, 'create'])->name('calendario.create');
     Route::get('/editcalendario/{id}', [CalendarioController::class, 'edit'])->name('calendario.edit');
     Route::delete('/destroycalendario/{id}', [CalendarioController::class, 'destroy'])->name('calendario.destroy');
-    Route::post('/incluicalendario', [CalendarioController::class, 'storeCalendario'])->name('calendario.store.calendario');
-    Route::post('/atualizacalendario', [CalendarioController::class, 'update'])->name('calendario.update.calendario');
+    Route::post('/incluicalendario', [CalendarioController::class, 'store'])->name('calendario.store');
+    Route::post('/atualizacalendario', [CalendarioController::class, 'update'])->name('calendario.update');
 });
