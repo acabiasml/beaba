@@ -32,13 +32,18 @@ class EscolasTable extends AbstractTable{
     }
 
     protected function columns(Table $table): void{
+
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
         $table->column('cnpj')->title("CNPJ");
         $table->column()->link(route('escolas'));
         $table->column('telefone')->title("Telefone");
 
-        $table->column()->link(route('home'))->title("link");
+        $table->column()->html(function(Escola $escola) {
+            $caminho = route("calendarios", "");
+            $string = '<a href="'.$caminho."/" . $escola->id . '">ver calendários</a>';
+            return $string;
+        });
     }
 
     protected function resultLines(Table $table): void {

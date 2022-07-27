@@ -5,22 +5,24 @@ namespace App\Tables;
 use App\Models\Calendario;
 use Okipa\LaravelTable\Abstracts\AbstractTable;
 use Okipa\LaravelTable\Table;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class CalendariosTable extends AbstractTable
 {
-    protected Request $request;
+    protected String $id;
 
-    public function __construct(Request $request){
-        $this->request = $request;
+    public function __construct(String $id){
+        $this->id = $id;
     }
 
     protected function table(): Table{
-        return (new Table())->model(Calendario::class)
+        return (new Table())
+            ->model(Calendario::class)
+            ->query(function(Builder $query) {
+            $query->select('calendarios.*')->where("escolas_id", "=", $this->id);})
             ->routes([
-                'index'   => ['name' => 'calendarios'],
+                'index'   => ['name' => 'escolas'],
                 'create'  => ['name' => 'calendario.create'],
-                'show' => ['name' => 'calendario.show'],
                 'edit'    => ['name' => 'calendario.edit'],
                 'destroy' => ['name' => 'calendario.destroy'],
             ])
@@ -33,7 +35,7 @@ class CalendariosTable extends AbstractTable
 
     protected function columns(Table $table): void{
         $table->column('id')->title("id");
-        $table->column('nome')->title("Nome")->sortable(true)->searchable();
+        $table->column('nome')->title("Nome")->sortable()->searchable();
         $table->column('ano')->title("Ano")->sortable(true, 'asc')->searchable();
     }
 

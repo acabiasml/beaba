@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EscolaController;
+use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\DashboardController;
 
 Route::post('/incluir', [UserController::class, 'storeFirst'])->name('user.store.first');
@@ -61,11 +62,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/incluiescola', [EscolaController::class, 'storeEscola'])->name('escola.store.escola');
     Route::post('/atualizaescola', [EscolaController::class, 'update'])->name('escola.update.escola');
 
-    Route::get('/calendarios', [CalendarioController::class, 'index'])->name('calendarios');
+    Route::get('/calendarios/{id}', [CalendarioController::class, 'index'])->name('calendarios');
     Route::get('/createcalendario', [CalendarioController::class, 'create'])->name('calendario.create');
-    Route::get('/showcalendario/{id}', [CalendarioController::class, 'show'])->name('calendario.show');
     Route::get('/editcalendario/{id}', [CalendarioController::class, 'edit'])->name('calendario.edit');
-    Route::get('/printcalendario/{id}', [CalendarioController::class, 'print'])->name('calendario.print');
     Route::delete('/destroycalendario/{id}', [CalendarioController::class, 'destroy'])->name('calendario.destroy');
     Route::post('/incluicalendario', [CalendarioController::class, 'storeCalendario'])->name('calendario.store.calendario');
     Route::post('/atualizacalendario', [CalendarioController::class, 'update'])->name('calendario.update.calendario');
