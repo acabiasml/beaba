@@ -283,6 +283,8 @@ svg
     overflow: hidden;
 
     vertical-align: middle;
+
+    width: 20px;
 }
 
 table
