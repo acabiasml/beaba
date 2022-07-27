@@ -46,7 +46,6 @@
             <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="tiposangue" label="Tipo Sanguíneo: " :options="['A+' => 'A+', 'A-' => 'A-', 'B+' => 'B+', 'B-' => 'B-', 'AB+' => 'AB+', 'AB-' => 'AB-', 'O+' => 'O+', 'O-' => 'O-']" />
             <x:form::textarea readonly label="Observações nutricionais" name="nutricionais" />
             <x:form::input readonly name="habilitacao" label="Habilitação" />
-            <x:form::input name="habilvalidade" label="Validade da habilitação" />
             <x:form::input readonly name="habilvalidade" label="Validade da habilitação" />
             <x:form::input readonly name="habilcategoria" label="Categoria de habilitação" />
         </div>
