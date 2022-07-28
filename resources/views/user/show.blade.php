@@ -23,7 +23,7 @@
             <x:form::input type="hidden" name="id" />
             <x:form::input readonly id="nome" name="nome" label="Nome completo" />
             <x:form::input readonly name="nomesocial" label="Nome social" />
-            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio']" />
+            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio', 'bibli' => 'Biblioteca']" />
             <x:form::input readonly id="email" type="email" name="email" label="E-mail" />
             <x:form::input readonly id="password" type="password" name="password" label="Senha" />
             <x:form::input readonly name="cpf" label="CPF" />

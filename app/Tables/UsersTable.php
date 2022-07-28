@@ -36,7 +36,7 @@ class UsersTable extends AbstractTable{
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
         $table->column('tipo')->title("Função")->sortable();
         $table->column('telefone1')->title("Telefone");
-        $table->column('cpf')->title("CPF");
+        $table->column('cpf')->title("CPF")->searchable();
     }
 
     protected function resultLines(Table $table): void

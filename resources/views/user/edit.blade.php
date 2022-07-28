@@ -13,7 +13,7 @@
             <x:form::input type="hidden" name="id"/>
             <x:form::input id="nome" name="nome" label="Nome completo" />
             <x:form::input name="nomesocial" label="Nome social" />
-            <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio']" />
+            <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio', 'bibli' => 'Biblioteca']" />
             <x:form::input id="email" type="email" name="email" label="E-mail" />
             <x:form::input id="password" type="password" name="password" label="Senha" />
             <x:form::input name="cpf" label="CPF" />

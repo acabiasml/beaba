@@ -43,7 +43,7 @@
                 <span class="nav-link-text">Home</span>
               </a>
             </li>
-            @if(Auth::user()->tipo != 'prof')
+            @if(Auth::user()->tipo == 'bibli' || Auth::user()->tipo == 'admin')
             <li class="nav-item">
               <a class="nav-link" href="{{route('biblioteca')}}">
                 <i class="ni ni-books text-orange"></i>
@@ -52,7 +52,7 @@
             </li>
             @endif
           </ul>
-          @if(Auth::user()->tipo == 'gestao' || Auth::user()->tipo == 'admin')
+          @if(Auth::user()->tipo == 'admin')
           <!-- Divider -->
           <hr class="my-3">
           <!-- Heading -->
@@ -73,6 +73,18 @@
                 <span class="nav-link-text">Pessoas</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('turmas')}}">
+                <i class="ni ni-align-left-2 text-info"></i>
+                <span class="nav-link-text">Turmas</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('relatorios')}}">
+                <i class="ni ni-paper-diploma text-blue"></i>
+                <span class="nav-link-text">Relatórios</span>
+              </a>
+            </li>
           </ul>
           @endif
           @if(Auth::user()->tipo != 'bibli')
@@ -89,37 +101,8 @@
                 <i class="ni ni-collection text-orange"></i>
                 <span class="nav-link-text">Diários</span>
               </a>
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('relatorios')}}">
-                <i class="ni ni-paper-diploma text-blue"></i>
-                <span class="nav-link-text">Relatórios</span>
-              </a>
-            </li>
             @endif
-            @if(Auth::user()->tipo == 'gestao' || Auth::user()->tipo == 'admin')
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('turmas')}}">
-                <i class="ni ni-align-left-2 text-info"></i>
-                <span class="nav-link-text">Turmas</span>
-              </a>
-            </li>
           </ul>
-          <!-- Divider -->
-          <hr class="my-3">
-          <!-- Heading -->
-          <h6 class="navbar-heading p-0 text-muted">
-            <span class="docs-normal">Parâmetros</span>
-          </h6>
-          <!-- Navigation -->
-          <ul class="navbar-nav mb-md-3">
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('conceitos')}}">
-                <i class="ni ni-ui-04 text-pink"></i>
-                <span class="nav-link-text">Conceitos</span>
-              </a>
-            </li>
-          </ul>
-          @endif
         </div>
       </div>
     </div>
