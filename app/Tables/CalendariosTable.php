@@ -21,9 +21,9 @@ class CalendariosTable extends AbstractTable
         return (new Table())
             ->model(Calendario::class)
             ->query(function(Builder $query) {
-            $query->select('calendarios.*')->where("escolas_id", "=", $this->escola->id);})
+                $query->select('calendarios.*')->where("escolas_id", "=", $this->escola->id);})
             ->routes([
-                'index'   => ['name' => 'escolas'],
+                'index'   => ['name' => 'calendarios', 'params' => ["id" => $this->escola->id]],
                 'create'  => ['name' => 'calendario.create', 'params' => ["id" => $this->escola->id]],
                 'edit'    => ['name' => 'calendario.edit'],
                 'destroy' => ['name' => 'calendario.destroy'],
@@ -39,6 +39,16 @@ class CalendariosTable extends AbstractTable
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable()->searchable();
         $table->column('ano')->title("Ano")->sortable(true, 'asc')->searchable();
+        $table->column()->html(function(Calendario $calendario) {
+            $caminho = route("bimestres", "");
+            $string = '<a href="'.$caminho."/" . $calendario->id . '">ver bimestres</a>';
+            return $string;
+        });
+        $table->column()->html(function(Calendario $calendario) {
+            $caminho = route("cursos", "");
+            $string = '<a href="'.$caminho."/" . $calendario->id . '">ver cursos</a>';
+            return $string;
+        });
     }
 
 

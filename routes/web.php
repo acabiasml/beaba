@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EscolaController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\BimestreController;
+use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
 
 Route::post('/incluir', [UserController::class, 'storeFirst'])->name('user.store.first');
@@ -68,4 +70,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/destroycalendario/{id}', [CalendarioController::class, 'destroy'])->name('calendario.destroy');
     Route::post('/incluicalendario', [CalendarioController::class, 'store'])->name('calendario.store');
     Route::post('/atualizacalendario', [CalendarioController::class, 'update'])->name('calendario.update');
+
+    Route::get('/bimestres/{id}', [BimestreController::class, 'index'])->name('bimestres');
+    Route::get('/createbimestre/{id}', [BimestreController::class, 'create'])->name('bimestre.create');
+    Route::get('/editbimestre/{id}', [BimestreController::class, 'edit'])->name('bimestre.edit');
+    Route::delete('/destroybimestre/{id}', [BimestreController::class, 'destroy'])->name('bimestre.destroy');
+    Route::post('/incluibimestre', [BimestreController::class, 'store'])->name('bimestre.store');
+    Route::post('/atualizabimestre', [BimestreController::class, 'update'])->name('bimestre.update');
+
+    Route::get('/cursos/{id}', [CursoController::class, 'index'])->name('cursos');
 });

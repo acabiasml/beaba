@@ -6,15 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBimestresTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('bimestres', function (Blueprint $table) {
             $table->increments('id', true);
+            $table->date('nome')->nullable();
             $table->date('inicio')->nullable();
             $table->date('fim')->nullable();
             
@@ -26,11 +23,6 @@ class CreateBimestresTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('bimestres');

@@ -13,7 +13,7 @@ class CalendarioController extends Controller{
     public function index($id){
         $escola = Escola::findOrFail($id);
         $table = (new CalendariosTable($id))->setup();
-        return View::make("calendario.calendario")->with(compact('table'))->with("escola", $escola);
+        return View::make("calendario.index")->with(compact('table'))->with("escola", $escola);
     }
 
     public function create($id){

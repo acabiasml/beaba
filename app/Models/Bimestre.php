@@ -4,8 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Bimestre extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
+
+    public $timestamps = false;
+
+    protected $fillable = ['id', 'nome', 'inicio', 'fim', 'calendarios_id'];
+
+    public function calendario(){
+        return $this->belongsTo(Calendario::class);
+    }
 }
