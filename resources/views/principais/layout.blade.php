@@ -101,7 +101,7 @@
                 <i class="ni ni-collection text-orange"></i>
                 <span class="nav-link-text">Diários</span>
               </a>
-            @endif
+              @endif
           </ul>
         </div>
       </div>

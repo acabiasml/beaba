@@ -20,9 +20,9 @@
             <x:form::input name="site" label="Site" />
         </div>
         <div class="col-md-6">
-            <x:form::select name="diretor" label="Diretoria" :options="$pessoas"/>
-            <x:form::select name="coordenador" label="Coordenação" :options="$pessoas"/>
-            <x:form::select name="secretario" label="Secretaria" :options="$pessoas"/>
+            <x:form::select name="diretor" label="Diretoria" :options="$pessoas" />
+            <x:form::select name="coordenador" label="Coordenação" :options="$pessoas" />
+            <x:form::select name="secretario" label="Secretaria" :options="$pessoas" />
             <x:form::input name="endereco" label="Logradouro" />
             <x:form::input name="numero" label="Número" />
             <x:form::input name="bairro" label="Bairro" />

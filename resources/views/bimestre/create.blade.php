@@ -9,7 +9,7 @@
     <h1 style="text-align: center">Novo Bimestre | {{$escola->nome}}</h1> <br />
 
     <x:form::form class="row" method="POST" :action="route('calendario.store')">
-        <x:form::input type="hidden" name="escolas_id" value="{{$escola->id}}"/>
+        <x:form::input type="hidden" name="escolas_id" value="{{$escola->id}}" />
         <div class="col-md-6">
             <x:form::input id="nome" name="nome" label="Nome" />
         </div>

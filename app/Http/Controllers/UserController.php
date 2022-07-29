@@ -10,18 +10,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    
-    public function index(){
+
+    public function index()
+    {
         //
     }
 
-    
-    public function create(){
+
+    public function create()
+    {
         return view("user.create");
     }
 
-    
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
 
         User::create([
             "nome" => $request->nome,
@@ -82,21 +85,24 @@ class UserController extends Controller
         ]);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $usuario = User::findOrFail($id);
         return view("user.show", ['usuario' => $usuario]);
     }
 
-    
-    public function edit($id){
+
+    public function edit($id)
+    {
         $usuario = User::findOrFail($id);
         return view("user.edit", ['usuario' => $usuario]);
     }
-    
-    public function update(Request $request){
+
+    public function update(Request $request)
+    {
         $usuario = User::findOrFail($request->id);
 
-        if($request->password != $usuario->password){
+        if ($request->password != $usuario->password) {
             $usuario->update(["password" => Hash::make($request->password)]);
         }
 
@@ -160,49 +166,55 @@ class UserController extends Controller
         return redirect('pessoas');
     }
 
-    public function destroy($id){
-        $usuario = User::findOrFail($id);        
+    public function destroy($id)
+    {
+        $usuario = User::findOrFail($id);
         $usuario->delete();
         return redirect('pessoas');
     }
 
-    public function autenticar(Request $request){
+    public function autenticar(Request $request)
+    {
 
         $this->validate($request, [
             'email' => 'required',
             'password' => 'required'
-        ],[
+        ], [
             'email.required' => 'É necessário informar o e-mail.',
             'password.required' => 'É necessário informar a senha.'
         ]);
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->intended('/home');
-        }else{
+        } else {
             return redirect()->back()->with('danger', 'Combinação e-mail e senha inválida.');
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('login');
     }
 
-    public function storeFirst(Request $request){
-        if(User::count() == 0){
+    public function storeFirst(Request $request)
+    {
+        if (User::count() == 0) {
             $this->store($request);
             return redirect('login');
         }
     }
 
-    public function storeUser(Request $request){
+    public function storeUser(Request $request)
+    {
         $this->store($request);
         return redirect('pessoas');
     }
 
-    public function print($id){
+    public function print($id)
+    {
         $usuario = User::findOrFail($id);
         $arquivo = Pdf::loadView("user.print", ['usuario' => $usuario])->setPaper('a4', 'portrait');
-        return $arquivo->download('ficha-user'.$usuario->id.time().'.pdf');
+        return $arquivo->download('ficha-user' . $usuario->id . time() . '.pdf');
     }
 }

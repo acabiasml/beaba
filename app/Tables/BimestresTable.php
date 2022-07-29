@@ -12,22 +12,24 @@ class BimestresTable extends AbstractTable
 {
     protected Calendario $calendario;
 
-    public function __construct($id){
+    public function __construct($id)
+    {
         $this->calendario = Calendario::findOrFail($id);
     }
 
     protected function table(): Table
     {
         return (new Table())->model(Bimestre::class)
-            ->query(function(Builder $query) {
-                $query->select('bimestres.*')->where("calendarios_id", "=", $this->calendario->id);})
+            ->query(function (Builder $query) {
+                $query->select('bimestres.*')->where("calendarios_id", "=", $this->calendario->id);
+            })
             ->routes([
                 'index'   => ['name' => 'bimestres', 'params' => ["id" => $this->calendario->id]],
                 'create'  => ['name' => 'bimestre.create', 'params' => ["id" => $this->calendario->id]],
                 'edit'    => ['name' => 'bimestre.edit'],
                 'destroy' => ['name' => 'bimestre.destroy'],
             ])
-            ->destroyConfirmationHtmlAttributes(fn(Bimestre $bimestre) => [
+            ->destroyConfirmationHtmlAttributes(fn (Bimestre $bimestre) => [
                 'data-confirm' => __('<< Não será possível desfazer essa operação! >> Confirma apagar o registro de :entry?', [
                     'entry' => $bimestre->nome,
                 ]),

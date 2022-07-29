@@ -15,7 +15,7 @@
     <a href="{{route('user.edit', $usuario->id)}}">
         <button type="button" class="btn btn-warning">Editar</button>
     </a>
-</div><br/>
+</div><br />
 
 <div class="container-fluid" style="margin-bottom: 50px">
     <x:form::form :bind="$usuario" class="row">

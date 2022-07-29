@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <h1>Cadastro de Pessoal</h1>
+<h1>Cadastro de Pessoal</h1>
 
-    {{ $table }}
-    
+{{ $table }}
+
 @endsection

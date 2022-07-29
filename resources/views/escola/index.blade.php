@@ -7,6 +7,6 @@
 
 <h1>Cadastro de Escolas</h1>
 
-    {{ $table }}
+{{ $table }}
 
 @endsection

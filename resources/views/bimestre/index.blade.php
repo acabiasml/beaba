@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <h1>Bimestres | {{$calendario->nome}} | {{$calendario->ano}}</h1>
+<h1>Bimestres | {{$calendario->nome}} | {{$calendario->ano}}</h1>
 
-    {{$table}}
-    
+{{$table}}
+
 @endsection

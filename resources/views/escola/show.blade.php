@@ -15,11 +15,11 @@
     <a href="{{route('escola.edit', $escola->id)}}">
         <button type="button" class="btn btn-warning">Editar</button>
     </a>
-</div><br/>
+</div><br />
 
 <div class="container-fluid" style="margin-bottom: 50px">
     <x:form::form :bind="$escola" class="row">
-    <div class="col-md-6">
+        <div class="col-md-6">
             <x:form::input readonly id="nome" name="nome" label="Nome" />
             <x:form::input readonly type="date" name="fundacao" label="Data de fundação" />
             <x:form::input readonly name="info" label="Informações de Fundação e Autorização" />
@@ -30,9 +30,9 @@
             <x:form::input readonly name="site" label="Site" />
         </div>
         <div class="col-md-6">
-            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="diretor" label="Diretoria" :options="$pessoas"/>
-            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="coordenador" label="Coordenação" :options="$pessoas"/>
-            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="secretario" label="Secretaria" :options="$pessoas"/>
+            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="diretor" label="Diretoria" :options="$pessoas" />
+            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="coordenador" label="Coordenação" :options="$pessoas" />
+            <x:form::select style="background: #eee; pointer-events: none; touch-action: none;" name="secretario" label="Secretaria" :options="$pessoas" />
             <x:form::input readonly name="endereco" label="Logradouro" />
             <x:form::input readonly name="numero" label="Número" />
             <x:form::input readonly name="bairro" label="Bairro" />

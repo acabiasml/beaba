@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <h1>Calendários | {{$escola->nome}}</h1>
+<h1>Calendários | {{$escola->nome}}</h1>
 
-    {{$table}}
-    
+{{$table}}
+
 @endsection

@@ -25,11 +25,11 @@
   </div>
 
   <x:form::form method="POST" :action="route('user.store.first')">
-    <x:form::input name="nome" id="nome" label="Nome completo: "/>
-    <x:form::input type="email" name="email" id="email" label="E-mail: "/>
-    <x:form::input type="password" name="password" id="password" label="Senha: "/>
-    <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador']" selected="admin"/>
-    
+    <x:form::input name="nome" id="nome" label="Nome completo: " />
+    <x:form::input type="email" name="email" id="email" label="E-mail: " />
+    <x:form::input type="password" name="password" id="password" label="Senha: " />
+    <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador']" selected="admin" />
+
     <div style="text-align: center">
       <x:form::button.submit>Registrar</x:form::submit>
     </div>
@@ -41,20 +41,20 @@
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    $(document).ready(function(){
-      $(":submit").on("click", function(e){
+    $(document).ready(function() {
+      $(":submit").on("click", function(e) {
         e.preventDefault();
-        
+
         nome = $.trim($("#nome").val());
         email = $.trim($("#email").val());
         password = $.trim($("#password").val());
 
-        if(nome != "" && email != "" && password != ""){
+        if (nome != "" && email != "" && password != "") {
           $("form:first").submit();
-        }else{
+        } else {
           alert("Existem campos a serem preenchidos.");
         }
-        
+
         return false;
       });
     });
