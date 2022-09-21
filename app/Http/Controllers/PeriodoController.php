@@ -2,35 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bimestre;
+use App\Models\Periodo;
 use App\Models\Calendario;
 use App\Models\Escola;
-use \App\Tables\BimestresTable;
+use \App\Tables\PeriodosTable;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 
-class BimestreController extends Controller
+class PeriodoController extends Controller
 {
 
     public function index($id)
     {
         $calendario = Calendario::findOrFail($id);
-        $table = (new BimestresTable($id))->setup();
-        return View::make("bimestre.index")->with(compact('table'))->with("calendario", $calendario);
+        $table = (new PeriodosTable($id))->setup();
+        return View::make("periodo.index")->with(compact('table'))->with("calendario", $calendario);
     }
 
     public function create($id)
     {
         $calendario = Calendario::findOrFail($id);
         $escola = Escola::findOrFail($calendario->escolas_id);
-        return view("bimestre.create", ["calendario" => $calendario, "escola" => $escola]);
+        return view("periodo.create", ["calendario" => $calendario, "escola" => $escola]);
     }
 
     public function store(Request $request)
     {
         $idCalendario = $request->calendarios_id;
 
-        Bimestre::create([
+        Periodo::create([
             "nome" => $request->nome,
             "inicio" => $request->inicio,
             "fim" => $request->fim,
@@ -42,18 +42,18 @@ class BimestreController extends Controller
 
     public function edit($id)
     {
-        $bimestre = Bimestre::findOrFail($id);
-        $calendario = Calendario::findOrFail($bimestre->calendarios_id);
+        $periodo = Periodo::findOrFail($id);
+        $calendario = Calendario::findOrFail($periodo->calendarios_id);
         $escola = Escola::findOrFail($calendario->escolas_id);
 
-        return view("bimestre.edit", ['bimestre' => $bimestre, 'calendario' => $calendario, 'escola' => $escola]);
+        return view("periodo.edit", ['periodo' => $periodo, 'calendario' => $calendario, 'escola' => $escola]);
     }
 
     public function update(Request $request)
     {
-        $bimestre = Bimestre::findOrFail($request->id);
+        $periodo = Periodo::findOrFail($request->id);
 
-        $bimestre->update([
+        $periodo->update([
             "nome" => $request->nome,
             "inicio" => $request->inicio,
             "fim" => $request->fim,
@@ -64,11 +64,11 @@ class BimestreController extends Controller
 
     public function destroy($id)
     {
-        $bimestre = Bimestre::findOrFail($id);
+        $periodo = Periodo::findOrFail($id);
 
-        $idCalendario = $bimestre->calendarios_id;
+        $idCalendario = $periodo->calendarios_id;
         
-        $bimestre->delete();
+        $periodo->delete();
         return $this->index($idCalendario);
     }
 }

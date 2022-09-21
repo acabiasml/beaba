@@ -1,17 +1,18 @@
 @extends('principais.layout')
 
-@section('title', 'NOVO PERÍODO')
+@section('title', 'EDITAR PERÍODO')
 @section('icon', 'ni-watch-time')
 
 @section('content')
 
 <div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">Novo Período | Calendário: {{$calendario->nome}}</h1> 
+    <h1 style="text-align: center">Editar Período | Calendário: {{$calendario->nome}}</h1> 
     <h1 style="text-align: center">{{$escola->nome}}</h1> <br />
 
-    <x:form::form class="row" method="POST" :action="route('bimestre.store')">
-        <x:form::input type="hidden" name="calendarios_id" value="{{$calendario->id}}" />
+    <x:form::form :bind="$periodo" class="row" method="POST" :action="route('periodo.update')">
         <div class="col-md-6">
+            <x:form::input type="hidden" name="calendarios_id" />
+            <x:form::input type="hidden" name="id" />
             <x:form::input id="nome" name="nome" label="Nome" />
         </div>
         <div class="col-md-6">
@@ -22,7 +23,7 @@
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>
-            <x:form::button.submit>Registrar</x:form::button.submit>
+            <x:form::button.submit>Atualizar registro</x:form::button.submit>
         </div>
     </x:form::form>
 </div>

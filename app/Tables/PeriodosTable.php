@@ -3,12 +3,12 @@
 namespace App\Tables;
 
 use App\Models\Calendario;
-use App\Models\Bimestre;
+use App\Models\Periodo;
 use Okipa\LaravelTable\Abstracts\AbstractTable;
 use Okipa\LaravelTable\Table;
 use Illuminate\Database\Eloquent\Builder;
 
-class BimestresTable extends AbstractTable
+class PeriodosTable extends AbstractTable
 {
     protected Calendario $calendario;
 
@@ -19,19 +19,19 @@ class BimestresTable extends AbstractTable
 
     protected function table(): Table
     {
-        return (new Table())->model(Bimestre::class)
+        return (new Table())->model(Periodo::class)
             ->query(function (Builder $query) {
-                $query->select('bimestres.*')->where("calendarios_id", "=", $this->calendario->id);
+                $query->select('periodos.*')->where("calendarios_id", "=", $this->calendario->id);
             })
             ->routes([
-                'index'   => ['name' => 'bimestres', 'params' => ["id" => $this->calendario->id]],
-                'create'  => ['name' => 'bimestre.create', 'params' => ["id" => $this->calendario->id]],
-                'edit'    => ['name' => 'bimestre.edit'],
-                'destroy' => ['name' => 'bimestre.destroy'],
+                'index'   => ['name' => 'periodos', 'params' => ["id" => $this->calendario->id]],
+                'create'  => ['name' => 'periodo.create', 'params' => ["id" => $this->calendario->id]],
+                'edit'    => ['name' => 'periodo.edit'],
+                'destroy' => ['name' => 'periodo.destroy'],
             ])
-            ->destroyConfirmationHtmlAttributes(fn (Bimestre $bimestre) => [
+            ->destroyConfirmationHtmlAttributes(fn (Periodo $periodo) => [
                 'data-confirm' => __('<< Não será possível desfazer essa operação! >> Confirma apagar o registro de :entry?', [
-                    'entry' => $bimestre->nome,
+                    'entry' => $periodo->nome,
                 ]),
             ]);
     }
