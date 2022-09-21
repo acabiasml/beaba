@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Bimestre;
 use App\Models\Calendario;
+use App\Models\Escola;
 use \App\Tables\BimestresTable;
 use Illuminate\Support\Facades\View;
-use App\Http\Requests\StoreBimestreRequest;
-use App\Http\Requests\UpdateBimestreRequest;
+use Illuminate\Http\Request;
 
 class BimestreController extends Controller
 {
@@ -19,33 +19,56 @@ class BimestreController extends Controller
         return View::make("bimestre.index")->with(compact('table'))->with("calendario", $calendario);
     }
 
-    public function create()
+    public function create($id)
     {
-        //
+        $calendario = Calendario::findOrFail($id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
+        return view("bimestre.create", ["calendario" => $calendario, "escola" => $escola]);
     }
 
-    public function store(StoreBimestreRequest $request)
+    public function store(Request $request)
     {
-        //
+        $idCalendario = $request->calendarios_id;
+
+        Bimestre::create([
+            "nome" => $request->nome,
+            "inicio" => $request->inicio,
+            "fim" => $request->fim,
+            "calendarios_id" => $idCalendario,
+        ]);
+
+        return $this->index($idCalendario);
     }
 
-    public function show(Bimestre $bimestre)
+    public function edit($id)
     {
-        //
+        $bimestre = Bimestre::findOrFail($id);
+        $calendario = Calendario::findOrFail($bimestre->calendarios_id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
+
+        return view("bimestre.edit", ['bimestre' => $bimestre, 'calendario' => $calendario, 'escola' => $escola]);
     }
 
-    public function edit(Bimestre $bimestre)
+    public function update(Request $request)
     {
-        //
+        $bimestre = Bimestre::findOrFail($request->id);
+
+        $bimestre->update([
+            "nome" => $request->nome,
+            "inicio" => $request->inicio,
+            "fim" => $request->fim,
+        ]);
+
+        return $this->index($request->calendarios_id);
     }
 
-    public function update(UpdateBimestreRequest $request, Bimestre $bimestre)
+    public function destroy($id)
     {
-        //
-    }
+        $bimestre = Bimestre::findOrFail($id);
 
-    public function destroy(Bimestre $bimestre)
-    {
-        //
+        $idCalendario = $bimestre->calendarios_id;
+        
+        $bimestre->delete();
+        return $this->index($idCalendario);
     }
 }

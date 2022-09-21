@@ -1,20 +1,24 @@
 @extends('principais.layout')
 
-@section('title', 'NOVO BIMESTRE')
+@section('title', 'NOVO PERÍODO')
 @section('icon', 'ni-watch-time')
 
 @section('content')
 
 <div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">Novo Bimestre | {{$escola->nome}}</h1> <br />
+    <h1 style="text-align: center">Novo Período | Calendário: {{$calendario->nome}}</h1> 
+    <h1 style="text-align: center">{{$escola->nome}}</h1> <br />
 
-    <x:form::form class="row" method="POST" :action="route('calendario.store')">
-        <x:form::input type="hidden" name="escolas_id" value="{{$escola->id}}" />
+    <x:form::form class="row" method="POST" :action="route('bimestre.store')">
+        <x:form::input type="hidden" name="calendarios_id" value="{{$calendario->id}}" />
         <div class="col-md-6">
             <x:form::input id="nome" name="nome" label="Nome" />
         </div>
         <div class="col-md-6">
-            <x:form::input name="ano" label="Ano" />
+            <x:form::input type="date" name="inicio" label="Início" />
+        </div>
+        <div class="col-md-6">
+            <x:form::input type="date" name="fim" label="Fim" />
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>

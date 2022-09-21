@@ -45,7 +45,7 @@ class CalendariosTable extends AbstractTable
         $table->column('ano')->title("Ano")->sortable(true, 'asc')->searchable();
         $table->column()->html(function (Calendario $calendario) {
             $caminho = route("bimestres", "");
-            $string = '<a href="' . $caminho . "/" . $calendario->id . '">ver bimestres</a>';
+            $string = '<a href="' . $caminho . "/" . $calendario->id . '">ver períodos</a>';
             return $string;
         });
         $table->column()->html(function (Calendario $calendario) {
