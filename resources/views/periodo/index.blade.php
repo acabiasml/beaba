@@ -1,11 +1,11 @@
 @extends('principais.layout')
 
-@section('title', 'BIMESTRES')
+@section('title', 'PERÍODOS')
 @section('icon', 'ni-calendar-grid-58')
 
 @section('content')
 
-<h1>Bimestres | {{$calendario->nome}} | {{$calendario->ano}}</h1>
+<h1>Períodos | {{$calendario->nome}} | {{$calendario->ano}}</h1>
 
 {{$table}}
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Bimestre extends Model
+class Periodo extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 

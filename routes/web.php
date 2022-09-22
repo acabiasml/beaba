@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EscolaController;
 use App\Http\Controllers\CalendarioController;
-use App\Http\Controllers\BimestreController;
+use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
 
@@ -71,12 +71,17 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/incluicalendario', [CalendarioController::class, 'store'])->name('calendario.store');
     Route::post('/atualizacalendario', [CalendarioController::class, 'update'])->name('calendario.update');
 
-    Route::get('/bimestres/{id}', [BimestreController::class, 'index'])->name('bimestres');
-    Route::get('/createbimestre/{id}', [BimestreController::class, 'create'])->name('bimestre.create');
-    Route::get('/editbimestre/{id}', [BimestreController::class, 'edit'])->name('bimestre.edit');
-    Route::delete('/destroybimestre/{id}', [BimestreController::class, 'destroy'])->name('bimestre.destroy');
-    Route::post('/incluibimestre', [BimestreController::class, 'store'])->name('bimestre.store');
-    Route::post('/atualizabimestre', [BimestreController::class, 'update'])->name('bimestre.update');
+    Route::get('/periodos/{id}', [PeriodoController::class, 'index'])->name('periodos');
+    Route::get('/createperiodo/{id}', [PeriodoController::class, 'create'])->name('periodo.create');
+    Route::get('/editperiodo/{id}', [PeriodoController::class, 'edit'])->name('periodo.edit');
+    Route::delete('/destroyperiodo/{id}', [PeriodoController::class, 'destroy'])->name('periodo.destroy');
+    Route::post('/incluiperiodo', [PeriodoController::class, 'store'])->name('periodo.store');
+    Route::post('/atualizaperiodo', [PeriodoController::class, 'update'])->name('periodo.update');
 
     Route::get('/cursos/{id}', [CursoController::class, 'index'])->name('cursos');
+    Route::get('/createcurso/{id}', [CursoController::class, 'create'])->name('curso.create');
+    Route::get('/editcurso/{id}', [CursoController::class, 'edit'])->name('curso.edit');
+    Route::delete('/destroycurso/{id}', [CursoController::class, 'destroy'])->name('curso.destroy');
+    Route::post('/incluicurso', [CursoController::class, 'store'])->name('curso.store');
+    Route::post('/atualizacurso', [CursoController::class, 'update'])->name('curso.update');
 });
