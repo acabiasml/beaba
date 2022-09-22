@@ -79,4 +79,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/atualizaperiodo', [PeriodoController::class, 'update'])->name('periodo.update');
 
     Route::get('/cursos/{id}', [CursoController::class, 'index'])->name('cursos');
+    Route::get('/createcurso/{id}', [CursoController::class, 'create'])->name('curso.create');
+    Route::get('/editcurso/{id}', [CursoController::class, 'edit'])->name('curso.edit');
+    Route::delete('/destroycurso/{id}', [CursoController::class, 'destroy'])->name('curso.destroy');
+    Route::post('/incluicurso', [CursoController::class, 'store'])->name('curso.store');
+    Route::post('/atualizacurso', [CursoController::class, 'update'])->name('curso.update');
 });
