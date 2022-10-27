@@ -5,7 +5,7 @@
 
 @section('content')
 
-<h1>Períodos | {{$calendario->nome}} | {{$calendario->ano}}</h1>
+<h1>Cursos | {{$calendario->nome}} | {{$calendario->ano}}</h1>
 
 {{$table}}
 

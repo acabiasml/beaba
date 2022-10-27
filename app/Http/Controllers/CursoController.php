@@ -3,67 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curso;
-use App\Http\Requests\StoreCursoRequest;
-use App\Http\Requests\UpdateCursoRequest;
-
+use App\Models\Calendario;
+use App\Models\Escola;
+use \App\Tables\CursosTable;
+use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
+ 
 class CursoController extends Controller
 {
-    public function index()
+    public function index($id)
+    {
+        $calendario = Calendario::findOrFail($id);
+        $table = (new CursosTable($id))->setup();
+        return View::make("curso.index")->with(compact('table'))->with("calendario", $calendario);
+    }
+
+    public function create($id)
+    {
+        $calendario = Calendario::findOrFail($id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
+        return view("curso.create", ["calendario" => $calendario, "escola" => $escola]);
+    }
+
+    public function store()
     {
         //
     }
 
-    public function create()
+    public function show()
     {
         //
     }
 
-    public function store(StoreCursoRequest $request)
+    public function edit()
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Curso $curso)
+    public function update()
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Curso $curso)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCursoRequest  $request
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCursoRequest $request, Curso $curso)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Curso $curso)
+    public function destroy()
     {
         //
     }

@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">Novo Período | Calendário: {{$calendario->nome}}</h1> 
+    <h1 style="text-align: center">Novo Curso | Calendário: {{$calendario->nome}}</h1> 
     <h1 style="text-align: center">{{$escola->nome}}</h1> <br />
 
     <x:form::form class="row" method="POST" :action="route('periodo.store')">
