@@ -25,9 +25,18 @@ class CursoController extends Controller
         return view("curso.create", ["calendario" => $calendario, "escola" => $escola]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $idCalendario = $request->calendarios_id;
+
+        Curso::create([
+            "inicio" => $request->inicio,
+            "fim" => $request->fim,
+            "nome" => $request->nome,
+            "calendarios_id" => $idCalendario,
+        ]);
+
+        return $this->index($idCalendario);
     }
 
     public function show()
@@ -45,8 +54,13 @@ class CursoController extends Controller
         //
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+
+        $idCalendario = $curso->calendarios_id;
+        
+        $curso->delete();
+        return $this->index($idCalendario);
     }
 }
