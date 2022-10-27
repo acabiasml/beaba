@@ -9,7 +9,7 @@
     <h1 style="text-align: center">Novo Curso | Calendário: {{$calendario->nome}}</h1> 
     <h1 style="text-align: center">{{$escola->nome}}</h1> <br />
 
-    <x:form::form class="row" method="POST" :action="route('periodo.store')">
+    <x:form::form class="row" method="POST" :action="route('curso.store')">
         <x:form::input type="hidden" name="calendarios_id" value="{{$calendario->id}}" />
         <div class="col-md-6">
             <x:form::input id="nome" name="nome" label="Nome" />

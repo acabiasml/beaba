@@ -9,7 +9,7 @@
     <h1 style="text-align: center">Editar Curso | Calendário: {{$calendario->nome}}</h1> 
     <h1 style="text-align: center">{{$escola->nome}}</h1> <br />
 
-    <x:form::form :bind="$periodo" class="row" method="POST" :action="route('periodo.update')">
+    <x:form::form :bind="$periodo" class="row" method="POST" :action="route('curso.update')">
         <div class="col-md-6">
             <x:form::input type="hidden" name="calendarios_id" />
             <x:form::input type="hidden" name="id" />
