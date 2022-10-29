@@ -40,13 +40,13 @@ class CursosTable extends AbstractTable
     {
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
-        $table->column('inicio')->title("Início")->sortable();
-        $table->column('fim')->title("Fim")->sortable();
+        $table->column('inicial')->title("Início")->sortable();
+        $table->column('final')->title("Fim")->sortable();
         $table->column('status')->title("Status")->sortable();
     }
 
     protected function resultLines(Table $table): void
     {
-        //
+        // 
     }
 }

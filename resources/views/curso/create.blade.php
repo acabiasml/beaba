@@ -11,14 +11,13 @@
 
     <x:form::form class="row" method="POST" :action="route('curso.store')">
         <x:form::input type="hidden" name="calendarios_id" value="{{$calendario->id}}" />
+        <x:form::input type="hidden" name="status" value="suspenso" />
         <div class="col-md-6">
-            <x:form::input id="nome" name="nome" label="Nome" />
+            <x:form::input id="nome" name="nome" label="Nome do Curso" />
         </div>
         <div class="col-md-6">
-            <x:form::input type="date" name="inicio" label="Início" />
-        </div>
-        <div class="col-md-6">
-            <x:form::input type="date" name="fim" label="Fim" />
+            <x:form::select name="inicio" label="Início" :options="$periodos" />
+            <x:form::select name="fim" label="Fim" :options="$periodos" />
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>

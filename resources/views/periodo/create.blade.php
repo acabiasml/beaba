@@ -16,8 +16,6 @@
         </div>
         <div class="col-md-6">
             <x:form::input type="date" name="inicio" label="Início" />
-        </div>
-        <div class="col-md-6">
             <x:form::input type="date" name="fim" label="Fim" />
         </div>
         <div class="col-12 mt-2">

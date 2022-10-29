@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Curso;
 use App\Models\Calendario;
 use App\Models\Escola;
+use App\Models\Periodo;
 use \App\Tables\CursosTable;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class CursoController extends Controller
     {
         $calendario = Calendario::findOrFail($id);
         $escola = Escola::findOrFail($calendario->escolas_id);
-        return view("curso.create", ["calendario" => $calendario, "escola" => $escola]);
+        return view("curso.create", ["calendario" => $calendario, "escola" => $escola, "periodos" => Periodo::where('calendarios_id', $id)->pluck('nome', 'id')->toArray()]);
     }
 
     public function store(Request $request)
@@ -33,6 +34,7 @@ class CursoController extends Controller
             "inicio" => $request->inicio,
             "fim" => $request->fim,
             "nome" => $request->nome,
+            "status" => $request->status,
             "calendarios_id" => $idCalendario,
         ]);
 
@@ -44,14 +46,27 @@ class CursoController extends Controller
         //
     }
 
-    public function edit()
+    public function edit($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        $calendario = Calendario::findOrFail($curso->calendarios_id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
+
+        return view("curso.edit", ['curso' => $curso, 'calendario' => $calendario, 'escola' => $escola, "periodos" => Periodo::where('calendarios_id', $curso->calendarios_id)->pluck('nome', 'id')->toArray()]);
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        //
+        $curso = Curso::findOrFail($request->id);
+
+        $curso->update([
+            "inicio" => $request->inicio,
+            "fim" => $request->fim,
+            "nome" => $request->nome,
+            "status" => $request->status,
+        ]);
+
+        return $this->index($request->calendarios_id);
     }
 
     public function destroy($id)

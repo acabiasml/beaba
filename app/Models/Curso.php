@@ -15,8 +15,18 @@ class Curso extends Model
 
     protected $fillable = ['id', 'nome', 'inicio', 'fim', 'status', 'calendarios_id'];
 
+    protected $appends = ['inicial', 'final'];
+
     public function calendario(){
-        return $this->belongsTo(Calendario::class);
+        return $this->belongsTo(Calendario::class); 
+    }
+
+    public function getInicialAttribute(){
+        return Periodo::find($this->inicio)->nome;
+    }
+
+    public function getFinalAttribute(){
+        return Periodo::find($this->fim)->nome;
     }
 }
  

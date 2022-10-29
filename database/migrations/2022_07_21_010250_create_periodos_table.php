@@ -11,7 +11,7 @@ class CreatePeriodosTable extends Migration
     {
         Schema::create('periodos', function (Blueprint $table) {
             $table->increments('id', true);
-            $table->date('nome')->nullable();
+            $table->string('nome')->nullable();
             $table->date('inicio')->nullable();
             $table->date('fim')->nullable();
             

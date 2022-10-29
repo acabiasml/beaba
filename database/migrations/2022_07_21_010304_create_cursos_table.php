@@ -15,16 +15,18 @@ class CreateCursosTable extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->increments('id', true);
-            $table->date('inicio')->nullable();
-            $table->date('fim')->nullable();
             $table->string('nome')->nullable();
             $table->string('status')->nullable();
 
             $table->integer('calendarios_id')->unsigned()->nullable();
+            $table->integer('inicio')->unsigned()->nullable();
+            $table->integer('fim')->unsigned()->nullable();
         });
 
         Schema::table('cursos', function(Blueprint $table){
             $table->foreign('calendarios_id')->references('id')->on('calendarios');
+            $table->foreign('inicio')->references('id')->on('periodos');
+            $table->foreign('fim')->references('id')->on('periodos');
         });
     }
 
