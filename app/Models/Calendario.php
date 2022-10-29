@@ -22,7 +22,7 @@ class Calendario extends Model{
     public function cursos(){
         return $this->hasMany(Curso::class);
     }
-
+ 
     public function escola(){
         return $this->belongsTo(Escola::class);
     }

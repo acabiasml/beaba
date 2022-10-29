@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EscolaController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\ComponenteController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
@@ -84,4 +85,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/destroycurso/{id}', [CursoController::class, 'destroy'])->name('curso.destroy');
     Route::post('/incluicurso', [CursoController::class, 'store'])->name('curso.store');
     Route::post('/atualizacurso', [CursoController::class, 'update'])->name('curso.update');
+
+    Route::get('/componentes/{id}', [ComponenteController::class, 'index'])->name('componentes');
+    Route::get('/createcomponente/{id}', [ComponenteController::class, 'create'])->name('componente.create');
+    Route::get('/editcomponente/{id}', [ComponenteController::class, 'edit'])->name('componente.edit');
+    Route::delete('/destroycomponente/{id}', [ComponenteController::class, 'destroy'])->name('componente.destroy');
+    Route::post('/incluicomponente', [ComponenteController::class, 'store'])->name('componente.store');
+    Route::post('/atualizacomponente', [ComponenteController::class, 'update'])->name('componente.update');
 });

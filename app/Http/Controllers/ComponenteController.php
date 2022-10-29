@@ -2,84 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Curso;
 use App\Models\Componente;
-use App\Http\Requests\StoreComponenteRequest;
-use App\Http\Requests\UpdateComponenteRequest;
+use App\Tables\ComponentesTable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class ComponenteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        $table = (new ComponentesTable($id))->setup();
+        return View::make("componente.index")->with(compact('table'))->with("curso", $curso);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreComponenteRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreComponenteRequest $request)
+    public function store()
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Componente  $componente
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Componente $componente)
+    public function show()
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Componente  $componente
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Componente $componente)
+    public function edit()
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateComponenteRequest  $request
-     * @param  \App\Models\Componente  $componente
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateComponenteRequest $request, Componente $componente)
+    public function update()
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Componente  $componente
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Componente $componente)
+    public function destroy()
     {
         //
     }
