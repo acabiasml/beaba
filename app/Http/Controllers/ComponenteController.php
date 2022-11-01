@@ -26,31 +26,51 @@ class ComponenteController extends Controller
         $calendario = Calendario::findOrFail($curso->calendarios_id);
         $escola = Escola::findOrFail($calendario->escolas_id);
 
-        return view("componente.create", ["curso" => $curso, "calendario" => $calendario, "escola" => $escola, "professores" => User::where('tipo', 'prof')->pluck('nome', 'id')->toArray()]);
+        return view("componente.create", ["curso" => $curso, "calendario" => $calendario, "escola" => $escola, "professores" => User::where('tipo', '!=' ,'estud')->pluck('nome', 'id')->toArray()]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        //
+        Componente::create([
+            "nome" => $request->nome,
+            "horas" => $request->horas,
+            "cursos_id" => $request->cursos_id,
+            "professor" => $request->professor
+        ]);
+
+        return $this->index($request->cursos_id);
     }
 
-    public function show()
+    public function edit($id)
     {
-        //
+        $componente = Componente::findOrFail($id);
+        $curso = Curso::findOrFail($componente->cursos_id);
+        $calendario = Calendario::findOrFail($curso->calendarios_id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
+
+        return view("componente.edit", ["componente"=> $componente, "curso" => $curso, "calendario" => $calendario, "escola" => $escola, "professores" => User::where('tipo', '!=' ,'estud')->pluck('nome', 'id')->toArray()]);
     }
 
-    public function edit()
+    public function update(Request $request)
     {
-        //
+        $componente = Componente::findOrFail($request->id);
+
+        $componente->update([
+            "nome" => $request->nome,
+            "horas" => $request->horas,
+            "professor" => $request->professor
+        ]);
+
+        return $this->index($request->cursos_id);
     }
 
-    public function update()
+    public function destroy($id)
     {
-        //
-    }
+        $componente = Componente::findOrFail($id);
 
-    public function destroy()
-    {
-        //
+        $idCurso = $componente->cursos_id;
+        
+        $componente->delete();
+        return $this->index($idCurso);
     }
 }

@@ -6,11 +6,12 @@
 @section('content')
 
 <div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">Editando componente para o curso <br/> {{$curso->nome}}</h1>
+    <h1 style="text-align: center">Editando componente {{$componente->nome}} <br/> {{$curso->nome}}</h1>
     <h1 style="text-align: center">{{$calendario->nome}} | {{$escola->nome}}</h1> <br />
 
-    <x:form::form :bind="$calendario" class="row" method="POST" :action="route('calendario.update')">
-    <x:form::input type="hidden" name="cursos_id" value="{{$curso->id}}" />
+    <x:form::form :bind="$componente" class="row" method="POST" :action="route('componente.update')">
+        <x:form::input type="hidden" name="cursos_id" value="{{$curso->id}}" />
+        <x:form::input type="hidden" name="id" />
         <div class="col-md-6">
             <x:form::input id="nome" name="nome" label="Nome do Componente: " :placeholder="false"/>
             <x:form::select name="professor" label="Professor Regente: " :options="$professores" :placeholder="false"/>

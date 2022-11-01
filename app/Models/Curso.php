@@ -15,7 +15,7 @@ class Curso extends Model
 
     protected $fillable = ['id', 'nome', 'inicio', 'fim', 'status', 'calendarios_id'];
 
-    protected $appends = ['inicial', 'final'];
+    protected $appends = ['inicial', 'final', 'horas'];
 
     public function calendario(){
         return $this->belongsTo(Calendario::class); 
@@ -27,6 +27,13 @@ class Curso extends Model
 
     public function getFinalAttribute(){
         return Periodo::find($this->fim)->nome;
+    }
+
+    public function getHorasAttribute(){
+        $total = 0;
+        $horasComponentes = Componente::where("cursos_id", $this->id)->get();
+        $total = $horasComponentes->sum("horas");
+        return $total;
     }
 }
  
