@@ -12,10 +12,10 @@
         <div class="col-md-6">
             <x:form::input type="hidden" name="escolas_id" />
             <x:form::input type="hidden" name="id" />
-            <x:form::input id="nome" name="nome" label="Nome" />
+            <x:form::input id="nome" name="nome" label="Nome: " :placeholder="false"/>
         </div>
         <div class="col-md-6">
-            <x:form::input name="ano" label="Ano" />
+            <x:form::input name="ano" label="Ano: " :placeholder="false"/>
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>

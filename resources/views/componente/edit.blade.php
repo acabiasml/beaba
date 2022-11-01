@@ -6,20 +6,21 @@
 @section('content')
 
 <div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">Editar Calendário | {{$escola}}</h1> <br />
+    <h1 style="text-align: center">Editando componente para o curso <br/> {{$curso->nome}}</h1>
+    <h1 style="text-align: center">{{$calendario->nome}} | {{$escola->nome}}</h1> <br />
 
     <x:form::form :bind="$calendario" class="row" method="POST" :action="route('calendario.update')">
+    <x:form::input type="hidden" name="cursos_id" value="{{$curso->id}}" />
         <div class="col-md-6">
-            <x:form::input type="hidden" name="escolas_id" />
-            <x:form::input type="hidden" name="id" />
-            <x:form::input id="nome" name="nome" label="Nome" />
+            <x:form::input id="nome" name="nome" label="Nome do Componente: " :placeholder="false"/>
+            <x:form::select name="professor" label="Professor Regente: " :options="$professores" :placeholder="false"/>
         </div>
         <div class="col-md-6">
-            <x:form::input name="ano" label="Ano" />
+            <x:form::input type="number" name="horas" label="Carga Horária (total de horas): " :placeholder="false"/>
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>
-            <x:form::button.submit>Atualizar registro</x:form::button.submit>
+            <x:form::button.submit>Registrar</x:form::button.submit>
         </div>
     </x:form::form>
 </div>

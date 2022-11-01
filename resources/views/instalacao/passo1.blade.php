@@ -25,9 +25,9 @@
   </div>
 
   <x:form::form method="POST" :action="route('user.store.first')">
-    <x:form::input name="nome" id="nome" label="Nome completo: " />
-    <x:form::input type="email" name="email" id="email" label="E-mail: " />
-    <x:form::input type="password" name="password" id="password" label="Senha: " />
+    <x:form::input name="nome" id="nome" label="Nome completo: " :placeholder="false"/>
+    <x:form::input type="email" name="email" id="email" label="E-mail: ":placeholder="false" />
+    <x:form::input type="password" name="password" id="password" label="Senha: " :placeholder="false"/>
     <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador']" selected="admin" />
 
     <div style="text-align: center">

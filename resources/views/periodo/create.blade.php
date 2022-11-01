@@ -12,11 +12,11 @@
     <x:form::form class="row" method="POST" :action="route('periodo.store')">
         <x:form::input type="hidden" name="calendarios_id" value="{{$calendario->id}}" />
         <div class="col-md-6">
-            <x:form::input id="nome" name="nome" label="Nome" />
+            <x:form::input id="nome" name="nome" label="Nome: " :placeholder="false"/>
         </div>
         <div class="col-md-6">
-            <x:form::input type="date" name="inicio" label="Início" />
-            <x:form::input type="date" name="fim" label="Fim" />
+            <x:form::input type="date" name="inicio" label="Data de Início: " />
+            <x:form::input type="date" name="fim" label="Data de Fim: " />
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>

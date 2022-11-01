@@ -1,20 +1,22 @@
 @extends('principais.layout')
 
-@section('title', 'NOVO CALENDÁRIO')
+@section('title', 'NOVO COMPONENTE')
 @section('icon', 'ni-calendar-grid-58')
 
 @section('content')
 
 <div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">Novo Calendário | {{$escola->nome}}</h1> <br />
+    <h1 style="text-align: center">Novo componente para o curso <br/> {{$curso->nome}}</h1>
+    <h1 style="text-align: center">{{$calendario->nome}} | {{$escola->nome}}</h1> <br />
 
-    <x:form::form class="row" method="POST" :action="route('calendario.store')">
-        <x:form::input type="hidden" name="escolas_id" value="{{$escola->id}}" />
+    <x:form::form class="row" method="POST" :action="route('componente.store')">
+        <x:form::input type="hidden" name="cursos_id" value="{{$curso->id}}" />
         <div class="col-md-6">
-            <x:form::input id="nome" name="nome" label="Nome" />
+            <x:form::input id="nome" name="nome" label="Nome do Componente: " :placeholder="false"/>
+            <x:form::select name="professor" label="Professor Regente: " :options="$professores" :placeholder="false"/>
         </div>
         <div class="col-md-6">
-            <x:form::input name="ano" label="Ano" />
+            <x:form::input type="number" name="horas" label="Carga Horária (total de horas): " :placeholder="false"/>
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>

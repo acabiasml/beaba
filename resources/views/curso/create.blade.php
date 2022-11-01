@@ -13,11 +13,11 @@
         <x:form::input type="hidden" name="calendarios_id" value="{{$calendario->id}}" />
         <x:form::input type="hidden" name="status" value="suspenso" />
         <div class="col-md-6">
-            <x:form::input id="nome" name="nome" label="Nome do Curso" />
+            <x:form::input id="nome" name="nome" label="Nome do Curso: " :placeholder="false"/>
         </div>
         <div class="col-md-6">
-            <x:form::select name="inicio" label="Início" :options="$periodos" />
-            <x:form::select name="fim" label="Fim" :options="$periodos" />
+        <x:form::select name="inicio" label="Período de Início: " :placeholder="false" :options="$periodos" />
+            <x:form::select name="fim" label="Período de Fim: " :placeholder="false" :options="$periodos" />
         </div>
         <div class="col-12 mt-2">
             <x:form::button.link class="btn-secondary me-3" href="{{route('escolas')}}">{{ __('Cancel') }}</x:form::button.link>
