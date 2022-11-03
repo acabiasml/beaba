@@ -74,12 +74,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('turmas')}}">
-                <i class="ni ni-align-left-2 text-info"></i>
-                <span class="nav-link-text">Turmas</span>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="{{route('relatorios')}}">
                 <i class="ni ni-paper-diploma text-blue"></i>
                 <span class="nav-link-text">Relatórios</span>

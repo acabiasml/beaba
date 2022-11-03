@@ -92,4 +92,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/destroycomponente/{id}', [ComponenteController::class, 'destroy'])->name('componente.destroy');
     Route::post('/incluicomponente', [ComponenteController::class, 'store'])->name('componente.store');
     Route::post('/atualizacomponente', [ComponenteController::class, 'update'])->name('componente.update');
+
+    Route::get('/turmas/{id}', [TurmaController::class, 'index'])->name('turmas');
+    Route::get('/createturma/{id}', [TurmaController::class, 'create'])->name('turma.create');
+    Route::get('/editturma/{id}', [TurmaController::class, 'edit'])->name('turma.edit');
+    Route::delete('/destroyturma/{id}', [TurmaController::class, 'destroy'])->name('turma.destroy');
+    Route::post('/incluiturma', [TurmaController::class, 'store'])->name('turma.store');
+    Route::post('/atualizaturma', [TurmaController::class, 'update'])->name('turma.update');
 });

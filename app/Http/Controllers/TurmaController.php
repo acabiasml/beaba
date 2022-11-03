@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateTurmaRequest;
 
 class TurmaController extends Controller
 {
-    public function index()
+    public function index($id)
     {
         ////
     }
