@@ -17,8 +17,13 @@ class CreateTurmasTable extends Migration
 
             $table->increments('id', true);
 
+            $table->date('datamatricula')->nullable();
+            $table->date('datatransf')->nullable();
+            $table->string('status')->nullable();
+
             $table->integer('cursos_id')->unsigned()->nullable();
             $table->integer('users_id')->unsigned()->nullable();
+            
         });
 
         Schema::table("turmas", function(Blueprint $table){

@@ -20,11 +20,13 @@ class CreateMediaTable extends Migration
 
             $table->integer('componentes_id')->unsigned()->nullable();
             $table->integer('users_id')->unsigned()->nullable();
+            $table->integer('periodos_id')->unsigned()->nullable();
         });
 
         Schema::table("media", function(Blueprint $table){
             $table->foreign('componentes_id')->references('id')->on('componentes');
             $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('periodos_id')->references('id')->on('periodos');
         });
     }
 
