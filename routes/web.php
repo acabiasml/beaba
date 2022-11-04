@@ -10,6 +10,7 @@ use App\Http\Controllers\ComponenteController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TurmaController;
 
 Route::post('/incluir', [UserController::class, 'storeFirst'])->name('user.store.first');
 

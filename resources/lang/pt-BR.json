@@ -126,5 +126,7 @@
     "Enable" : "Habilitar" ,
     "Regenerate Recovery Codes" : "Gerar novamente os códigos de recuperação" ,
     "Show Recovery Codes" : "Mostrar os códigos de recuperação" ,
-    "Disable" : "Desabilitar"
+    "Disable" : "Desabilitar",
+    "No results were found." : "Nenhum resultado foi encontrado.",
+    "Number of rows" : "Número de linhas"
 }

@@ -2,80 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Turma;
-use App\Http\Requests\StoreTurmaRequest;
-use App\Http\Requests\UpdateTurmaRequest;
+use App\Models\Calendario;
+use App\Models\Curso;
+use App\Models\Componente;
+use App\Models\Escola;
+use App\Models\User;
+use App\Tables\TurmasTable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class TurmaController extends Controller
 {
     public function index($id)
     {
-        ////
+        $curso = Curso::findOrFail($id);
+        $table = (new TurmasTable($id))->setup();
+        return View::make("turma.index")->with(compact('table'))->with("curso", $curso)->with("pessoas", User::where('tipo', 'estud')->pluck('nome', 'id')->toArray());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create($id)
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTurmaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTurmaRequest $request)
+    public function store(Request $request)
     {
-        //
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Turma  $turma
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Turma $turma)
+    public function edit($id)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Turma  $turma
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Turma $turma)
+    public function update(Request $request)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTurmaRequest  $request
-     * @param  \App\Models\Turma  $turma
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTurmaRequest $request, Turma $turma)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Turma  $turma
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Turma $turma)
-    {
-        //
+        
     }
 }

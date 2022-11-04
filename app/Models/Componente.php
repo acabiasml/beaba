@@ -13,7 +13,7 @@ class Componente extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id', 'nome', 'horas', 'cursos_id', 'professor'];
+    protected $fillable = ['id', 'nome', 'horas', 'cursos_id', 'professor']; 
 
     protected $appends = ['regente']; 
 
