@@ -110,7 +110,7 @@
           <!-- Search form -->
           <div class="col-lg-6 col-7">
             <i class="ni @yield('icon') text-amarelo" style="width: 20px"></i>
-            <h6 class="h2 text-white d-inline-block mb-0"> @yield('title')</h6>
+            <h6 class="h2 text-white d-inline-block mb-0"> @yield('title') </h6>
           </div>
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">

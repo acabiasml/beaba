@@ -1,11 +1,11 @@
 @extends('principais.layout')
 
-@section('title', 'CALENDÁRIOS')
+@section('title', 'CALENDÁRIOS ')
 @section('icon', 'ni-calendar-grid-58')
 
 @section('content')
 
-<h1>Calendários | {{$escola->nome}}</h1>
+<a href="{{route('escolas', $escola->id)}}">{{$escola->nome}}</a> >> Calendários
 
 {{$table}}
 

@@ -5,7 +5,9 @@
 
 @section('content')
 
-<h1>Períodos | {{$calendario->nome}} | {{$calendario->ano}}</h1>
+<a href="{{route('escolas', $escola->id)}}">{{$escola->nome}}</a> >> 
+<a href="{{route('calendarios', $calendario->id)}}">{{$calendario->nome}} - {{$calendario->ano}}</a> >> 
+Períodos
 
 {{$table}}
 

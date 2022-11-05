@@ -5,13 +5,19 @@
 
 @section('content')
 
-<h1>{{$curso->nome}}</h1>
+<a href="{{route('escolas', $escola->id)}}">{{$escola->nome}}</a> >> 
+<a href="{{route('calendarios', $calendario->id)}}">{{$calendario->nome}} - {{$calendario->ano}}</a> >>
+<a href="{{route('cursos', $curso->id)}}">{{$curso->nome}}</a> >> 
+Turma
+
+<br/><br/>
+<h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Matriculados</h3>
 
 {{$table}}
 
-<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Nova Matrícula</h3> 
+<br/><h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Nova Matrícula</h3>
 
+<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px"> 
     <x:form::form class="row" method="POST" :action="route('turma.store')" >
         <x:form::input type="hidden" name="cursos_id" value="{{$curso->id}}" />
         <div class="col-sm">

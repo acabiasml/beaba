@@ -15,8 +15,9 @@ class CursoController extends Controller
     public function index($id)
     {
         $calendario = Calendario::findOrFail($id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
         $table = (new CursosTable($id))->setup();
-        return View::make("curso.index")->with(compact('table'))->with("calendario", $calendario);
+        return View::make("curso.index")->with(compact('table'))->with("calendario", $calendario)->with("escola", $escola);
     }
 
     public function create($id)

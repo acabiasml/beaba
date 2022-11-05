@@ -16,8 +16,13 @@ class ComponenteController extends Controller
     public function index($id)
     {
         $curso = Curso::findOrFail($id);
+        $calendario = Calendario::findOrFail($curso->calendarios_id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
         $table = (new ComponentesTable($id))->setup();
-        return View::make("componente.index")->with(compact('table'))->with("curso", $curso);
+        return View::make("componente.index")->with(compact('table'))
+            ->with("curso", $curso)
+            ->with("calendario", $calendario)
+            ->with("escola", $escola);
     }
 
     public function create($id)

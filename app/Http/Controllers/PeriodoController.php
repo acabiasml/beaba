@@ -15,8 +15,9 @@ class PeriodoController extends Controller
     public function index($id)
     {
         $calendario = Calendario::findOrFail($id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
         $table = (new PeriodosTable($id))->setup();
-        return View::make("periodo.index")->with(compact('table'))->with("calendario", $calendario);
+        return View::make("periodo.index")->with(compact('table'))->with("calendario", $calendario)->with("escola", $escola);
     }
 
     public function create($id)

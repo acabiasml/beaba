@@ -17,12 +17,19 @@ class TurmaController extends Controller
     public function index($id)
     {
         $curso = Curso::findOrFail($id);
+        $calendario = Calendario::findOrFail($curso->calendarios_id);
+        $escola = Escola::findOrFail($calendario->escolas_id);
+        
         $table = (new TurmasTable($id))->setup();
 
         $naTurma = Turma::pluck("users_id")->all();
         $pessoas = User::where("tipo", "estud")->whereNotIn("id", $naTurma)->pluck("nome", "id")->toArray();
 
-        return View::make("turma.index")->with(compact('table'))->with("curso", $curso)->with("pessoas", $pessoas);
+        return View::make("turma.index")->with(compact('table'))
+            ->with("curso", $curso)
+            ->with("calendario", $calendario)
+            ->with("escola", $escola)
+            ->with("pessoas", $pessoas);
     }
 
     public function create($id)

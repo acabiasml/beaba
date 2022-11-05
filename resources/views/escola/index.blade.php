@@ -5,7 +5,7 @@
 
 @section('content')
 
-<h1>Cadastro de Escolas</h1>
+<a href="{{route('home')}}">Home</a> >> Escolas
 
 {{ $table }}
 
