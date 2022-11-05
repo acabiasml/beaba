@@ -13,9 +13,21 @@ class Turma extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id', 'datamatricula', 'datatransf', 'status', 'cursos_id', 'users_id'];
+    protected $fillable = ['id', 'datamatricula', 'datatransf', 'status', 'tipo', 'cursos_id', 'users_id', 'usermatricula', 'usertransf'];
 
-    protected $appends = ['aluno']; 
+    protected $appends = ['aluno', 'quemmatriculou', 'quemtransferiu']; 
+
+    public function getQuemmatriculouAttribute(){
+        return User::find($this->usermatricula)->nome;
+    }
+
+    public function getQuemtransferiuAttribute(){
+        if(User::find($this->usertransf)){
+            return User::find($this->usertransf)->nome;
+        }else{
+            return "";
+        }
+    }
 
     public function getAlunoAttribute(){
         return User::find($this->users_id)->nome;

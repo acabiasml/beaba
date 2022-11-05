@@ -34,7 +34,10 @@ class TurmasTable extends AbstractTable
         $table->column('id')->title("id");
         $table->column('aluno')->title("Estudante");
         $table->column('status')->title("Status")->sortable();
+        $table->column('tipo')->title("Tipo")->sortable();
+        $table->column('quemmatriculou')->title("Matriculado por");
         $table->column('datamatricula')->title("Data de Matrícula")->sortable();
-        $table->column('datatransf')->title("Data de Transferência")->sortable();;
+        $table->column('quemtransferiu')->title("Transferido por");
+        $table->column('datatransf')->title("Data de Transferência")->sortable();
     }
 }

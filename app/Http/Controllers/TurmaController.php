@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Tables\TurmasTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TurmaController extends Controller
 {
@@ -22,13 +22,17 @@ class TurmaController extends Controller
         
         $table = (new TurmasTable($id))->setup();
 
-        $naTurma = Turma::pluck("users_id")->all();
-        $pessoas = User::where("tipo", "estud")->whereNotIn("id", $naTurma)->pluck("nome", "id")->toArray();
+        $naTurma = Turma::where("status", "matriculado")->pluck("users_id")->all();
+        $pessoas = User::where("tipo", "estud")->whereNotIn("id", $naTurma)->orderBy('nome', 'asc')->pluck("nome", "id")->toArray();
+        
+        $foraTransferidos = Turma::where("status", "!=", "transferido")->pluck("users_id")->all();
+        $matriculados = User::whereIn("id", $foraTransferidos)->orderBy("nome", "asc")->pluck("nome", "id")->toArray();
 
         return View::make("turma.index")->with(compact('table'))
             ->with("curso", $curso)
             ->with("calendario", $calendario)
             ->with("escola", $escola)
+            ->with("matriculados", $matriculados)
             ->with("pessoas", $pessoas);
     }
 
@@ -41,6 +45,8 @@ class TurmaController extends Controller
     {
         Turma::create([
             "datamatricula" => $request->datamatricula,
+            "usermatricula" => Auth::user()->id,
+            "tipo" => $request->tipo,
             "status" => "matriculado",
             "cursos_id" => $request->cursos_id,
             "users_id" => $request->users_id
@@ -59,15 +65,16 @@ class TurmaController extends Controller
         
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $turma = Turma::findOrFail($id);
+        $turma = Turma::where("users_id", '=', $request->users_id)->where("cursos_id", "=", $request->cursos_id)->first();
 
         $turma->update([
             "status" => "transferido",
+            "usertransf" => Auth::user()->id,
             "datatransf" => date('Y-m-d H:i:s')
         ]);
 
-        return redirect()->route('turmas', ['id' => $id]);
+        return redirect()->route('turmas', ['id' => $turma->cursos_id]);
     }
 }

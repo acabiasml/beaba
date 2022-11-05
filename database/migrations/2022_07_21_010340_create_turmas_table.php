@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTurmasTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('turmas', function (Blueprint $table) {
@@ -37,11 +33,6 @@ class CreateTurmasTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('turmas');

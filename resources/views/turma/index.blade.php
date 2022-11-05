@@ -22,6 +22,7 @@ Turma
         <x:form::input type="hidden" name="cursos_id" value="{{$curso->id}}" />
         <div class="col-sm">
             <x:form::select name="users_id" label="Nome: " :options="$pessoas" :placeholder="false"/>
+            <x:form::radio name="tipo" label="Tipo: " :group="['regular' => 'Regular', 'ouvinte' => 'Ouvinte']" inline/>
         </div>
         <div class="col-sm">
             <x:form::input type="date" name="datamatricula" label="Data: " />
@@ -30,6 +31,16 @@ Turma
             <br />
             <x:form::button.submit>Incluir</x:form::button.submit>
         </div>
+    </x:form::form>
+</div>
+
+<br/><h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Desligar / Transferir</h3>
+
+<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px"> 
+    <x:form::form method="POST" :action="route('turma.destroy')" >
+        <x:form::input type="hidden" name="cursos_id" value="{{$curso->id}}" />
+        <x:form::select name="users_id" label="Nome: " :options="$matriculados" :placeholder="false"/>
+        <x:form::button.submit>Transferir</x:form::button.submit>
     </x:form::form>
 </div>
 
