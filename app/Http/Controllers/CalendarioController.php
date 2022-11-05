@@ -35,7 +35,7 @@ class CalendarioController extends Controller
             "escolas_id" => $idEscola,
         ]);
 
-        return $this->index($idEscola);
+        return redirect()->route('calendarios', ['id' => $idEscola]);
     }
 
     public function edit($id)
@@ -55,7 +55,7 @@ class CalendarioController extends Controller
             "ano" => $request->ano,
         ]);
 
-        return $this->index($request->escolas_id);
+        return redirect()->route('calendarios', ['id' => $request->escolas_id]);
     }
 
     public function destroy($id)
@@ -65,6 +65,7 @@ class CalendarioController extends Controller
         $idEscola = $calendario->escolas_id;
 
         $calendario->delete();
-        return $this->index($idEscola);
+
+        return redirect()->route('calendarios', ['id' => $idEscola]);
     }
 }

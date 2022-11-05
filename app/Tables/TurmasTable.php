@@ -26,19 +26,13 @@ class TurmasTable extends AbstractTable
             })
             ->routes([
                 'index'   => ['name' => 'turmas', 'params' => ["id" => $this->curso->id]],
-                'destroy' => ['name' => 'turma.destroy'],
-            ])
-            ->destroyConfirmationHtmlAttributes(fn (Turma $turma) => [
-                'data-confirm' => __('<< Confirma o desligamento de :entry?', [
-                    'entry' => $turma->aluno,
-                ]),
             ]);
     }
 
     protected function columns(Table $table): void
     {
         $table->column('id')->title("id");
-        $table->column('aluno')->title("Estudante")->sortable();
+        $table->column('aluno')->title("Estudante");
         $table->column('status')->title("Status")->sortable();
         $table->column('datamatricula')->title("Data de Matrícula")->sortable();
         $table->column('datatransf')->title("Data de Transferência")->sortable();;

@@ -37,7 +37,7 @@ class PeriodoController extends Controller
             "calendarios_id" => $idCalendario,
         ]);
 
-        return $this->index($idCalendario);
+        return redirect()->route('periodos', ['id' => $idCalendario]);
     }
 
     public function edit($id)
@@ -59,7 +59,7 @@ class PeriodoController extends Controller
             "fim" => $request->fim,
         ]);
 
-        return $this->index($request->calendarios_id);
+        return redirect()->route('periodos', ['id' => $request->calendarios_id]);
     }
 
     public function destroy($id)
@@ -69,6 +69,7 @@ class PeriodoController extends Controller
         $idCalendario = $periodo->calendarios_id;
         
         $periodo->delete();
-        return $this->index($idCalendario);
+
+        return redirect()->route('periodos', ['id' => $idCalendario]);
     }
 }

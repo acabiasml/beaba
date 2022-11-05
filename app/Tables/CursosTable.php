@@ -50,7 +50,7 @@ class CursosTable extends AbstractTable
             $caminho1 = route("componentes", "");
             $caminho2 = route("turmas", "");
             
-            $string = '<a href="' . $caminho1 . "/" . $curso->id . '">ver componentes</a> | <br/>';
+            $string = '<a href="' . $caminho1 . "/" . $curso->id . '">ver componentes</a> <br/><br/>';
             $string = $string . '<a href="' . $caminho2 . "/" . $curso->id . '">ver turma</a>';
 
             return $string;

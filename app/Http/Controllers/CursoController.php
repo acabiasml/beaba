@@ -38,7 +38,7 @@ class CursoController extends Controller
             "calendarios_id" => $idCalendario,
         ]);
 
-        return $this->index($idCalendario);
+        return redirect()->route('cursos', ['id' => $idCalendario]);
     }
 
     public function show()
@@ -66,7 +66,7 @@ class CursoController extends Controller
             "status" => $request->status,
         ]);
 
-        return $this->index($request->calendarios_id);
+        return redirect()->route('cursos', ['id' => $request->calendarios_id]);
     }
 
     public function destroy($id)
@@ -76,6 +76,7 @@ class CursoController extends Controller
         $idCalendario = $curso->calendarios_id;
         
         $curso->delete();
-        return $this->index($idCalendario);
+
+        return redirect()->route('cursos', ['id' => $idCalendario]);
     }
 }

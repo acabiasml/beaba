@@ -48,8 +48,4 @@ class EscolasTable extends AbstractTable
             return $string;
         });
     }
-
-    protected function resultLines(Table $table): void
-    {
-    }
 }

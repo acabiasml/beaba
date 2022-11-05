@@ -38,7 +38,7 @@ class ComponenteController extends Controller
             "professor" => $request->professor
         ]);
 
-        return $this->index($request->cursos_id);
+        return redirect()->route('componentes', ['id' => $request->cursos_id]);
     }
 
     public function edit($id)
@@ -61,7 +61,7 @@ class ComponenteController extends Controller
             "professor" => $request->professor
         ]);
 
-        return $this->index($request->cursos_id);
+        return redirect()->route('componentes', ['id' => $request->cursos_id]);
     }
 
     public function destroy($id)
@@ -71,6 +71,7 @@ class ComponenteController extends Controller
         $idCurso = $componente->cursos_id;
         
         $componente->delete();
-        return $this->index($idCurso);
+
+        return redirect()->route('componentes', ['id' => $idCurso]);
     }
 }
