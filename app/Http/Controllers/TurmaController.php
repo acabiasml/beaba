@@ -22,10 +22,10 @@ class TurmaController extends Controller
         
         $table = (new TurmasTable($id))->setup();
 
-        $naTurma = Turma::where("status", "matriculado")->pluck("users_id")->all();
+        $naTurma = Turma::where("status", "matriculado")->where("cursos_id", $id)->pluck("users_id")->all();
         $pessoas = User::where("tipo", "estud")->whereNotIn("id", $naTurma)->orderBy('nome', 'asc')->pluck("nome", "id")->toArray();
         
-        $foraTransferidos = Turma::where("status", "!=", "transferido")->pluck("users_id")->all();
+        $foraTransferidos = Turma::where("status", "!=", "transferido")->where("cursos_id", $id)->pluck("users_id")->all();
         $matriculados = User::whereIn("id", $foraTransferidos)->orderBy("nome", "asc")->pluck("nome", "id")->toArray();
 
         return View::make("turma.index")->with(compact('table'))

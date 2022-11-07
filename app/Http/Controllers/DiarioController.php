@@ -2,84 +2,75 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Componente;
 use App\Models\Diario;
-use App\Http\Requests\StoreDiarioRequest;
-use App\Http\Requests\UpdateDiarioRequest;
+use App\Models\Curso;
+use App\Models\Periodo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class DiarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $doProfessor = array();
+
+        $componentes = Componente::where("professor", Auth::user()->id)->orderBy("id", "desc")->get();
+
+        foreach ($componentes as $componente){ 
+            $este = array();
+
+            $este["componente_id"] = $componente->id;
+            $este["componente_nome"] = $componente->nome;
+            $este["componente_horas"] = $componente->horas;
+
+            $curso = Curso::where("id", $componente->cursos_id)->first();
+
+            $este["componente_id_curso"] = $curso->id;
+            $este["componente_nome_curso"] = $curso->nome;
+            $este["componente_status_curso"] = $curso->status;
+
+            $inicio = Periodo::where("id", $curso->inicio)->pluck("inicio")->first();
+            $fim = Periodo::where("id", $curso->fim)->pluck("fim")->first();
+
+            #pegando os períodos que estão entre o início e fim do curso...
+            $periodos = Periodo::where("calendarios_id", $curso->calendarios_id)->whereBetween("inicio", [$inicio, $fim])->get();
+
+            $este["componente_periodos_curso"] = $periodos;
+
+            array_push($doProfessor, $este);
+        }
+
+        return View::make("diarios.index")->with("doProfessor", $doProfessor);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreDiarioRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreDiarioRequest $request)
+    public function store()
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Diario  $diario
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Diario $diario)
+    public function show()
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Diario  $diario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Diario $diario)
+    public function edit()
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateDiarioRequest  $request
-     * @param  \App\Models\Diario  $diario
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateDiarioRequest $request, Diario $diario)
+    public function update()
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Diario  $diario
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Diario $diario)
+    public function destroy()
     {
         //
     }

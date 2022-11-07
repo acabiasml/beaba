@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EscolaController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\ComponenteController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\DiarioController;
 use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
@@ -43,13 +45,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/home', [DashboardController::class,'home'])->name('home');
     Route::get('/biblioteca', [DashboardController::class,'biblioteca'])->name('biblioteca');
-    Route::get('/escolas', [DashboardController::class,'escolas'])->name('escolas');
-    Route::get('/pessoas', [DashboardController::class,'pessoas'])->name('pessoas');
-    Route::get('/diarios', [DashboardController::class,'diarios'])->name('diarios');
     Route::get('/relatorios', [DashboardController::class,'relatorios'])->name('relatorios');
-    Route::get('/turmas', [DashboardController::class,'turmas'])->name('turmas');
-    Route::get('/conceitos', [DashboardController::class,'conceitos'])->name('conceitos');
 
+    Route::get('/pessoas', [DashboardController::class,'pessoas'])->name('pessoas');
     Route::get('/createuser', [UserController::class, 'create'])->name('user.create');
     Route::get('/showuser/{id}', [UserController::class, 'show'])->name('user.show');
     Route::get('/edituser/{id}', [UserController::class, 'edit'])->name('user.edit');
@@ -58,6 +56,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/inclui', [UserController::class, 'storeUser'])->name('user.store.user');
     Route::post('/atualiza', [UserController::class, 'update'])->name('user.update.user');
 
+    Route::get('/escolas', [DashboardController::class,'escolas'])->name('escolas');
     Route::get('/createescola', [EscolaController::class, 'create'])->name('escola.create');
     Route::get('/showescola/{id}', [EscolaController::class, 'show'])->name('escola.show');
     Route::get('/editescola/{id}', [EscolaController::class, 'edit'])->name('escola.edit');
@@ -100,4 +99,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/destroyturma', [TurmaController::class, 'destroy'])->name('turma.destroy');
     Route::post('/incluiturma', [TurmaController::class, 'store'])->name('turma.store');
     Route::post('/atualizaturma', [TurmaController::class, 'update'])->name('turma.update');
+
+    Route::get('/diarios', [DiarioController::class,'index'])->name('diarios');
+
+    Route::post('/medias/', [MediaController::class,'index'])->name('medias');
+    Route::post('/frequencias', [FrequenciaController::class,'index'])->name('frequencias');
 });
