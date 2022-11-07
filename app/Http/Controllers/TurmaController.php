@@ -72,7 +72,7 @@ class TurmaController extends Controller
         $turma->update([
             "status" => "transferido",
             "usertransf" => Auth::user()->id,
-            "datatransf" => date('Y-m-d H:i:s')
+            "datatransf" => $request->datatransf,
         ]);
 
         return redirect()->route('turmas', ['id' => $turma->cursos_id]);

@@ -41,6 +41,7 @@ class ComponentesTable extends AbstractTable
     {
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable()->searchable();
+        $table->column('area')->title("Área")->sortable();
         $table->column('horas')->title("Carga Horária");
         $table->column('regente')->title("Regente")->sortable();
     }

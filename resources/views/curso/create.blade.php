@@ -5,15 +5,18 @@
 
 @section('content')
 
-<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">Novo Curso | Calendário: {{$calendario->nome}}</h1> 
-    <h1 style="text-align: center">{{$escola->nome}}</h1> <br />
+<a href="{{route('escolas', $escola->id)}}">{{$escola->nome}}</a> >> 
+<a href="{{route('calendarios', $calendario->id)}}">{{$calendario->nome}} - {{$calendario->ano}}</a> >> 
+Cursos <br/><br/>
+<h1>Novo</h1>
 
+<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
     <x:form::form class="row" method="POST" :action="route('curso.store')">
         <x:form::input type="hidden" name="calendarios_id" value="{{$calendario->id}}" />
         <x:form::input type="hidden" name="status" value="suspenso" />
         <div class="col-md-6">
-            <x:form::input id="nome" name="nome" label="Nome do Curso: " :placeholder="false"/>
+            <x:form::input id="nome" name="nome" label="Nome: " :placeholder="false"/>
+            <x:form::radio name="modalidade" label="Modalidade: " :group="['infantil' => 'Educação Infantil', 'fundamental' => 'Ensino Fundamental', 'medio' => 'Ensino Médio', 'tecnico' => 'Ensino Técnico Profissionalizante']" inline/>
         </div>
         <div class="col-md-6">
         <x:form::select name="inicio" label="Período de Início: " :placeholder="false" :options="$periodos" />

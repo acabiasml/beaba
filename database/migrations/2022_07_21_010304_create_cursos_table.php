@@ -17,6 +17,7 @@ class CreateCursosTable extends Migration
             $table->increments('id', true);
             $table->string('nome')->nullable();
             $table->string('status')->nullable();
+            $table->string('modalidade')->nullable();
 
             $table->integer('calendarios_id')->unsigned()->nullable();
             $table->integer('inicio')->unsigned()->nullable();

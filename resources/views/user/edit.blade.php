@@ -5,8 +5,11 @@
 
 @section('content')
 
+<a href="{{route('home')}}">Home</a> >> Pessoas
+<br/><br/>
+<h1>Editando</h1>
+
 <div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">EDITAR CADASTRO</h1> <br />
 
     <x:form::form :bind="$usuario" class="row" method="POST" :action="route('user.update.user')">
         <div class="col-md-6">

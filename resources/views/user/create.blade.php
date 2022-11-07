@@ -5,9 +5,11 @@
 
 @section('content')
 
-<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
-    <h1 style="text-align: center">NOVO CADASTRO</h1> <br />
+<a href="{{route('home')}}">Home</a> >> Pessoas
+<br/><br/>
+<h1>Novo</h1>
 
+<div class="container-fluid" style="margin-top: 20px; margin-bottom: 50px">
     <x:form::form class="row" method="POST" :action="route('user.store.user')">
         <div class="col-md-6">
             <x:form::input id="nome" name="nome" label="Nome Completo: " :placeholder="false"/>

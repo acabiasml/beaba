@@ -43,7 +43,7 @@ class CalendarioController extends Controller
         $calendario = Calendario::findOrFail($id);
         $escola = Escola::findOrFail($calendario->escolas_id);
 
-        return view("calendario.edit", ['calendario' => $calendario, 'escola' => $escola->nome]);
+        return view("calendario.edit", ['calendario' => $calendario, 'escola' => $escola]);
     }
 
     public function update(Request $request)

@@ -13,9 +13,13 @@ class Componente extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id', 'nome', 'horas', 'cursos_id', 'professor']; 
+    protected $fillable = ['id', 'nome', 'horas', 'cursos_id', 'professor', 'area_id']; 
 
-    protected $appends = ['regente']; 
+    protected $appends = ['regente', 'area']; 
+
+    public function getAreaAttribute(){
+        return Area::find($this->area_id)->nome;
+    }
 
     public function getRegenteAttribute(){
         return User::find($this->professor)->nome;

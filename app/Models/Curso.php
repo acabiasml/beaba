@@ -13,7 +13,7 @@ class Curso extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id', 'nome', 'inicio', 'fim', 'status', 'calendarios_id'];
+    protected $fillable = ['id', 'nome', 'inicio', 'fim', 'status', 'calendarios_id', 'modalidade'];
 
     protected $appends = ['inicial', 'final', 'horas'];
 

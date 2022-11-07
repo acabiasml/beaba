@@ -35,6 +35,7 @@ class CursoController extends Controller
             "inicio" => $request->inicio,
             "fim" => $request->fim,
             "nome" => $request->nome,
+            "modalidade" => $request->modalidade,
             "status" => $request->status,
             "calendarios_id" => $idCalendario,
         ]);
@@ -64,6 +65,7 @@ class CursoController extends Controller
             "inicio" => $request->inicio,
             "fim" => $request->fim,
             "nome" => $request->nome,
+            "modalidade" => $request->modalidade,
             "status" => $request->status,
         ]);
 
