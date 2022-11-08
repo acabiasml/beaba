@@ -7,7 +7,7 @@
 
 <a href="{{route('escolas', $escola->id)}}">{{$escola->nome}}</a> >> 
 <a href="{{route('calendarios', $calendario->id)}}">{{$calendario->nome}} - {{$calendario->ano}}</a> >>
-<a href="{{route('cursos', $curso->id)}}">{{$curso->nome}}</a> >> 
+<a href="{{route('cursos', $calendario->id)}}">{{$curso->nome}}</a> >> 
 Componentes <br/><br/>
 <h1>Novo</h1>
 
