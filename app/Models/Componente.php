@@ -34,6 +34,10 @@ class Componente extends Model
     }
 
     public function curso(){
-        return $this->belongsTo(Curso::class);
+        return $this->belongsTo(Curso::class, 'cursos_id');
+    }
+
+    public function medias(){
+        return $this->hasMany(Media::class);
     }
 }

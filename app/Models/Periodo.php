@@ -18,4 +18,8 @@ class Periodo extends Model
     public function calendario(){
         return $this->belongsTo(Calendario::class);
     }
+
+    public function medias(){
+        return $this->hasMany(Media::class);
+    }
 }

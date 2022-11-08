@@ -103,5 +103,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/diarios', [DiarioController::class,'index'])->name('diarios');
 
     Route::post('/medias/', [MediaController::class,'index'])->name('medias');
+    Route::post('/incluimedia', [MediaController::class,'store'])->name('media.store');
+
     Route::post('/frequencias', [FrequenciaController::class,'index'])->name('frequencias');
 });

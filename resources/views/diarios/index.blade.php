@@ -11,7 +11,7 @@
 
 <h1>Suas turmas </h1>
 
-    <table class="table">
+    <table class="table table-responsive-sm">
     <thead>
         <tr>
         <th scope="col">ID</th>

@@ -22,4 +22,8 @@ class User extends Authenticatable{
                             'telefone2', 'cartaosus', 'tiposangue', 'nutricionais', 'nis',
                             'carteiratrab', 'habilitacao', 'habilcategoria', 'habilvalidade',
                             'banco', 'agencia', 'conta', 'created_at', 'updated_at'];
+
+    public function medias(){
+        return $this->hasMany(Media::class);
+    }
 }
