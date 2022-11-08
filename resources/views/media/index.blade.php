@@ -15,7 +15,7 @@
 
 
 <div>
-    <form method="POST" action="{{route('media.store')}}">
+    <form method="GET" action="{{route('media.store')}}">
     @csrf
         <input type="hidden" name="periodo" value="{{$periodo->id}}" />
         <input type="hidden" name="componente" value="{{$componente->id}}" />
@@ -27,7 +27,7 @@
             @endforeach
         </select>
 
-        <label for="nota">Média: </label><input type="number" name="nota">
+        <label for="nota">Média: </label><input type="number" step="0.01" name="nota">
 
         <button type="submit">Registrar</button>
     </form>

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Periodo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Route;
 
 class MediaController extends Controller
 {
@@ -27,19 +28,21 @@ class MediaController extends Controller
             if($matricula->status == "transferido" && $matricula->datatransf < $periodo->inicio){
                 array_push($transferidos, $matricula->users_id);
             }else{
-                $media = Media::where("componentes_id", $componente->id)
-                ->where("periodos_id", $periodo->id)
-                ->where("users_id", $matricula->users_id)->first();
-            
-                $aluno = User::where("id", $matricula->users_id)->first();  
+                if($matricula->status == "matriculado" && $matricula->datamatricula <= $periodo->fim){
+                    $media = Media::where("componentes_id", $componente->id)
+                    ->where("periodos_id", $periodo->id)
+                    ->where("users_id", $matricula->users_id)->first();
                 
-                $nota = 0;
+                    $aluno = User::where("id", $matricula->users_id)->first();  
+                    
+                    $nota = 0;
 
-                if($media){
-                    $nota = $media->nota;
+                    if($media){
+                        $nota = $media->nota;
+                    }
+
+                    array_push($ativos, ["id" => $aluno->id, "nome" => $aluno->nome, "media" => $nota]);
                 }
-
-                array_push($ativos, ["id" => $aluno->id, "nome" => $aluno->nome, "media" => $nota]);
             }
         }
 
@@ -59,7 +62,7 @@ class MediaController extends Controller
             ['users_id' => $request->aluno, 'componentes_id' => $request->componente, 'periodos_id' => $request->periodo],
             ['nota' =>  $request->nota],
         );
-
+        
         return redirect()->route('medias', ['componente' => $request->componente, 'periodo' => $request->periodo]);
     }
 }

@@ -31,7 +31,7 @@
                 @if ($key["componente_status_curso"] == "iniciado")
                     <td>
                         Período: 
-                        <form method="POST">
+                        <form method="GET">
                             @csrf
 
                             <input type="hidden" name="componente" value="{{$key['componente_id']}}" />
