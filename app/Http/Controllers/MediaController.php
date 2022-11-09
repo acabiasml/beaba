@@ -28,7 +28,7 @@ class MediaController extends Controller
             if($matricula->status == "transferido" && $matricula->datatransf < $periodo->inicio){
                 array_push($transferidos, $matricula->users_id);
             }else{
-                if($matricula->status == "matriculado" && $matricula->datamatricula <= $periodo->fim){
+                if($matricula->datamatricula <= $periodo->fim){
                     $media = Media::where("componentes_id", $componente->id)
                     ->where("periodos_id", $periodo->id)
                     ->where("users_id", $matricula->users_id)->first();
