@@ -31,6 +31,8 @@ class DiarioController extends Controller
             $este["componente_nome_curso"] = $curso->nome;
             $este["componente_status_curso"] = $curso->status;
 
+            $este["componente_cumprido"] = Diario::where("componentes_id", $componente->id)->get()->count() + Diario::where("componentes_id", $componente->id)->where("geminada", 1)->get()->count();
+
             $inicio = Periodo::where("id", $curso->inicio)->pluck("inicio")->first();
             $fim = Periodo::where("id", $curso->fim)->pluck("fim")->first();
 
@@ -45,14 +47,40 @@ class DiarioController extends Controller
         return View::make("diarios.index")->with("doProfessor", $doProfessor);
     }
 
-    public function create()
+    public function ver(Request $request)
     {
-        //
+        $componente = Componente::where("id", $request->componente)->first();
+        $periodo = Periodo::where("id", $request->periodo)->first();
+
+        $registrados = Diario::where("componentes_id", $componente->id)
+                                ->where("data", ">=", $periodo->inicio)
+                                ->where("data", "<=", $periodo->fim)
+                                ->orderBy("data", "asc")->get();
+
+        return View::make("diarios.ver")
+                ->with("componente", $componente)
+                ->with("periodo", $periodo)
+                ->with("curso", $componente->curso)
+                ->with("registrados", $registrados);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $componente = Componente::where("id", $request->componente)->first();
+        $periodo = Periodo::where("id", $request->periodo)->first();
+
+        $info["componente"] = $request->componente;
+        $info["periodo"] = $request->periodo;
+
+        if($request->dia < $periodo->inicio || $request->dia > $periodo->fim){
+            $info["errim"] = "erro";
+        }else{
+            $diario = Diario::updateOrCreate(
+                ['data' => $request->dia, 'componentes_id' => $request->componente],
+                ['conteudo' =>  $request->conteudo, 'geminada' => $request->geminada],
+            );
+        }
+        return redirect()->route('diarios.ver', $info);
     }
 
     public function show()

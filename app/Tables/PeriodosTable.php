@@ -40,8 +40,8 @@ class PeriodosTable extends AbstractTable
     {
         $table->column('id')->title("id");
         $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
-        $table->column('inicio')->title("Início")->sortable();
-        $table->column('fim')->title("Fim")->sortable();
+        $table->column('inicio')->title("Início")->sortable()->dateTimeFormat("d-m-Y");
+        $table->column('fim')->title("Fim")->sortable()->dateTimeFormat("d-m-Y");
     }
 
     protected function resultLines(Table $table): void
