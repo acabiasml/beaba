@@ -50,6 +50,7 @@
     <thead>
         <tr>
             <th scope="col">Data</th>
+            <th scope="col">Tipo</th>
             <th scope="col">Conteúdo</th>
         </tr>
     </thead>
@@ -57,6 +58,7 @@
         @foreach ($registrados as $registrado)
             <tr>
                 <td>{{date('d-m-Y', strtotime($registrado->data))}}</td>
+                <td>{{$registrado->traduzgem}}</td>
                 <td>{{$registrado->conteudo}}</td>
             </tr>
         @endforeach

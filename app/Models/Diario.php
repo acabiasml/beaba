@@ -14,4 +14,14 @@ class Diario extends Model
     public $timestamps = false;
 
     protected $fillable = ['id', 'data', 'conteudo', 'componentes_id', 'geminada']; 
+
+    protected $appends = ['traduzgem'];
+
+    public function getTraduzgemAttribute(){
+        if($this->geminada == "0"){
+            return "SIMPLES";
+        }else{
+            return "GEMINADA";
+        }
+    }
 }
