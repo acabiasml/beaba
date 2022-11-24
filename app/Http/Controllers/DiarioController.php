@@ -44,7 +44,7 @@ class DiarioController extends Controller
             array_push($doProfessor, $este);
         }
 
-        return View::make("diarios.index")->with("doProfessor", $doProfessor);
+        return View::make("diario.index")->with("doProfessor", $doProfessor);
     }
 
     public function ver(Request $request)
@@ -64,7 +64,7 @@ class DiarioController extends Controller
 
         $somaBimestre = $registrados->count() + $geminadas;
 
-        return View::make("diarios.ver")
+        return View::make("diario.ver")
                 ->with("componente", $componente)
                 ->with("periodo", $periodo)
                 ->with("curso", $componente->curso)
@@ -87,7 +87,7 @@ class DiarioController extends Controller
                 ['conteudo' =>  $request->conteudo, 'geminada' => $request->geminada],
             );
         }
-        return redirect()->route('diarios.ver', $info);
+        return redirect()->route('diario.ver', $info);
     }
 
     public function show()
