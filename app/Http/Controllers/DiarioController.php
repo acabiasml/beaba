@@ -44,7 +44,7 @@ class DiarioController extends Controller
             array_push($doProfessor, $este);
         }
 
-        return View::make("diario.index")->with("doProfessor", $doProfessor);
+        return View::make("diarios.index")->with("doProfessor", $doProfessor);
     }
 
     public function ver(Request $request)
