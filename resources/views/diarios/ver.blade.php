@@ -18,7 +18,7 @@
 <h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Inserir conteúdo</h3>
 
 <div>
-    <form method="GET" action="{{route('diarios.store')}}">
+    <form method="GET" action="{{route('diario.store')}}">
     @csrf
         <input type="hidden" name="periodo" value="{{$periodo->id}}" />
         <input type="hidden" name="componente" value="{{$componente->id}}" />
@@ -45,13 +45,14 @@
 
 <br/>
 
-<h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Conteúdos registrados</h3>
+<h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Conteúdos registrados | {{$somabimestre}} aulas nesse bimestre</h3>
     <table class="table table-responsive-sm">
     <thead>
         <tr>
             <th scope="col">Data</th>
             <th scope="col">Tipo</th>
             <th scope="col">Conteúdo</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -60,6 +61,15 @@
                 <td>{{date('d-m-Y', strtotime($registrado->data))}}</td>
                 <td>{{$registrado->traduzgem}}</td>
                 <td>{{$registrado->conteudo}}</td>
+                <td>
+                    <form method="POST" action="{{route('diario.destroy')}}">
+                    @csrf
+                        <input type="hidden" name="conteudo" value="{{$registrado->id}}" />
+                        <input type="hidden" name="componente" value="{{$componente->id}}" />
+                        <input type="hidden" name="periodo" value="{{$periodo->id}}" />
+                        <button type="submit">Excluir</button> <i class="ni ni-check-bold" style="color: green"></i> Frequência
+                    </form>
+                <td>
             </tr>
         @endforeach
     </tbody>

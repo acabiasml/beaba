@@ -41,7 +41,7 @@
                             </select>
                             <br/><br/>
                             <button type="submit" formaction="{{route('medias')}}">Notas</button>
-                            <button type="submit" formaction="{{route('diarios.ver')}}">Conteúdos e Frequência</button>
+                            <button type="submit" formaction="{{route('diario.ver')}}">Conteúdos e Frequência</button>
                         </form>
                     </td>
                 @endif

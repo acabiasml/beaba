@@ -57,16 +57,23 @@ class DiarioController extends Controller
                                 ->where("data", "<=", $periodo->fim)
                                 ->orderBy("data", "asc")->get();
 
+        $geminadas = Diario::where("componentes_id", $componente->id)
+                                ->where("data", ">=", $periodo->inicio)
+                                ->where("data", "<=", $periodo->fim)
+                                ->where("geminada", 1)->get()->count();                              
+
+        $somaBimestre = $registrados->count() + $geminadas;
+
         return View::make("diarios.ver")
                 ->with("componente", $componente)
                 ->with("periodo", $periodo)
                 ->with("curso", $componente->curso)
-                ->with("registrados", $registrados);
+                ->with("registrados", $registrados)
+                ->with("somabimestre", $somaBimestre);
     }
 
     public function store(Request $request)
     {
-        $componente = Componente::where("id", $request->componente)->first();
         $periodo = Periodo::where("id", $request->periodo)->first();
 
         $info["componente"] = $request->componente;
@@ -98,8 +105,14 @@ class DiarioController extends Controller
         //
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
-        //
+        $conteudo = Diario::findOrFail($request->conteudo);
+        $conteudo->delete();
+
+        $info["componente"] = $request->componente;
+        $info["periodo"] = $request->periodo;
+
+        return redirect()->route('diario.ver', $info);
     }
 }
