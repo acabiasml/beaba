@@ -48,6 +48,11 @@
         .page-break {
             page-break-after: always;
         }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
     </style>
 </head>
 
@@ -95,8 +100,42 @@
                 <p style="font-size: 11pt">Diretor(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp; Secretário(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <br /><br />
             </div>
+
             <div class="page-break"></div>
-            <h1>Page 2</h1>
+            <h1 style="text-align: center">FICHA DE REGISTRO DE PROGRESSÃO</h1>
+
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <th rowspan="2">Código</th>
+                    <th rowspan="2">Nome</th>
+                    <th colspan="{{count($periodo)}}">Progressão</th>
+                    <th rowspan="2">Média</th>
+                    <th rowspan="2">Faltas</th>
+                    <th rowspan="2">Resultado Final</th>
+                </tr>
+                <tr>
+                    @foreach ($periodo as $p)
+                        <td style="text-align: center">{{$p->nome}}</td>
+                    @endforeach
+                    <td rowspan="0"></td>
+                    <td rowspan="0"></td>
+                </tr>
+                @foreach ($turma as $matricula)
+                <tr>
+                    <td style="text-align: center">{{$matricula->id}}</td>
+                    <td>{{$matricula->aluno}}</td>
+                    @foreach ($periodo as $p)
+                        <td>0</td>
+                    @endforeach
+                    <td></td>
+                    <td style="text-align: center">{{$matricula->status}}</td>
+                    <td></td>
+                </tr>
+                @endforeach
+            </table>
+
+            <div class="page-break"></div>
+            <h1>Page 3</h1>
         </div>
     </main>
 
