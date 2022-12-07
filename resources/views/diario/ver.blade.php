@@ -14,6 +14,7 @@
 @endif
 
 <h1>{{$periodo->nome}}</h1>
+<p>Período de {{date('d-m-Y', strtotime($periodo->inicio))}} até {{date('d-m-Y', strtotime($periodo->fim))}}.</p>
 
 <h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Inserir conteúdo</h3>
 

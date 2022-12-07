@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/verdiario', [DiarioController::class,'ver'])->name('diario.ver');
     Route::get('/incluiconteudo', [DiarioController::class, 'store'])->name('diario.store');
     Route::post('/destroyconteudo', [DiarioController::class, 'destroy'])->name('diario.destroy');
+    Route::get('/printdiario', [DiarioController::class, 'print'])->name('diario.print');
 
     Route::get('/medias/', [MediaController::class,'index'])->name('medias');
     Route::get('/incluimedia', [MediaController::class,'store'])->name('media.store');

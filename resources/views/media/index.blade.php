@@ -1,6 +1,7 @@
 @extends('principais.layout')
 
 @section('title', 'NOTA MÉDIA NO PERÍODO')
+
 @section('icon', 'ni-collection')
 
 @section('content')
@@ -21,15 +22,15 @@
         <input type="hidden" name="componente" value="{{$componente->id}}" />
         
         <label for="aluno">Estudante: </label>
-        <select name="aluno">
+        <select name="aluno" id="selectaluno">
             @foreach ($ativos as $aluno)
                 <option value="{{$aluno["id"]}}">{{$aluno["nome"]}}</option>
             @endforeach
         </select>
 
-        <label for="nota">Média: </label><input type="number" step="0.01" name="nota">
+        <label for="nota">Média: </label><input type="number" step="0.01" name="nota" id="nota">
 
-        <button type="submit">Registrar</button>
+        <button type="submit" id="registrar">Registrar</button>
     </form>
 </div>
 
@@ -48,7 +49,7 @@
         @foreach ($ativos as $aluno)
             <tr>
                 <td>{{$aluno["id"]}}</td>
-                <td>{{$aluno["nome"]}}</td>
+                <td class="select-change" id="{{$aluno['id']}}">{{$aluno["nome"]}}</td>
                 <td style="text-align: center">{{$aluno["media"]}}</td>
             </tr>
         @endforeach
@@ -64,5 +65,23 @@
         </p>
     </div>
     @endif
+
+@endsection
+
+@section('script')
+
+    $(document).ready(function(){
+        $('.select-change').click(function(){ 
+            $('#selectaluno').val(this.id).trigger('change');
+        });
+        
+        $("#registrar").on('click', function(e){
+            var nota = $.trim($("#nota").val());
+            if(nota < 0 || nota > 10 || nota === ""){
+                alert("A média inserida é inválida.");
+                e.preventDefault(); 
+            }
+        });
+    });
 
 @endsection

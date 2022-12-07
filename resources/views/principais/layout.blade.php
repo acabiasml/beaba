@@ -114,41 +114,6 @@
           </div>
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-bell-55"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
-                
-                <div class="px-3 py-3">
-                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.</h6>
-                </div>
-                
-                <div class="list-group list-group-flush">
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        
-                        <img alt="Avatar do Gravatar" src="{{$avatar}}" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">{{Auth::user()->name}}</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>2 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                
-                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
-              </div>
-            </li> -->
             <li class="nav-item d-xl-none">
               <!-- Sidenav toggler -->
               <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
@@ -236,6 +201,10 @@
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
+
+  <script>
+    @yield('script')
+  </script>
 
   <script>
     // Example of javascript snippet to ask a confirmation before executing the destroy action

@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Componente;
 use App\Models\Diario;
 use App\Models\Curso;
+use App\Models\Calendario;
+use App\Models\User;
+use App\Models\Escola;
+use App\Models\Area;
 use App\Models\Periodo;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 
@@ -114,5 +119,21 @@ class DiarioController extends Controller
         $info["periodo"] = $request->periodo;
 
         return redirect()->route('diario.ver', $info);
+    }
+
+    public function print(Request $request)
+    {
+        $periodo = Periodo::where("id", $request->periodo)->first();
+        $componente = Componente::where("id", $request->componente)->first();
+        $professor = User::where("id", $componente->professor)->first();
+        $area = Area::where("id", $componente->area_id)->first();
+        $curso = Curso::where("id", $componente->cursos_id)->first();
+        $calendario = Calendario::where("id", $curso->calendarios_id)->first();
+        $escola = Escola::where("id", $calendario->escolas_id)->first();
+
+        $pdf = app("dompdf.wrapper");
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $arquivo = $pdf->loadView("diario.print", ["escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodo" => $periodo, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
+        return $arquivo->download('diario-turma' . time() . '.pdf');
     }
 }
