@@ -106,31 +106,29 @@
 
             <table style="margin-left: auto; margin-right: auto;">
                 <tr>
-                    <th rowspan="2">Código</th>
+                    <th rowspan="2">&nbsp;Código&nbsp;</th>
                     <th rowspan="2">Nome</th>
                     <th colspan="{{count($periodo)}}">Progressão</th>
-                    <th rowspan="2">Média</th>
-                    <th rowspan="2">Faltas</th>
-                    <th rowspan="2">Resultado Final</th>
+                    <th rowspan="2">&nbsp;Média&nbsp;</th>
+                    <th rowspan="2">&nbsp;Faltas&nbsp;</th>
+                    <th rowspan="2">&nbsp;Situação&nbsp;</th>
                 </tr>
                 <tr>
                     @foreach ($periodo as $p)
                         <td style="text-align: center">{{$p->nome}}</td>
                     @endforeach
-                    <td rowspan="0"></td>
-                    <td rowspan="0"></td>
                 </tr>
-                @foreach ($turma as $matricula)
-                <tr>
-                    <td style="text-align: center">{{$matricula->id}}</td>
-                    <td>{{$matricula->aluno}}</td>
-                    @foreach ($periodo as $p)
-                        <td>0</td>
-                    @endforeach
-                    <td></td>
-                    <td style="text-align: center">{{$matricula->status}}</td>
-                    <td></td>
-                </tr>
+                @foreach ($infos as $t)
+                        <tr>
+                            <td style="text-align: center">{{$t['codigo']}}</td>
+                            <td>&nbsp;{{$t['nome']}}&nbsp;&nbsp;</td>
+                            @foreach ($t['notas'] as $nota)
+                                <td style="text-align: center">{{$nota}}</td>
+                            @endforeach
+                            <td style="text-align: center">{{$t['media']}}</td>
+                            <td style="text-align: center">0</td>
+                            <td style="text-align: center">&nbsp;{{$t['resultado']}}&nbsp;</td>
+                        </tr>
                 @endforeach
             </table>
 

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Escola;
 use App\Models\Area;
 use App\Models\Turma;
+use App\Models\Media;
 use App\Models\Periodo;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -133,9 +134,52 @@ class DiarioController extends Controller
         $escola = Escola::where("id", $calendario->escolas_id)->first();
         $turma = Turma::where("cursos_id", $curso->id)->get();
 
+        $infos = array();
+
+        foreach ($turma as $matricula){
+            if($matricula->tipo == "regular"){
+                $dados = array();
+                $dados["codigo"] = $matricula->id;
+                $dados["nome"] = $matricula->aluno;
+
+                $notas = array();
+                foreach($periodo as $bimestre){
+                    $consulta = Media::where("users_id", $matricula->id)
+                                    ->where("componentes_id", $componente->id)
+                                    ->where("periodos_id", $bimestre->id)->first();
+                    
+                    if($consulta == null){
+                        $notas[$bimestre->id] = "-";
+                    }else{
+                        $notas[$bimestre->id] = $consulta->nota;
+                    }
+                }
+
+                $dados["notas"] = $notas;
+
+                if($matricula->status == "transferido"){
+                    $media = "-";
+                }else{
+                    $media = 0;
+                    foreach($notas as $nota){
+                        if($nota != "-"){
+                            $media = $media + $nota;
+                        }
+                    }
+                    
+                    $media = $media / count($notas);
+                }
+
+                $dados["media"] = $media;
+                $dados["resultado"] = $matricula->status;
+
+                array_push($infos, $dados);
+            } 
+        }
+
         $pdf = app("dompdf.wrapper");
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $arquivo = $pdf->loadView("diario.print", ["turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodo" => $periodo, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
+        $arquivo = $pdf->loadView("diario.print", ["infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodo" => $periodo, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
         return $arquivo->download('diario-turma' . time() . '.pdf');
     }
 }
