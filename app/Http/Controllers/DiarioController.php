@@ -139,12 +139,15 @@ class DiarioController extends Controller
         foreach ($turma as $matricula){
             if($matricula->tipo == "regular"){
                 $dados = array();
-                $dados["codigo"] = $matricula->id;
+                $dados["codigo"] = $matricula->users_id;
                 $dados["nome"] = $matricula->aluno;
 
                 $notas = array();
+                $media = 0;
+                $contador = 0;
+
                 foreach($periodo as $bimestre){
-                    $consulta = Media::where("users_id", $matricula->id)
+                    $consulta = Media::where("users_id", $matricula->users_id)
                                     ->where("componentes_id", $componente->id)
                                     ->where("periodos_id", $bimestre->id)->first();
                     
@@ -152,26 +155,25 @@ class DiarioController extends Controller
                         $notas[$bimestre->id] = "-";
                     }else{
                         $notas[$bimestre->id] = $consulta->nota;
+                        $media = $media + $consulta->nota;
+                        $contador = $contador + 1;
                     }
                 }
 
                 $dados["notas"] = $notas;
+                $dados["media"] = $media / count($periodo);
 
-                if($matricula->status == "transferido"){
-                    $media = "-";
-                }else{
-                    $media = 0;
-                    foreach($notas as $nota){
-                        if($nota != "-"){
-                            $media = $media + $nota;
-                        }
+                if($contador == count($periodo) && $matricula->status != "transferido"){
+                    if($dados["media"] >= 6){
+                        $dados["resultado"] = "aprovado";
+                    }else{
+                        $dados["resultado"] = "reprovado";
                     }
-                    
-                    $media = $media / count($notas);
+                }else{
+                    $dados["resultado"] = $matricula->status;
                 }
 
-                $dados["media"] = $media;
-                $dados["resultado"] = $matricula->status;
+                
 
                 array_push($infos, $dados);
             } 

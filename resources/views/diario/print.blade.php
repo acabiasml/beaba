@@ -102,13 +102,13 @@
             </div>
 
             <div class="page-break"></div>
-            <h1 style="text-align: center">FICHA DE REGISTRO DE PROGRESSÃO</h1>
+            <h1 style="text-align: center; margin-top: -15px">FICHA DE REGISTRO DE PROGRESSÃO</h1>
 
             <table style="margin-left: auto; margin-right: auto;">
                 <tr>
                     <th rowspan="2">&nbsp;Código&nbsp;</th>
                     <th rowspan="2">Nome</th>
-                    <th colspan="{{count($periodo)}}">Progressão</th>
+                    <th colspan="{{count($periodo)}}">Notas</th>
                     <th rowspan="2">&nbsp;Média&nbsp;</th>
                     <th rowspan="2">&nbsp;Faltas&nbsp;</th>
                     <th rowspan="2">&nbsp;Situação&nbsp;</th>
@@ -125,7 +125,7 @@
                             @foreach ($t['notas'] as $nota)
                                 <td style="text-align: center">{{$nota}}</td>
                             @endforeach
-                            <td style="text-align: center">{{$t['media']}}</td>
+                            <td style="text-align: center">{{round(floatval($t['media']), 1)}}</td>
                             <td style="text-align: center">0</td>
                             <td style="text-align: center">&nbsp;{{$t['resultado']}}&nbsp;</td>
                         </tr>
