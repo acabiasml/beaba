@@ -108,13 +108,13 @@
                 <tr>
                     <th rowspan="2">&nbsp;Código&nbsp;</th>
                     <th rowspan="2">Nome</th>
-                    <th colspan="{{count($periodo)}}">Notas</th>
+                    <th colspan="{{count($periodos)}}">Notas</th>
                     <th rowspan="2">&nbsp;Média&nbsp;</th>
                     <th rowspan="2">&nbsp;Faltas&nbsp;</th>
                     <th rowspan="2">&nbsp;Situação&nbsp;</th>
                 </tr>
                 <tr>
-                    @foreach ($periodo as $p)
+                    @foreach ($periodos as $p)
                         <td style="text-align: center">{{$p->nome}}</td>
                     @endforeach
                 </tr>
@@ -133,7 +133,38 @@
             </table>
 
             <div class="page-break"></div>
-            <h1>Page 3</h1>
+            <h1>Períodos</h1>
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Início</th>
+                    <th>Fim</th>
+                </tr>
+                @foreach ($periodos as $bimestre)
+                <tr>
+                    <td style="text-align: center">&nbsp;{{$bimestre->nome}}&nbsp;</td>
+                    <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->inicio))}}&nbsp;</td>
+                    <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->fim))}}&nbsp;</td>
+                </tr>
+                @endforeach
+            </table>
+
+            <h1>Conteúdos</h1>
+            <p><b>Calendário:</b> {{$calendario->nome}} <b>Ano Letivo:</b> {{$calendario->ano}} </p>
+            <p><b>Componente Curricular:</b> {{$componente->nome}} <b>Área:</b> {{$area->nome}} <b>Carga horária:</b> {{$componente->horas}}h </p>
+            <p><b>Turma:</b> {{$curso->nome}} <b>Modalidade:</b> Ensino {{$curso->modalidade}}</p>
+            <table>
+                <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Conteúdo</th>
+                </tr>
+                @foreach ($conteudos as $conteudo)
+                    <td>{{$conteudo->data}}</td>
+                    <td>{{$conteudo->traduzgem}}</td>
+                    <td>{{$conteudo->conteudo}}</td>
+                @endforeach
+            </table>
         </div>
     </main>
 

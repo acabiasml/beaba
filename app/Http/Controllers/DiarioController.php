@@ -130,9 +130,10 @@ class DiarioController extends Controller
         $area = Area::where("id", $componente->area_id)->first();
         $curso = Curso::where("id", $componente->cursos_id)->first();
         $calendario = Calendario::where("id", $curso->calendarios_id)->first();
-        $periodo = Periodo::where("calendarios_id", $calendario->id)->get();
+        $periodos = Periodo::where("calendarios_id", $calendario->id)->get();
         $escola = Escola::where("id", $calendario->escolas_id)->first();
         $turma = Turma::where("cursos_id", $curso->id)->get();
+        $conteudos = Diario::where("componentes_id", $componente->id)->get();
 
         $infos = array();
 
@@ -146,7 +147,7 @@ class DiarioController extends Controller
                 $media = 0;
                 $contador = 0;
 
-                foreach($periodo as $bimestre){
+                foreach($periodos as $bimestre){
                     $consulta = Media::where("users_id", $matricula->users_id)
                                     ->where("componentes_id", $componente->id)
                                     ->where("periodos_id", $bimestre->id)->first();
@@ -161,9 +162,9 @@ class DiarioController extends Controller
                 }
 
                 $dados["notas"] = $notas;
-                $dados["media"] = $media / count($periodo);
+                $dados["media"] = $media / count($periodos);
 
-                if($contador == count($periodo) && $matricula->status != "transferido"){
+                if($contador == count($periodos) && $matricula->status != "transferido"){
                     if($dados["media"] >= 6){
                         $dados["resultado"] = "aprovado";
                     }else{
@@ -173,15 +174,13 @@ class DiarioController extends Controller
                     $dados["resultado"] = $matricula->status;
                 }
 
-                
-
                 array_push($infos, $dados);
             } 
         }
 
         $pdf = app("dompdf.wrapper");
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $arquivo = $pdf->loadView("diario.print", ["infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodo" => $periodo, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
+        $arquivo = $pdf->loadView("diario.print", ["conteudos" => $conteudos, "infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodos" => $periodos, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
         return $arquivo->download('diario-turma' . time() . '.pdf');
     }
 }
