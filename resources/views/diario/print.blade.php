@@ -57,25 +57,29 @@
 </head>
 
 <body>
+
+    @php
+        setlocale(LC_ALL, "pt_BR", "pt_BR.utf-8", "pt_BR.utf-8", "portuguese");
+        $agora = new DateTime(null, new DateTimeZone('America/Cuiaba'));
+    @endphp
+
     <header>
         <div style="clear:both; position:relative; padding-left: 16px; padding-right: 16px">
             <div style="position:absolute; left:0pt; width:200pt;">
                 <img src="{{public_path('assets/img/ctjj.jpg')}}" style="height: 100px; margin-top: 5px">
             </div>
             <div style="width: 100%; display: block; float: left">
-                <p style="font-size: 14pt"><b>Centro Técnico Juvenil de Jarudore</b></p>
-                <p style="margin-top: -10pt">Tel.: (66) 3432-1093. E-mail: ctjj.mt@gmail.com</p>
-                <p style="margin-top: -10pt">https://www.ctjj.org</p>
+                <p>Centro Técnico Juvenil de Jarudore</p>
+                <p style="font-size: 14pt; margin-top: -10pt"><b>{{$escola->nome}}</b></p>
+                <p style="margin-top: -13pt">CNPJ: {{$escola->cnpj}}. Fundação: {{strftime("%d de %b de %Y", strtotime($escola->fundacao))}}.</p>
+                <p style="margin-top: -10pt">{{$escola->info}}.</p>
+                <p style="margin-top: -10pt">Tel.: {{$escola->telefone}}. E-mail: {{$escola->email}} | Site: {{$escola->site}}</p>
             </div>
             <div style="width: 180%; display: block; float: left">
                 <img src="{{public_path('assets/img/lsf.jpg')}}" style="height: 90px; margin-top: 5px">
             </div>
         </div>
     </header>
-
-    @php
-        $agora = new DateTime(null, new DateTimeZone('America/Cuiaba'));
-    @endphp
 
     <footer style="clear:both; margin-top: 10pt">
         Ficha gerada para impressão por: {{Auth::user()->nome}}, em {{$agora->format('d/m/Y')}} às {{$agora->format('H:i')}}.
@@ -86,13 +90,13 @@
     <main>
         <div style="clear:both; position:relative">
             <div style="text-align: center; font-size: 14pt; margin-bottom: -5pt">
-                <span>{{$calendario->nome}}</span>
-                <span>DIÁRIO DE CLASSE | Ano letivo: <b>{{$calendario->ano}}</b></span>
-                <hr style="margin-top: 0pt;" /><br /><br /><br />
-                <span style="text-transform:uppercase; font-size: 13pt">{{$curso->nome}} ENSINO {{$curso->modalidade}} </span><br />
-                <span style="text-transform:uppercase; font-size: 20pt"><b>{{$componente->nome}}</b></span>
-                <br/><span style="font-size: 12pt">Área: {{$area->nome}}</span><br /><br />
-                <br /><span style="text-transform:uppercase"><b>Prof.: {{$professor->nome}}</b></span>
+                <br/><br/><br/>
+                <p><b>DIÁRIO DE CLASSE</b></p>
+                <p>{{$calendario->nome}} - Ano letivo: {{$calendario->ano}}</p>
+                <span style="text-transform:uppercase; font-size: 13pt">{{$curso->nome}} ENSINO {{$curso->modalidade}}</span>
+                <span style="text-transform:uppercase; font-size: 20pt"><b>{{$componente->nome}}</b></span><br/>
+                <span style="font-size: 12pt">Área: {{$area->nome}}</span>
+                <span style="text-transform:uppercase"><b>Prof.: {{$professor->nome}}</b></span>
                 <br/><br /><br /><br />
 
                 <p>Este documento contém _____ folhas e destina-se ao registro das frequências, atividades pedagógicas desenvolvidas e desempenho escolar dos alunos matriculados no regime REGULAR, nesta unidade escolar.</p>
@@ -102,18 +106,23 @@
             </div>
 
             <div class="page-break"></div>
-            <h1 style="text-align: center; margin-top: -15px">FICHA DE REGISTRO DE PROGRESSÃO</h1>
+            <h1 style="text-align: center; margin-top: -5px">FICHA DE REGISTRO DE PROGRESSÃO</h1>
+            <p style="text-align: center; margin-top: -15px">{{$calendario->nome}}, {{$calendario->ano}}. <b>{{$curso->nome}}</b>, <b>Ensino {{$curso->modalidade}}</b>. <b>{{$componente->nome}}</b>, {{$componente->horas}}h - Área: {{$area->nome}}.</p>
 
-            <table style="margin-left: auto; margin-right: auto;">
+            <table style="margin-left: auto; margin-right: auto; font-size: smaller">
                 <tr>
                     <th rowspan="2">&nbsp;Código&nbsp;</th>
                     <th rowspan="2">Nome</th>
                     <th colspan="{{count($periodos)}}">Notas</th>
                     <th rowspan="2">&nbsp;Média&nbsp;</th>
-                    <th rowspan="2">&nbsp;Faltas&nbsp;</th>
+                    <th colspan="{{count($periodos)}}">Faltas</th>
+                    <th rowspan="2">&nbsp;Total&nbsp;</th>
                     <th rowspan="2">&nbsp;Situação&nbsp;</th>
                 </tr>
                 <tr>
+                    @foreach ($periodos as $p)
+                        <td style="text-align: center">{{$p->nome}}</td>
+                    @endforeach
                     @foreach ($periodos as $p)
                         <td style="text-align: center">{{$p->nome}}</td>
                     @endforeach
@@ -126,14 +135,19 @@
                                 <td style="text-align: center">{{$nota}}</td>
                             @endforeach
                             <td style="text-align: center">{{round(floatval($t['media']), 1)}}</td>
-                            <td style="text-align: center">0</td>
+                            @foreach ($t['faltas'] as $falta)
+                                <td style="text-align: center">{{$falta}}</td>
+                            @endforeach
+                            <td style="text-align: center">{{$t['totalfaltas']}}</td>
                             <td style="text-align: center">&nbsp;{{$t['resultado']}}&nbsp;</td>
                         </tr>
                 @endforeach
             </table>
 
             <div class="page-break"></div>
-            <h1>Períodos</h1>
+            <h1 style="text-align: center; margin-top: -5px">CONTEÚDOS POR PERÍODO</h1>
+            <p style="text-align: center; margin-top: -15px">{{$calendario->nome}}, {{$calendario->ano}}. <b>{{$curso->nome}}</b>, <b>Ensino {{$curso->modalidade}}</b>. <b>{{$componente->nome}}</b>, {{$componente->horas}}h - Área: {{$area->nome}}.</p>
+            
             <table>
                 <tr>
                     <th>Nome</th>
@@ -148,21 +162,17 @@
                 </tr>
                 @endforeach
             </table>
-
-            <h1>Conteúdos</h1>
-            <p><b>Calendário:</b> {{$calendario->nome}} <b>Ano Letivo:</b> {{$calendario->ano}} </p>
-            <p><b>Componente Curricular:</b> {{$componente->nome}} <b>Área:</b> {{$area->nome}} <b>Carga horária:</b> {{$componente->horas}}h </p>
-            <p><b>Turma:</b> {{$curso->nome}} <b>Modalidade:</b> Ensino {{$curso->modalidade}}</p>
+            <br/>
             <table>
                 <tr>
                     <th>Data</th>
                     <th>Tipo</th>
                     <th>Conteúdo</th>
                 </tr>
-                @foreach ($conteudos as $conteudo)
-                    <td>{{$conteudo->data}}</td>
-                    <td>{{$conteudo->traduzgem}}</td>
-                    <td>{{$conteudo->conteudo}}</td>
+                @foreach ($diarios as $d)
+                    <td>{{$d->data}}</td>
+                    <td>{{$d->traduzgem}}</td>
+                    <td>{{$d->conteudo}}</td>
                 @endforeach
             </table>
         </div>

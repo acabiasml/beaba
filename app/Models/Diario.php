@@ -24,4 +24,8 @@ class Diario extends Model
             return "GEMINADA";
         }
     }
+
+    public function frequencias(){
+        return $this->hasMany(Frequencia::class);
+    }
 }

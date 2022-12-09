@@ -11,6 +11,7 @@ use App\Models\Escola;
 use App\Models\Area;
 use App\Models\Turma;
 use App\Models\Media;
+use App\Models\Frequencia;
 use App\Models\Periodo;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -133,7 +134,7 @@ class DiarioController extends Controller
         $periodos = Periodo::where("calendarios_id", $calendario->id)->get();
         $escola = Escola::where("id", $calendario->escolas_id)->first();
         $turma = Turma::where("cursos_id", $curso->id)->get();
-        $conteudos = Diario::where("componentes_id", $componente->id)->get();
+        $diarios = Diario::where("componentes_id", $componente->id)->get();
 
         $infos = array();
 
@@ -144,10 +145,13 @@ class DiarioController extends Controller
                 $dados["nome"] = $matricula->aluno;
 
                 $notas = array();
+                $faltas = array();
                 $media = 0;
+                $totalfaltas = 0;
                 $contador = 0;
 
                 foreach($periodos as $bimestre){
+                    
                     $consulta = Media::where("users_id", $matricula->users_id)
                                     ->where("componentes_id", $componente->id)
                                     ->where("periodos_id", $bimestre->id)->first();
@@ -159,10 +163,24 @@ class DiarioController extends Controller
                         $media = $media + $consulta->nota;
                         $contador = $contador + 1;
                     }
+
+                    $consulta2 = Frequencia::where("users_id", $matricula->users_id)
+                                    ->where("presenca", "0")
+                                    ->whereIn("diarios_id", $diarios->pluck("id"))->get();
+
+                    if($consulta2->isEmpty()){
+                        $faltas[$bimestre->id] = "-";
+                    }else{
+                        $faltas[$bimestre->id] = count($consulta2);
+                        $totalfaltas = $totalfaltas + count($consulta2);
+                    }
                 }
 
                 $dados["notas"] = $notas;
                 $dados["media"] = $media / count($periodos);
+
+                $dados["faltas"] = $faltas;
+                $dados["totalfaltas"] = $totalfaltas;
 
                 if($contador == count($periodos) && $matricula->status != "transferido"){
                     if($dados["media"] >= 6){
@@ -180,7 +198,7 @@ class DiarioController extends Controller
 
         $pdf = app("dompdf.wrapper");
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $arquivo = $pdf->loadView("diario.print", ["conteudos" => $conteudos, "infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodos" => $periodos, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
+        $arquivo = $pdf->loadView("diario.print", ["diarios" => $diarios, "infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodos" => $periodos, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
         return $arquivo->download('diario-turma' . time() . '.pdf');
     }
 }
