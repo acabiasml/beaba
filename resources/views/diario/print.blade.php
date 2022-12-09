@@ -171,7 +171,7 @@
                 </tr>
                 @foreach ($diarios as $d)
                 <tr>
-                    <td style="text-align: center">&nbsp;{{$d->data}}&nbsp;</td>
+                    <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($d->data))}}&nbsp;</td>
                     <td style="text-align: center">&nbsp;{{$d->geminada}}&nbsp;</td>
                     <td>&nbsp;{{$d->conteudo}}&nbsp;</td>
                 </tr>
