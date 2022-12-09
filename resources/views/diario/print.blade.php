@@ -166,7 +166,7 @@
             <table>
                 <tr>
                     <th>Data</th>
-                    <th>Nº</th>
+                    <th style="text-align: center">&nbsp;Nº&nbsp;</th>
                     <th>Conteúdo</th>
                 </tr>
                 @foreach ($diarios as $d)

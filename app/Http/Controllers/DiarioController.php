@@ -39,7 +39,7 @@ class DiarioController extends Controller
             $este["componente_nome_curso"] = $curso->nome;
             $este["componente_status_curso"] = $curso->status;
 
-            $este["componente_cumprido"] = Diario::where("componentes_id", $componente->id)->get()->count() + Diario::where("componentes_id", $componente->id)->where("geminada", 1)->get()->count();
+            $este["componente_cumprido"] = Diario::where("componentes_id", $componente->id)->get()->count() + Diario::where("componentes_id", $componente->id)->where("geminada", 2)->get()->count();
 
             $inicio = Periodo::where("id", $curso->inicio)->pluck("inicio")->first();
             $fim = Periodo::where("id", $curso->fim)->pluck("fim")->first();
@@ -68,7 +68,7 @@ class DiarioController extends Controller
         $geminadas = Diario::where("componentes_id", $componente->id)
                                 ->where("data", ">=", $periodo->inicio)
                                 ->where("data", "<=", $periodo->fim)
-                                ->where("geminada", 1)->get()->count();                              
+                                ->where("geminada", 2)->get()->count();                              
 
         $somaBimestre = $registrados->count() + $geminadas;
 
