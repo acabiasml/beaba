@@ -30,8 +30,8 @@
         <label for="geminada">Tipo: </label>
 
         <select name="geminada">
-            <option value="0">Simples</option>
-            <option value="1">Geminada</option>
+            <option value="1">Simples</option>
+            <option value="2">Geminada</option>
         </select>
 
         <br/>
@@ -60,7 +60,7 @@
         @foreach ($registrados as $registrado)
             <tr>
                 <td>{{date('d-m-Y', strtotime($registrado->data))}}</td>
-                <td>{{$registrado->traduzgem}}</td>
+                <td>{{$registrado->geminada}}</td>
                 <td>{{$registrado->conteudo}}</td>
                 <td>
                     <form method="POST" action="{{route('diario.destroy')}}">

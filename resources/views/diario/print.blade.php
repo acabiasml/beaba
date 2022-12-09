@@ -166,13 +166,13 @@
             <table>
                 <tr>
                     <th>Data</th>
-                    <th>Tipo</th>
+                    <th>Quantidade</th>
                     <th>Conteúdo</th>
                 </tr>
                 @foreach ($diarios as $d)
                 <tr>
                     <td>{{$d->data}}</td>
-                    <td>{{$d->traduzgem}}</td>
+                    <td>{{$d->geminada}}</td>
                     <td>{{$d->conteudo}}</td>
                 </tr>
                 @endforeach

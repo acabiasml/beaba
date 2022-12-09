@@ -15,16 +15,6 @@ class Diario extends Model
 
     protected $fillable = ['id', 'data', 'conteudo', 'componentes_id', 'geminada']; 
 
-    protected $appends = ['traduzgem'];
-
-    public function getTraduzgemAttribute(){
-        if($this->geminada == "0"){
-            return "SIMPLES";
-        }else{
-            return "GEMINADA";
-        }
-    }
-
     public function frequencias(){
         return $this->hasMany(Frequencia::class);
     }
