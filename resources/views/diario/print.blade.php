@@ -82,8 +82,8 @@
     </header>
 
     <footer style="clear:both; margin-top: 10pt">
-        Ficha gerada para impressão por: {{Auth::user()->nome}}, em {{$agora->format('d/m/Y')}} às {{$agora->format('H:i')}}.
         <hr style="margin-bottom: -10px" />
+        <p>Ficha gerada para impressão por: {{Auth::user()->nome}}, em {{$agora->format('d/m/Y')}} às {{$agora->format('H:i')}}.</p>
         <p style="text-align: center">CTJJ. Endereço de Correspondência: Caixa Postal 338. CEP 78700-970. Rondonópolis-MT.</p>
     </footer>
 
