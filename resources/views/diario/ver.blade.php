@@ -51,7 +51,7 @@
     <thead>
         <tr>
             <th scope="col">Data</th>
-            <th scope="col">Tipo</th>
+            <th scope="col">Quantidade</th>
             <th scope="col">Conteúdo</th>
             <th>Ações</th>
         </tr>
