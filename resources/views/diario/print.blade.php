@@ -23,7 +23,7 @@
             margin-top: 3.5cm;
             margin-left: 2cm;
             margin-right: 2cm;
-            margin-bottom: 2cm;
+            margin-bottom: 2.5cm;
         }
 
         header {
@@ -37,7 +37,6 @@
 
         footer {
             position: fixed;
-            margin-top: 5px;
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
