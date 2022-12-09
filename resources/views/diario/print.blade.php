@@ -20,7 +20,7 @@
             font-family: roboto-serif, sans-serif;
             font-size: 10pt;
 
-            margin-top: 3.5cm;
+            margin-top: 4cm;
             margin-left: 2cm;
             margin-right: 2cm;
             margin-bottom: 2.5cm;
@@ -53,6 +53,10 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
+
+        table{
+            font-size: smaller;
+        }
     </style>
 </head>
 
@@ -74,6 +78,7 @@
                 <p style="margin-top: -13pt">CNPJ: {{$escola->cnpj}}. Fundação: {{strftime("%d de %b de %Y", strtotime($escola->fundacao))}}.</p>
                 <p style="margin-top: -10pt">{{$escola->info}}.</p>
                 <p style="margin-top: -10pt">Tel.: {{$escola->telefone}}. E-mail: {{$escola->email}} | Site: {{$escola->site}}</p>
+                <p style="text-align: center">{{$calendario->nome}}, {{$calendario->ano}}. <b>{{$curso->nome}}</b>, <b>Ensino {{$curso->modalidade}}</b>. <b>{{$componente->nome}}</b>, {{$componente->horas}}h - Área: {{$area->nome}}.</p>
             </div>
             <div style="width: 180%; display: block; float: left">
                 <img src="{{public_path('assets/img/lsf.jpg')}}" style="height: 90px; margin-top: 5px">
@@ -106,10 +111,9 @@
             </div>
 
             <div class="page-break"></div>
-            <h1 style="text-align: center; margin-top: -5px">FICHA DE REGISTRO DE PROGRESSÃO</h1>
-            <p style="text-align: center; margin-top: -15px">{{$calendario->nome}}, {{$calendario->ano}}. <b>{{$curso->nome}}</b>, <b>Ensino {{$curso->modalidade}}</b>. <b>{{$componente->nome}}</b>, {{$componente->horas}}h - Área: {{$area->nome}}.</p>
+            <h1 style="text-align: center">FICHA DE REGISTRO DE PROGRESSÃO</h1>
 
-            <table style="margin-left: auto; margin-right: auto; font-size: smaller">
+            <table style="margin-left: auto; margin-right: auto">
                 <tr>
                     <th rowspan="2">&nbsp;Código&nbsp;</th>
                     <th rowspan="2">Nome</th>
@@ -145,8 +149,7 @@
             </table>
 
             <div class="page-break"></div>
-            <h1 style="text-align: center; margin-top: -5px">CONTEÚDOS POR PERÍODO</h1>
-            <p style="text-align: center; margin-top: -15px">{{$calendario->nome}}, {{$calendario->ano}}. <b>{{$curso->nome}}</b>, <b>Ensino {{$curso->modalidade}}</b>. <b>{{$componente->nome}}</b>, {{$componente->horas}}h - Área: {{$area->nome}}.</p>
+            <h1 style="text-align: center">CONTEÚDOS POR PERÍODO</h1>
             
             <table>
                 <tr>
@@ -154,12 +157,28 @@
                     <th>Início</th>
                     <th>Fim</th>
                 </tr>
+
+                @php
+                    $cont = 1;
+                    $color = "white";
+                @endphp
+
                 @foreach ($periodos as $bimestre)
-                <tr>
-                    <td style="text-align: center">&nbsp;{{$bimestre->nome}}&nbsp;</td>
-                    <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->inicio))}}&nbsp;</td>
-                    <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->fim))}}&nbsp;</td>
-                </tr>
+
+                    @if(($cont % 2) == 0)
+                        {{$color = "silver"}}
+                    @else
+                        {{$color = "white"}}
+                    @endif
+
+                    <tr style="background-color: {{$color}}">
+                        <td style="text-align: center">&nbsp;{{$bimestre->nome}}&nbsp;</td>
+                        <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->inicio))}}&nbsp;</td>
+                        <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->fim))}}&nbsp;</td>
+                    </tr>
+
+                    {{$cont = $cont +1 }}
+
                 @endforeach
             </table>
             <br/>
@@ -169,13 +188,37 @@
                     <th style="text-align: center">&nbsp;Nº&nbsp;</th>
                     <th>Conteúdo</th>
                 </tr>
-                @foreach ($diarios as $d)
-                <tr>
-                    <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($d->data))}}&nbsp;</td>
-                    <td style="text-align: center">&nbsp;{{$d->geminada}}&nbsp;</td>
-                    <td>&nbsp;{{$d->conteudo}}&nbsp;</td>
-                </tr>
+
+                @php
+                    $cont = 1;
+                    $color = "white";
+                @endphp
+
+                @foreach($periodos as $bimestre)
+
+                    @if(($cont % 2) == 0)
+                        {{$color = "silver"}}
+                    @else
+                        {{$color = "white"}}
+                    @endif
+
+                    @foreach ($diarios as $d)
+
+                        @if ($d->data >= $bimestre->inicio && $d->data <= $bimestre->fim)
+                            <tr style="background-color: {{$color}}">
+                                <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($d->data))}}&nbsp;</td>
+                                <td style="text-align: center">&nbsp;{{$d->geminada}}&nbsp;</td>
+                                <td>&nbsp;{{$d->conteudo}}&nbsp;</td>
+                            </tr>
+                        @endif
+
+                    @endforeach
+
+                    {{$cont = $cont +1 }}
+
                 @endforeach
+
+                
             </table>
         </div>
     </main>
