@@ -56,6 +56,7 @@
 
         table{
             font-size: smaller;
+            width: 100%;
         }
 
         h1{
@@ -171,12 +172,12 @@
                         </tr>
                         <tr>
                             @foreach($bimestre as $umdia)
-                                <td>&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
+                                <td style="text-align: center">&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
                             @endforeach
                         </tr>
                         <tr>
                             @foreach($bimestre as $umdia)
-                                <td>&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
+                                <td style="text-align: center">&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
                             @endforeach
                         </tr>                    
                         @foreach ($infos as $t)
@@ -186,7 +187,7 @@
                                 @foreach($t['diasletivos'][$cont] as $alunochamada)
                                     <td style="text-align: center">{{$alunochamada['chamada']}}</td>
                                 @endforeach
-                                <td sytle="text-align: center">&nbsp;{{$t['faltanessebim'][$cont]}}&nbsp;</td>
+                                <td style="text-align: center">{{$t['faltanessebim'][$cont]}}</td>
                             <tr>
                         @endforeach
                         <tr><td colspan="{{count($bimestre) + 3}}">Observações: </td></tr>
@@ -197,12 +198,12 @@
                     <table style="margin-left: auto; margin-right: auto">
                         <tr>
                             <th>Data</th>
-                            <th>Conteúdo</th>
+                            <th>Descrição</th>
                         </tr>
                         @foreach($diariosbimestre[$cont] as $diario)
                             <tr>
-                                <td>&nbsp;{{date('d-m-Y', strtotime($diario->data))}}&nbsp;</td>
-                                <td style="text-align: left">&nbsp;{{$diario->conteudo}}&nbsp;</td>
+                                <td style="text-align: center; width: 8%">{{date('d-m-Y', strtotime($diario->data))}}</td>
+                                <td style="text-align: left">&nbsp;{{$diario->conteudo}}</td>
                             </tr>
                         @endforeach
                     </table>
