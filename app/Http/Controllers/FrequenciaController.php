@@ -2,84 +2,99 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Componente;
+use App\Models\Diario;
 use App\Models\Frequencia;
-use App\Http\Requests\StoreFrequenciaRequest;
-use App\Http\Requests\UpdateFrequenciaRequest;
+use App\Models\Turma;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class FrequenciaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $dia = Diario::findOrFail($request->diario);
+        $componente = Componente::findOrFail($dia->componentes_id);
+        $turma = Turma::where("cursos_id", $componente->cursos_id)->get();
+
+        $frequencias = array();
+
+        foreach ($turma as $matricula){
+            $variavel = array();
+            $variavel["id"] = $matricula->users_id;
+            $variavel["nome"] = $matricula->aluno;
+            
+            $consulta = Frequencia::where("diarios_id", $dia->id)
+                                    ->where("users_id", $matricula->users_id)->first();
+            
+            if($consulta == null){
+                $variavel["chamada"] = "P";
+            }else{
+                $variavel["chamada"] = $consulta->presenca;
+            }
+
+            array_push($frequencias, $variavel);
+        }
+
+        return View::make("frequencia.ver")->with("componente", $componente)
+                                            ->with("curso", $componente->curso)
+                                            ->with("chamada", $dia)
+                                            ->with("frequencias", $frequencias);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreFrequenciaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreFrequenciaRequest $request)
+    public function store()
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Frequencia  $frequencia
-     * @return \Illuminate\Http\Response
-     */
     public function show(Frequencia $frequencia)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Frequencia  $frequencia
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Frequencia $frequencia)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateFrequenciaRequest  $request
-     * @param  \App\Models\Frequencia  $frequencia
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateFrequenciaRequest $request, Frequencia $frequencia)
+    public function update(Request $request)
     {
-        //
+
+        $consulta = Frequencia::where("diarios_id", $request->dia)
+                                    ->where("users_id", $request->aluno)->first();
+            
+        if($consulta == null){
+            Frequencia::create([
+                "presenca" => "F",
+                "diarios_id" => $request->dia,
+                "users_id" => $request->aluno,
+            ]);
+        }else{
+            
+            $atualiza = Frequencia::findOrFail($consulta->id);
+
+            if($atualiza->presenca == "F"){
+                $atualiza->update([
+                    "presenca" => "P",
+                ]);
+            }else{
+                $atualiza->update([
+                    "presenca" => "F",
+                ]);
+            }
+        }
+
+        $info["diario"] = $request->dia;
+
+        return redirect()->route('frequencia.ver', $info);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Frequencia  $frequencia
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Frequencia $frequencia)
+    public function destroy()
     {
         //
     }

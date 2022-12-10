@@ -115,8 +115,8 @@ class DiarioController extends Controller
 
     public function destroy(Request $request)
     {
-        $conteudo = Diario::findOrFail($request->conteudo);
-        $conteudo->delete();
+        $diario = Diario::findOrFail($request->diario);
+        $diario->delete();
 
         $info["componente"] = $request->componente;
         $info["periodo"] = $request->periodo;
@@ -164,15 +164,19 @@ class DiarioController extends Controller
                         $contador = $contador + 1;
                     }
 
+                    $diasbimestre = Diario::where("componentes_id", $componente->id)
+                                            ->whereBetween("data", [$bimestre->inicio, $bimestre->fim])
+                                            ->get()->pluck("id");
+
                     $consulta2 = Frequencia::where("users_id", $matricula->users_id)
-                                    ->where("presenca", "0")
-                                    ->whereIn("diarios_id", $diarios->pluck("id"))->get();
+                                    ->where("presenca", "F")
+                                    ->whereIn("diarios_id", $diasbimestre)->get();                
 
                     if($consulta2->isEmpty()){
                         $faltas[$bimestre->id] = "-";
                     }else{
-                        $faltas[$bimestre->id] = count($consulta2);
-                        $totalfaltas = $totalfaltas + count($consulta2);
+                        $faltas[$bimestre->id] = $consulta2->count();
+                        $totalfaltas = $totalfaltas + $consulta2->count();
                     }
                 }
 

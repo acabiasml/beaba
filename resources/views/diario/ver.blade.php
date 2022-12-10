@@ -63,12 +63,13 @@
                 <td>{{$registrado->geminada}}</td>
                 <td>{{$registrado->conteudo}}</td>
                 <td>
-                    <form method="POST" action="{{route('diario.destroy')}}">
+                    <form method="POST">
                     @csrf
-                        <input type="hidden" name="conteudo" value="{{$registrado->id}}" />
+                        <input type="hidden" name="diario" value="{{$registrado->id}}" />
                         <input type="hidden" name="componente" value="{{$componente->id}}" />
                         <input type="hidden" name="periodo" value="{{$periodo->id}}" />
-                        <button type="submit">Excluir</button> <i class="ni ni-check-bold" style="color: green"></i> Frequência
+                        <button type="submit" formaction="{{route('diario.destroy')}}">Excluir</button>
+                        <button type="submit" formaction="{{route('frequencias')}}">Frequências</button>
                     </form>
                 <td>
             </tr>

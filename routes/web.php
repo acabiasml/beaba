@@ -13,6 +13,7 @@ use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TurmaController;
+use App\Http\Controllers\FrequenciaController;
 
 Route::post('/incluir', [UserController::class, 'storeFirst'])->name('user.store.first');
 
@@ -110,4 +111,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/incluimedia', [MediaController::class,'store'])->name('media.store');
 
     Route::post('/frequencias', [FrequenciaController::class,'index'])->name('frequencias');
+    Route::get('/verfrequencia', [FrequenciaController::class,'index'])->name('frequencia.ver');
+    Route::post('/atualizafrequencia', [FrequenciaController::class, 'update'])->name('frequencia.update');
 });
