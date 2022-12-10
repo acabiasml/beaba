@@ -57,6 +57,10 @@
         table{
             font-size: smaller;
         }
+
+        h1{
+            font-size: 18px;
+        }
     </style>
 </head>
 
@@ -147,79 +151,70 @@
                         </tr>
                 @endforeach
             </table>
-
-            <div class="page-break"></div>
-            <h1 style="text-align: center">CONTEÚDOS POR PERÍODO</h1>
             
-            <table>
-                <tr>
-                    <th>Nome</th>
-                    <th>Início</th>
-                    <th>Fim</th>
-                </tr>
+            @php
+                $cont = 0;
+            @endphp
 
-                @php
-                    $cont = 1;
-                    $color = "white";
-                @endphp
-
-                @foreach ($periodos as $bimestre)
-
-                    @if(($cont % 2) == 0)
-                        {{$color = "silver"}}
-                    @else
-                        {{$color = "white"}}
-                    @endif
-
-                    <tr style="background-color: {{$color}}">
-                        <td style="text-align: center">&nbsp;{{$bimestre->nome}}&nbsp;</td>
-                        <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->inicio))}}&nbsp;</td>
-                        <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($bimestre->fim))}}&nbsp;</td>
-                    </tr>
-
-                    {{$cont = $cont +1 }}
-
-                @endforeach
-            </table>
-            <br/>
-            <table>
-                <tr>
-                    <th>Data</th>
-                    <th style="text-align: center">&nbsp;Nº&nbsp;</th>
-                    <th>Conteúdo</th>
-                </tr>
-
-                @php
-                    $cont = 1;
-                    $color = "white";
-                @endphp
-
-                @foreach($periodos as $bimestre)
-
-                    @if(($cont % 2) == 0)
-                        {{$color = "silver"}}
-                    @else
-                        {{$color = "white"}}
-                    @endif
-
-                    @foreach ($diarios as $d)
-
-                        @if ($d->data >= $bimestre->inicio && $d->data <= $bimestre->fim)
-                            <tr style="background-color: {{$color}}">
-                                <td style="text-align: center">&nbsp;{{date('d-m-Y', strtotime($d->data))}}&nbsp;</td>
-                                <td style="text-align: center">&nbsp;{{$d->geminada}}&nbsp;</td>
-                                <td>&nbsp;{{$d->conteudo}}&nbsp;</td>
-                            </tr>
-                        @endif
-
-                    @endforeach
-
-                    {{$cont = $cont +1 }}
-
-                @endforeach
-
+            @foreach($diariosbimestre as $bimestre)
+                @if(count($t['diasletivos'][$cont]) > 0)    
                 
-            </table>
+                    <div class="page-break"></div>
+                    <h1 style="text-align: center; text-transform:uppercase;">FREQUÊNCIA {{$periodos[$cont]->nome}}</h1>
+
+                    <table style="margin-left: auto; margin-right: auto">
+                        <tr>
+                            <th rowspan="3">Código</th>
+                            <th rowspan="3">Estudante</th>
+                            <th colspan="{{count($bimestre)}}">Dias Letivos</th>
+                            <th rowspan="3">TF</th>
+                        </tr>
+                        <tr>
+                            @foreach($bimestre as $umdia)
+                                <td>&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            @foreach($bimestre as $umdia)
+                                <td>&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
+                            @endforeach
+                        </tr>                    
+                        @foreach ($infos as $t)
+                            <tr>
+                                <td style="text-align: center">{{$t['codigo']}}</td>
+                                <td>{{$t['nome']}}</td>
+                                @foreach($t['diasletivos'][$cont] as $alunochamada)
+                                    <td style="text-align: center">{{$alunochamada['chamada']}}</td>
+                                @endforeach
+                                <td sytle="text-align: center">&nbsp;{{$t['faltanessebim'][$cont]}}&nbsp;</td>
+                            <tr>
+                        @endforeach
+                        <tr><td colspan="{{count($bimestre) + 3}}">Observações: </td></tr>
+                    </table>
+
+                    <h1 style="text-align: center; text-transform:uppercase;">CONTEÚDOS {{$periodos[$cont]->nome}}</h1>
+
+                    <table style="margin-left: auto; margin-right: auto">
+                        <tr>
+                            <th>Data</th>
+                            <th>Conteúdo</th>
+                        </tr>
+                        @foreach($diariosbimestre[$cont] as $diario)
+                            <tr>
+                                <td>&nbsp;{{date('d-m-Y', strtotime($diario->data))}}&nbsp;</td>
+                                <td style="text-align: left">&nbsp;{{$diario->conteudo}}&nbsp;</td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                @endif
+                
+                @php
+                    $cont = $cont + 1;
+                @endphp
+
+            @endforeach
+
         </div>
     </main>
 

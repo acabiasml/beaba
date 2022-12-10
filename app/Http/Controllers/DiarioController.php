@@ -134,7 +134,15 @@ class DiarioController extends Controller
         $periodos = Periodo::where("calendarios_id", $calendario->id)->get();
         $escola = Escola::where("id", $calendario->escolas_id)->first();
         $turma = Turma::where("cursos_id", $curso->id)->get();
-        $diarios = Diario::where("componentes_id", $componente->id)->get();
+
+        $diariosbimestre = array();
+        foreach($periodos as $bimestre){
+            $essebimestre = Diario::where("componentes_id", $componente->id)
+                                    ->where("data", ">=", $bimestre->inicio)
+                                    ->where("data", "<=", $bimestre->fim)                        
+                                    ->get();
+            array_push($diariosbimestre, $essebimestre);
+        }
 
         $infos = array();
 
@@ -146,6 +154,8 @@ class DiarioController extends Controller
 
                 $notas = array();
                 $faltas = array();
+                $diasletivos = array();
+                $faltasporbimestre = array();
                 $media = 0;
                 $totalfaltas = 0;
                 $contador = 0;
@@ -165,12 +175,42 @@ class DiarioController extends Controller
                     }
 
                     $diasbimestre = Diario::where("componentes_id", $componente->id)
-                                            ->whereBetween("data", [$bimestre->inicio, $bimestre->fim])
-                                            ->get()->pluck("id");
+                                            ->where("data", ">=", $bimestre->inicio)
+                                            ->where("data", "<=", $bimestre->fim)
+                                            ->get();
 
+                    $diasdessebimestre = array();
+                    
+                    $faltadessealuno = 0;
+
+                    foreach($diasbimestre as $dia){
+                        
+                        $umadata = array();
+
+                        $verifica = Frequencia::where("users_id", $matricula->users_id)
+                                            ->where("diarios_id", $dia->id)->first();
+                        
+                        $umadata["data"] = $dia->data;
+                        
+                        if($verifica == null){
+                            $umadata["chamada"] = "*";
+                        }else{
+                            if($verifica->presenca == "P"){
+                                $umadata["chamada"] = "*";
+                            }else{
+                                $faltadessealuno = $faltadessealuno + 1;
+                                $umadata["chamada"] = "F";
+                            }
+                        }
+
+                        array_push($diasdessebimestre, $umadata);
+                    }
+                    
+                    array_push($diasletivos, $diasdessebimestre);
+                    
                     $consulta2 = Frequencia::where("users_id", $matricula->users_id)
                                     ->where("presenca", "F")
-                                    ->whereIn("diarios_id", $diasbimestre)->get();                
+                                    ->whereIn("diarios_id", $diasbimestre->pluck("id"))->get();                
 
                     if($consulta2->isEmpty()){
                         $faltas[$bimestre->id] = "-";
@@ -178,8 +218,12 @@ class DiarioController extends Controller
                         $faltas[$bimestre->id] = $consulta2->count();
                         $totalfaltas = $totalfaltas + $consulta2->count();
                     }
+                    
+                    array_push($faltasporbimestre, $faltadessealuno);
                 }
 
+                $dados["faltanessebim"] = $faltasporbimestre;
+                $dados["diasletivos"] = $diasletivos;
                 $dados["notas"] = $notas;
                 $dados["media"] = $media / count($periodos);
 
@@ -202,7 +246,7 @@ class DiarioController extends Controller
 
         $pdf = app("dompdf.wrapper");
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $arquivo = $pdf->loadView("diario.print", ["diarios" => $diarios, "infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodos" => $periodos, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
+        $arquivo = $pdf->loadView("diario.print", ["diariosbimestre" => $diariosbimestre, "infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodos" => $periodos, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
         return $arquivo->download('diario-turma' . time() . '.pdf');
     }
 }
