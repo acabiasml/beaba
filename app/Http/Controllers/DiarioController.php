@@ -231,7 +231,7 @@ class DiarioController extends Controller
                 $dados["totalfaltas"] = $totalfaltas;
 
                 if($contador == count($periodos) && $matricula->status != "transferido"){
-                    if($dados["media"] >= 6){
+                    if(($media / count($periodos)) >= 5.5){
                         $dados["resultado"] = "aprovado";
                     }else{
                         $dados["resultado"] = "reprovado";
