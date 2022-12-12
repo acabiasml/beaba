@@ -191,16 +191,25 @@ class DiarioController extends Controller
                                             ->where("diarios_id", $dia->id)->first();
                         
                         $umadata["data"] = $dia->data;
-                        
-                        if($verifica == null){
-                            $umadata["chamada"] = "*";
-                        }else{
-                            if($verifica->presenca == "P"){
+
+                        if($dia->data >= $matricula->datamatricula){
+                            if($verifica == null){
                                 $umadata["chamada"] = "*";
                             }else{
-                                $faltadessealuno = $faltadessealuno + 1;
-                                $umadata["chamada"] = "F";
+                                if($verifica->presenca == "P"){
+                                    $umadata["chamada"] = "*";
+                                }else{
+                                    $faltadessealuno = $faltadessealuno + 1;
+                                    $umadata["chamada"] = "F";
+                                }
                             }
+                            if($matricula->datatransf != null){
+                                if($dia->data > $matricula->datatransf){
+                                    $umadata["chamada"] = "#";
+                                }
+                            }
+                        }else{
+                            $umadata["chamada"] = "-";
                         }
 
                         array_push($diasdessebimestre, $umadata);
@@ -230,7 +239,7 @@ class DiarioController extends Controller
                 $dados["faltas"] = $faltas;
                 $dados["totalfaltas"] = $totalfaltas;
 
-                if($contador == count($periodos) && $matricula->status != "transferido"){
+                if($matricula->status != "transferido" && $contador == count($periodos)){
                     if(($media / count($periodos)) >= 5.5){
                         $dados["resultado"] = "aprovado";
                     }else{
