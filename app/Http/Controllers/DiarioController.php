@@ -209,7 +209,7 @@ class DiarioController extends Controller
                                 }
                             }
                         }else{
-                            $umadata["chamada"] = "-";
+                            $umadata["chamada"] = "#";
                         }
 
                         array_push($diasdessebimestre, $umadata);
