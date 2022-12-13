@@ -192,7 +192,13 @@ class DiarioController extends Controller
                         
                         $umadata["data"] = $dia->data;
 
-                        if($dia->data >= $matricula->datamatricula){
+                        if($matricula->status == "transferido"){
+                            $datalimite = $matricula->datatransf;
+                        }else{
+                            $datalimite = $bimestre->fim;
+                        }
+
+                        if($dia->data >= $matricula->datamatricula && $dia->data <= $datalimite){
                             if($verifica == null){
                                 $umadata["chamada"] = "*";
                             }else{
@@ -201,11 +207,6 @@ class DiarioController extends Controller
                                 }else{
                                     $faltadessealuno = $faltadessealuno + 1;
                                     $umadata["chamada"] = "F";
-                                }
-                            }
-                            if($matricula->datatransf != null){
-                                if($dia->data > $matricula->datatransf){
-                                    $umadata["chamada"] = "#";
                                 }
                             }
                         }else{
