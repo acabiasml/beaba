@@ -254,6 +254,8 @@ class DiarioController extends Controller
             } 
         }
 
+        dd($infos);
+
         $pdf = app("dompdf.wrapper");
         $pdf->getDomPDF()->set_option("enable_php", true);
         $arquivo = $pdf->loadView("diario.print", ["diariosbimestre" => $diariosbimestre, "infos" => $infos, "turma" => $turma, "escola" => $escola, "curso" => $curso, "calendario" => $calendario, "componente" => $componente, "periodos" => $periodos, "professor" => $professor, "area" => $area])->setPaper('a4', 'landscape');
