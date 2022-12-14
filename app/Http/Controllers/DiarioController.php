@@ -1,7 +1,5 @@
 <?php
 
-#arquivos
-
 namespace App\Http\Controllers;
 
 use App\Models\Componente;
