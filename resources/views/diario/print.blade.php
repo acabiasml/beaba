@@ -143,7 +143,13 @@
                             @foreach ($t['notas'] as $nota)
                                 <td style="text-align: center">{{$nota}}</td>
                             @endforeach
-                            <td style="text-align: center">{{round(floatval($t['media']), 1)}}</td>
+                            <td style="text-align: center">
+                                @if(round(floatval($t['media']), 1) == 0)
+                                    -
+                                @else
+                                    {{round(floatval($t['media']), 1)}}
+                                @endif
+                            </td>
                             @foreach ($t['faltas'] as $falta)
                                 <td style="text-align: center">{{$falta}}</td>
                             @endforeach

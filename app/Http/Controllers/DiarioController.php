@@ -220,7 +220,12 @@ class DiarioController extends Controller
                 $dados["faltanessebim"] = $faltasporbimestre;
                 $dados["diasletivos"] = $diasletivos;
                 $dados["notas"] = $notas;
-                $dados["media"] = $media / count($periodos);
+
+                if($matricula->status == "transferido"){
+                    $dados["media"] = "-";
+                }else{
+                    $dados["media"] = $media / count($periodos);
+                }
 
                 $dados["faltas"] = $faltas;
                 $dados["totalfaltas"] = $totalfaltas;
