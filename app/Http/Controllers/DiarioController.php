@@ -1,5 +1,7 @@
 <?php
 
+#TesteSeAparece
+
 namespace App\Http\Controllers;
 
 use App\Models\Componente;
@@ -253,8 +255,6 @@ class DiarioController extends Controller
                 array_push($infos, $dados);
             } 
         }
-
-        dd($infos);
 
         $pdf = app("dompdf.wrapper");
         $pdf->getDomPDF()->set_option("enable_php", true);
