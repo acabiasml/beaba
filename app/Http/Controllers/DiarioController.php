@@ -1,7 +1,5 @@
 <?php
 
-#TesteSeAparece
-
 namespace App\Http\Controllers;
 
 use App\Models\Componente;
@@ -98,21 +96,6 @@ class DiarioController extends Controller
             );
         }
         return redirect()->route('diario.ver', $info);
-    }
-
-    public function show()
-    {
-        //
-    }
-
-    public function edit()
-    {
-        //
-    }
-
-    public function update()
-    {
-        //
     }
 
     public function destroy(Request $request)
