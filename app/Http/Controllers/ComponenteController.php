@@ -33,8 +33,9 @@ class ComponenteController extends Controller
         $curso = Curso::findOrFail($id);
         $calendario = Calendario::findOrFail($curso->calendarios_id);
         $escola = Escola::findOrFail($calendario->escolas_id);
+        $professores = User::where('tipo', '!=' ,'estud')->pluck('nome', 'id')->toArray();
 
-        return view("componente.create", ["area" => $area, "curso" => $curso, "calendario" => $calendario, "escola" => $escola, "professores" => User::where('tipo', '!=' ,'estud')->pluck('nome', 'id')->toArray()]);
+        return view("componente.create", ["area" => $area, "curso" => $curso, "calendario" => $calendario, "escola" => $escola, "professores" => $professores]);
     }
 
     public function store(Request $request)

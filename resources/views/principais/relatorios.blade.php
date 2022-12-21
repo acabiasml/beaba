@@ -4,10 +4,37 @@
 @section('icon', 'ni-paper-diploma')
 
 @section('content')
-<p>
-<h1>Relatórios! Em construção...</h1>
 
+<a href="{{route('home')}}">Home</a> >> Relatórios
 
+<br/><br/>
 
-</p>
+<div style="text-align: center">
+    <form action="#">
+        <p>Turma: </p>
+        <select>
+            <option>Boletim por período</option>
+            <option>Ficha individual</option>
+            <option>Ficha de matrícula</option>
+            <option>Lista de chamada</option>
+        </select>
+        <select>
+            <option>Nome da turma</option>
+        </select>
+        <button>Consultar</button>
+    </form>
+    <br/>
+    <form action="{{route('diarios')}}" method="get">
+        <p>Professores: </p>
+        <select>
+            <option>Diário de classe</option>
+        </select>
+        <select name="professor">
+            @foreach ($professores as $professor)
+                <option value="{{$professor->id}}">{{$professor->nome}}</option>
+            @endforeach
+        </select>
+        <input type="submit" value="Acessar">
+    </form>
+</div>
 @endsection

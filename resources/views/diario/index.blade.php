@@ -9,7 +9,7 @@
 
 <br/><br/>
 
-<h1>Suas turmas, {{Auth::user()->nome}}</h1>
+<h1>Turmas ativas de {{$profissional->nome}}</h1>
 
     <table class="table table-responsive-sm">
     <thead>

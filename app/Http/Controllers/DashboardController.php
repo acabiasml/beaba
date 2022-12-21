@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use \App\Tables\UsersTable;
 use \App\Tables\EscolasTable;
+use Illuminate\Support\Facades\View;
 
 use Illuminate\Http\Request;
 
@@ -33,6 +35,7 @@ class DashboardController extends Controller
 
     public function relatorios()
     {
-        return view("principais.relatorios");
+        $professores = User::where('tipo', '!=' ,'estud')->get();
+        return View::make("principais.relatorios")->with("professores", $professores);
     }
 }

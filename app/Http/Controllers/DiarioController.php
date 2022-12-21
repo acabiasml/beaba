@@ -20,11 +20,18 @@ use Illuminate\Support\Facades\Auth;
 
 class DiarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $doProfessor = array();
 
-        $componentes = Componente::where("professor", Auth::user()->id)->orderBy("id", "desc")->get();
+        if($request->professor == null){
+            $professor = Auth::user()->id;
+        }else{
+            $professor = $request->professor;
+        }
+
+        $profissional = User::where('id', $professor)->first();
+        $componentes = Componente::where("professor", $professor)->orderBy("id", "desc")->get();
 
         foreach ($componentes as $componente){ 
             $este = array();
@@ -52,7 +59,7 @@ class DiarioController extends Controller
             array_push($doProfessor, $este);
         }
 
-        return View::make("diario.index")->with("doProfessor", $doProfessor);
+        return View::make("diario.index")->with("doProfessor", $doProfessor)->with("profissional", $profissional);
     }
 
     public function ver(Request $request)
