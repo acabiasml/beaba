@@ -178,12 +178,12 @@
                         </tr>
                         <tr>
                             @foreach($bimestre as $umdia)
-                                <td style="text-align: center; text-size: small">&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
+                                <td style="text-align: center; text-size: 9px">&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
                             @endforeach
                         </tr>
                         <tr>
                             @foreach($bimestre as $umdia)
-                                <td style="text-align: center; text-size: small">&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
+                                <td style="text-align: center; text-size: 9px">&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
                             @endforeach
                         </tr>                    
                         @foreach ($infos as $t)
