@@ -13,6 +13,7 @@ use App\Http\Controllers\PeriodoController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TurmaController;
+use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\FrequenciaController;
 
 Route::post('/incluir', [UserController::class, 'storeFirst'])->name('user.store.first');
@@ -46,7 +47,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/home', [DashboardController::class,'home'])->name('home');
     Route::get('/biblioteca', [DashboardController::class,'biblioteca'])->name('biblioteca');
-    Route::get('/relatorios', [DashboardController::class,'relatorios'])->name('relatorios');
 
     Route::get('/pessoas', [DashboardController::class,'pessoas'])->name('pessoas');
     Route::get('/createuser', [UserController::class, 'create'])->name('user.create');
@@ -113,4 +113,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/frequencias', [FrequenciaController::class,'index'])->name('frequencias');
     Route::get('/verfrequencia', [FrequenciaController::class,'index'])->name('frequencia.ver');
     Route::post('/atualizafrequencia', [FrequenciaController::class, 'update'])->name('frequencia.update');
+
+    Route::get('/relatorios', [RelatorioController::class,'index'])->name('relatorios');
+    Route::get('/seleciona', [RelatorioController::class,'select'])->name('frequencia.ver');
 });

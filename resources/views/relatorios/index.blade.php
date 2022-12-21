@@ -10,18 +10,20 @@
 <br/><br/>
 
 <div style="text-align: center">
-    <form action="#">
+    <form action="#" method="get">
         <p>Turma: </p>
-        <select>
-            <option>Boletim por período</option>
-            <option>Ficha individual</option>
-            <option>Ficha de matrícula</option>
-            <option>Lista de chamada</option>
+        <select name="opcao">
+            <option value="boletim">Boletim por período</option>
+            <option value="individual">Ficha individual</option>
+            <option value="matricula">Ficha de matrícula</option>
+            <option value="chamada">Lista de chamada</option>
         </select>
-        <select>
-            <option>Nome da turma</option>
+        <select name="curso">
+            @foreach ($cursos as $curso)
+                <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}}</option>
+            @endforeach
         </select>
-        <button>Consultar</button>
+        <input type="submit" value="Consultar">
     </form>
     <br/>
     <form action="{{route('diarios')}}" method="get">

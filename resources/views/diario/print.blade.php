@@ -83,7 +83,7 @@
                 <p style="margin-top: -13pt">CNPJ: {{$escola->cnpj}}. Fundação: {{strftime("%d de %b de %Y", strtotime($escola->fundacao))}}.</p>
                 <p style="margin-top: -10pt">{{$escola->info}}.</p>
                 <p style="margin-top: -10pt">Tel.: {{$escola->telefone}}. E-mail: {{$escola->email}} | Site: {{$escola->site}}</p>
-                <p style="text-align: center">{{$calendario->nome}}, {{$calendario->ano}}. <b>{{$curso->nome}}</b>, <b>Ensino {{$curso->modalidade}}</b>. <b>{{$componente->nome}}</b>, {{$componente->horas}}h - Área: {{$area->nome}}.</p>
+                <p style="text-align: center">{{$calendario->nome}}, {{$calendario->ano}}. <b>{{$curso->nome}}</b>, <b>ENSINO {{strtoupper($curso->modalidade)}}</b>. <b>{{$componente->nome}}</b>, {{$componente->horas}}h - Área: {{$area->nome}}.</p>
             </div>
             <div style="width: 180%; display: block; float: left">
                 <img src="{{public_path('assets/img/lsf.jpg')}}" style="height: 90px; margin-top: 5px">
