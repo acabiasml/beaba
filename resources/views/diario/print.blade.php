@@ -191,7 +191,7 @@
                                 <td style="text-align: center">{{$t['codigo']}}</td>
                                 <td>{{$t['nome']}}</td>
                                 @foreach($t['diasletivos'][$cont] as $alunochamada)
-                                    <td style="text-align: center">{{$alunochamada['chamada']}}</td>
+                                    <td style="text-align: center; font-size: 9px">{{$alunochamada['chamada']}}</td>
                                 @endforeach
                                 <td style="text-align: center">{{$t['faltanessebim'][$cont]}}</td>
                             <tr>
