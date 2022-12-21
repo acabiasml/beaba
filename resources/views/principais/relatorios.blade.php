@@ -27,7 +27,7 @@
     <form action="{{route('diarios')}}" method="get">
         <p>Professores: </p>
         <select>
-            <option>Diário de classe</option>
+            <option>Diário de Classe</option>
         </select>
         <select name="professor">
             @foreach ($professores as $professor)
