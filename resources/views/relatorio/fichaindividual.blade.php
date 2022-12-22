@@ -115,68 +115,9 @@
                     <div class="page-break"></div>
                 @endif
                 
-                <h1 style="text-align: center; font-weight:normal">BOLETIM {{strtoupper($bimestre["periodo-nome"])}} | <b>{{strtoupper($dados["curso-nome"])}} DO ENSINO {{strtoupper($dados["curso-modalidade"])}}</b> | {{$curso->calendario->nome}}, {{$curso->calendario->ano}}</h1>
+                <h1 style="text-align: center; font-weight:normal"><b>FICHA INDIVIDUAL</b></h1>
 
-                <table style="margin-left: auto; margin-right: auto">
-                    <tr>
-                        <th rowspan="3">ID</th>
-                        <th rowspan="3">Estudante</th>
-
-                        @php
-                            $conte = 0;
-                            foreach($bimestre['alunos'][0]['areas'] as $area){
-                                if($area["area-nome"] != "Parte Diversificada" && $area["area-nome"] != "Itinerário Formativo"){
-                                    $conte = $conte + count($area['componentes']);
-                                }
-                            }
-
-                            $conte2 = 0;
-                            foreach($bimestre['alunos'][0]['areas'] as $area){
-                                if($area["area-nome"] == "Parte Diversificada" || $area["area-nome"] == "Itinerário Formativo"){
-                                    $conte2 = $conte2 + count($area['componentes']);
-                                }
-                            }
-                        @endphp
-
-                        <th colspan="{{$conte}}">Base Nacional Comum (Lei nº 9.394/96)</th>
-                        <th colspan="{{count(end($bimestre['alunos'][0]['areas'])['componentes'])}}">{{end($bimestre['alunos'][0]['areas'])['area-nome']}}</th>
-                    </tr>
-                    <tr>
-                        @foreach ($bimestre['alunos'][0]['areas'] as $area)
-                            @if($area["area-nome"] != "Parte Diversificada" && $area["area-nome"] != "Itinerário Formativo")
-                                <td colspan="{{count($area['componentes'])}}">{{$area["area-nome"]}}</td>
-                            @endif
-                        @endforeach
-
-                        @foreach ($bimestre['alunos'][0]['areas'] as $area)
-                            @if($area["area-nome"] == "Parte Diversificada" || $area["area-nome"] == "Itinerário Formativo")
-                                @foreach ($area["componentes"] as $componente)
-                                    <th rowspan="2" class="rotate"><div>{{$componente["componente-nome"]}}</div></th>
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </tr>
-                    <tr>
-                        @foreach ($bimestre['alunos'][0]['areas'] as $area)
-                            @if($area["area-nome"] != "Parte Diversificada" && $area["area-nome"] != "Itinerário Formativo")
-                                @foreach ($area["componentes"] as $componente)
-                                    <th class="rotate"><div>{{$componente["componente-nome"]}}</div></th>
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </tr>
-                    @foreach ($bimestre["alunos"] as $aluno)
-                        <tr>
-                            <td>{{$aluno["aluno-id"]}}</td>
-                            <td>{{$aluno["aluno-nome"]}}</td>
-                            @foreach ($aluno["areas"] as $area)
-                                @foreach ($area["componentes"] as $componente)
-                                    <td>{{$componente["componente-media"]}}</td>
-                                @endforeach
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </table>
+                
                 
                 @php
                     $i = $i + 1;

@@ -171,7 +171,25 @@
                             <td>{{$aluno["aluno-nome"]}}</td>
                             @foreach ($aluno["areas"] as $area)
                                 @foreach ($area["componentes"] as $componente)
-                                    <td>{{$componente["componente-media"]}}</td>
+                                    <td>
+                                        @php
+                                            if($componente["componente-media"] != "-"){
+                                                if($componente["componente-media"] >=0 && $componente["componente-media"] <= 2.9){
+                                                    echo "ING";
+                                                }else if($componente["componente-media"] > 2.9 && $componente["componente-media"] <= 5.4){
+                                                    echo "INS";
+                                                }else if($componente["componente-media"] > 5.4 && $componente["componente-media"] <= 7.5){
+                                                    echo "SUF";
+                                                }else if($componente["componente-media"] > 7.5 && $componente["componente-media"] <= 9){
+                                                    echo "BOM";
+                                                }else if($componente["componente-media"] > 9){
+                                                    echo "OTI";
+                                                }
+                                            }else{
+                                                echo $componente["componente-media"];
+                                            }
+                                        @endphp
+                                    </td>
                                 @endforeach
                             @endforeach
                         </tr>

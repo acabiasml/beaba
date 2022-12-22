@@ -14,6 +14,7 @@
         <p>Turma: </p>
         <select name="opcao">
             <option value="boletim">Boletim por período</option>
+            <option value="boletimconc">Boletim conceitual por período</option>
             <option value="individual">Ficha individual</option>
             <option value="matricula">Ficha de matrícula</option>
             <option value="chamada">Lista de chamada</option>

@@ -204,11 +204,13 @@
                     <table style="margin-left: auto; margin-right: auto">
                         <tr>
                             <th>Data</th>
+                            <th>Quant.</th>
                             <th>Descrição</th>
                         </tr>
                         @foreach($diariosbimestre[$cont] as $diario)
                             <tr>
                                 <td style="text-align: center; width: 8%">{{date('d-m-Y', strtotime($diario->data))}}</td>
+                                <td style="text-align: left; width: 5px; text-align: center">&nbsp;{{$diario->geminada}}&nbsp;</td>
                                 <td style="text-align: left">&nbsp;{{$diario->conteudo}}</td>
                             </tr>
                         @endforeach

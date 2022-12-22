@@ -99,6 +99,8 @@ class RelatorioController extends Controller
 
         if($request->opcao == "boletim"){
             $arquivo = $pdf->loadView("relatorio.turboletim", ["dados" => $boletim, "curso" => $curso])->setPaper('a4', 'landscape');
+        }else if($request->opcao == "boletimconc"){
+            $arquivo = $pdf->loadView("relatorio.turboletimconc", ["dados" => $boletim, "curso" => $curso])->setPaper('a4', 'landscape');
         }else if($request->opcao == "individual"){
 
         }else if($request->opcao == "matricula"){
