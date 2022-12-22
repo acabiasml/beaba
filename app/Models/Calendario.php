@@ -15,15 +15,15 @@ class Calendario extends Model{
 
     protected $fillable = ['id', 'nome', 'ano', 'escolas_id'];
 
-    public function bimestres(){
-        return $this->hasMany(Bimestre::class);
-    }
-
     public function cursos(){
         return $this->hasMany(Curso::class);
     }
+
+    public function periodos(){
+        return $this->hasMany(Periodo::class);
+    }
  
     public function escola(){
-        return $this->belongsTo(Escola::class);
+        return $this->belongsTo(Escola::class, 'escolas_id');
     }
 }

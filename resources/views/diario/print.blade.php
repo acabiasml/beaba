@@ -120,7 +120,7 @@
 
             <table style="margin-left: auto; margin-right: auto">
                 <tr>
-                    <th rowspan="2">&nbsp;Código&nbsp;</th>
+                    <th rowspan="2">&nbsp;ID&nbsp;</th>
                     <th rowspan="2">Nome</th>
                     <th colspan="{{count($periodos)}}">Notas</th>
                     <th rowspan="2">&nbsp;Média&nbsp;</th>
@@ -171,7 +171,7 @@
 
                     <table style="margin-left: auto; margin-right: auto">
                         <tr>
-                            <th rowspan="3">Código</th>
+                            <th rowspan="3">&nbsp;ID&nbsp;</th>
                             <th rowspan="3">Estudante</th>
                             <th colspan="{{count($bimestre)}}">Dias Letivos</th>
                             <th rowspan="3">TF</th>
@@ -189,7 +189,7 @@
                         @foreach ($infos as $t)
                             <tr>
                                 <td style="text-align: center">{{$t['codigo']}}</td>
-                                <td>{{$t['nome']}}</td>
+                                <td>&nbsp;{{$t['nome']}}</td>
                                 @foreach($t['diasletivos'][$cont] as $alunochamada)
                                     <td style="text-align: center; font-size: 9px">{{$alunochamada['chamada']}}</td>
                                 @endforeach

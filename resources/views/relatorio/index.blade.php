@@ -10,7 +10,7 @@
 <br/><br/>
 
 <div style="text-align: center">
-    <form action="#" method="get">
+    <form action="{{route('relatorio.boletim')}}" method="get">
         <p>Turma: </p>
         <select name="opcao">
             <option value="boletim">Boletim por período</option>
@@ -20,7 +20,7 @@
         </select>
         <select name="curso">
             @foreach ($cursos as $curso)
-                <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}}</option>
+                <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>
             @endforeach
         </select>
         <input type="submit" value="Consultar">

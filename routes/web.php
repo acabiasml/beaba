@@ -115,5 +115,5 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/atualizafrequencia', [FrequenciaController::class, 'update'])->name('frequencia.update');
 
     Route::get('/relatorios', [RelatorioController::class,'index'])->name('relatorios');
-    Route::get('/seleciona', [RelatorioController::class,'select'])->name('frequencia.ver');
+    Route::get('/seleciona', [RelatorioController::class,'select'])->name('relatorio.boletim');
 });

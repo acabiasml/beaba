@@ -16,7 +16,7 @@ class Periodo extends Model
     protected $fillable = ['id', 'nome', 'inicio', 'fim', 'calendarios_id'];
 
     public function calendario(){
-        return $this->belongsTo(Calendario::class);
+        return $this->belongsTo(Calendario::class, 'calendarios_id');
     }
 
     public function medias(){
