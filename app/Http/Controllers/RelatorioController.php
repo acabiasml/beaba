@@ -111,6 +111,7 @@ class RelatorioController extends Controller
         }else if($request->opcao == "individual"){
 
             $individual = array();
+
             foreach ($turma as $matricula){
                 
                 $estudante = User::where("id", $matricula->users_id)->first();
@@ -175,7 +176,8 @@ class RelatorioController extends Controller
                 array_push($individual, $estealuno);
             }
 
-            dd(json_encode($individual, JSON_PRETTY_PRINT));
+            #dd(json_encode($individual, JSON_PRETTY_PRINT));
+            $arquivo = $pdf->loadView("relatorio.fichaindividual", ["dados" => $individual, "curso" => $curso])->setPaper('a4', 'portrait');
 
         }else if($request->opcao == "matricula"){
 

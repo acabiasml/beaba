@@ -20,15 +20,15 @@
             font-family: roboto-serif, sans-serif;
             font-size: 10pt;
 
-            margin-top: 3.2cm;
-            margin-left: 2cm;
-            margin-right: 2cm;
+            margin-top: 3.5cm;
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
             margin-bottom: 2.5cm;
         }
 
         header {
             position: fixed;
-            top: 10pt;
+            top: 35px;
             left: 0cm;
             right: 0cm;
             height: 3cm;
@@ -86,18 +86,18 @@
 
     <header>
         <div style="clear:both; position:relative; padding-left: 16px; padding-right: 16px">
-            <div style="position:absolute; left:0pt; width:200pt;">
-                <img src="{{public_path('assets/img/ctjj.jpg')}}" style="height: 100px; margin-top: 5px">
+            <div style="position:absolute; left:-30pt; width:200pt;">
+                <img src="{{public_path('assets/img/ctjj.jpg')}}" style="height: 80px; margin-top: 5px">
             </div>
             <div style="width: 100%; display: block; float: left">
                 <p>Centro Técnico Juvenil de Jarudore</p>
-                <p style="font-size: 14pt; margin-top: -10pt"><b>{{$curso->calendario->escola->nome}}</b></p>
+                <p style="font-size: 12pt; margin-top: -14pt"><b>{{$curso->calendario->escola->nome}}</b></p>
                 <p style="margin-top: -13pt">CNPJ: {{$curso->calendario->escola->cnpj}}. Fundação: {{strftime("%d de %b de %Y", strtotime($curso->calendario->escola->fundacao))}}.</p>
-                <p style="margin-top: -10pt">{{$curso->calendario->escola->info}}.</p>
                 <p style="margin-top: -10pt">Tel.: {{$curso->calendario->escola->telefone}}. E-mail: {{$curso->calendario->escola->email}} | Site: {{$curso->calendario->escola->site}}</p>
+                <p style="margin-top: -10pt">{{$curso->calendario->escola->info}}.</p>
             </div>
             <div style="width: 180%; display: block; float: left">
-                <img src="{{public_path('assets/img/lsf.jpg')}}" style="height: 90px; margin-top: 5px">
+                <img src="{{public_path('assets/img/lsf.jpg')}}" style="height: 70px; margin-top: 5px">
             </div>
         </div>
     </header>
@@ -110,15 +110,23 @@
 
     <main>
         <div style="clear:both; position:relative">
-            @foreach ($dados["periodos"] as $bimestre)
+            @foreach ($dados as $matricula)
                 @if ($i != 0)
                     <div class="page-break"></div>
                 @endif
                 
-                <h1 style="text-align: center; font-weight:normal"><b>FICHA INDIVIDUAL</b></h1>
+                <h1 style="text-align: center">FICHA INDIVIDUAL</h1>
+                <h3 style="text-align: center; font-weight:normal; margin-top: -10px; text-transform:uppercase;">{{$curso->nome}} do ensino {{$curso->modalidade}}. {{$curso->calendario->nome}}, {{$curso->calendario->ano}}</h3>
+                
+                <p style="margin-top: 25px"><b>Estudante: </b>{{strtoupper($matricula['aluno']->nome)}}</p>
+                <p style="margin-top: -8px">
+                    <b>Naturalidade: </b>{{$matricula['aluno']->naturalidade}}, {{$matricula['aluno']->naturaif}}.
+                    <b>Nacionalidade:</b> {{$matricula['aluno']->nacionalidade}}.
+                    <b>Data de Nascimento:</b> {{date('d-m-Y', strtotime($matricula['aluno']->nascimento))}}.
+                </p>
+                <p style="margin-top: -8px"><b>Genitora: </b>{{$matricula['aluno']->genitora}}. <b>Genitor: </b>{{$matricula['aluno']->genitor}}.</p>
+                <p style="margin-top: -8px"><b>CPF: </b> {{$matricula['aluno']->cpf}} | <b>Tel.: </b> {{$matricula['aluno']->respontel1}}</p>
 
-                
-                
                 @php
                     $i = $i + 1;
                 @endphp
