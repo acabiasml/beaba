@@ -20,26 +20,31 @@
 
 <div>
     <form method="GET" action="{{route('diario.store')}}">
-    @csrf
-        <input type="hidden" name="periodo" value="{{$periodo->id}}" />
-        <input type="hidden" name="componente" value="{{$componente->id}}" />
+        <div class="row">
+        @csrf
+            <input type="hidden" name="periodo" value="{{$periodo->id}}" />
+            <input type="hidden" name="componente" value="{{$componente->id}}" />
 
-        <label for="dia">Data: </label>
-            <input type="date" name="dia">
-        
-        <label for="geminada">Tipo: </label>
-
-        <select name="geminada">
-            <option value="1">Simples</option>
-            <option value="2">Geminada</option>
-        </select>
-
-        <br/>
-        <label for="conteudo">Conteúdo: </label>
-            <input type="text" maxlength="255" name="conteudo" class="form-control">
-        <br/>
-        <div style="text-align: center">
-            <button type="submit">Registrar</button>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="dia">Data: </label>
+                    <input class="form-control" type="date" name="dia">
+                    
+                    <label for="geminada">Tipo: </label>
+                    <select class="form-control" name="geminada">
+                        <option value="1">Simples</option>
+                        <option value="2">Geminada</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="conteudo">Conteúdo: </label>
+                    <input class="form-control" type="text" maxlength="255" name="conteudo" class="form-control">
+                    <br/>
+                    <div style="text-align: center"><button  class="btn btn-warning" type="submit">Registrar</button></div>
+                </div>
+            </div>
         </div>
     </form>
 </div>
@@ -50,26 +55,26 @@
     <table class="table table-responsive-sm">
     <thead>
         <tr>
-            <th scope="col">Data</th>
-            <th scope="col">Nº</th>
-            <th scope="col">Conteúdo</th>
-            <th>Ações</th>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Data</th>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Nº</th>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Conteúdo</th>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center">Ações</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($registrados as $registrado)
             <tr>
-                <td>{{date('d-m-Y', strtotime($registrado->data))}}</td>
-                <td>{{$registrado->geminada}}</td>
+                <td style="text-align: center">{{date('d-m-Y', strtotime($registrado->data))}}</td>
+                <td style="text-align: center">{{$registrado->geminada}}</td>
                 <td>{{$registrado->conteudo}}</td>
-                <td>
+                <td style="text-align: center">
                     <form method="POST">
                     @csrf
                         <input type="hidden" name="diario" value="{{$registrado->id}}" />
                         <input type="hidden" name="componente" value="{{$componente->id}}" />
                         <input type="hidden" name="periodo" value="{{$periodo->id}}" />
-                        <button type="submit" formaction="{{route('diario.destroy')}}">Excluir</button>
-                        <button type="submit" formaction="{{route('frequencias')}}">Frequências</button>
+                        <button type="submit" class="btn btn-danger btn-sm" formaction="{{route('diario.destroy')}}">Excluir</button>
+                        <button type="submit" class="btn btn-info btn-sm" formaction="{{route('frequencias')}}">Frequências</button>
                     </form>
                 <td>
             </tr>

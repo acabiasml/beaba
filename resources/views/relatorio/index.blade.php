@@ -10,11 +10,11 @@
 <br/><br/>
 
 <div style="text-align: center">
-    <h1 style="text-align: left">Por turma </h1>
+    <h1 style="text-align: left">Emitir registros </h1>
     <form action="{{route('relatorio.boletim')}}" method="get">
         <div class="row">
             <div class="col-md-6">
-                <select name="opcao" class="form-control form-control-sm">
+                <select name="opcao" name="reldisp" class="form-control form-control-sm">
                     <optgroup label="Relatórios disponíveis">
                         <option value="boletim">Boletim por período</option>
                         <option value="boletimconc">Boletim conceitual por período</option>
@@ -25,7 +25,7 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <select name="curso" class="form-control form-control-sm">
+                <select name="curso" name="relturm" class="form-control form-control-sm">
                     <optgroup label="Turmas ativas">
                     @foreach ($cursos as $curso)
                         <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>

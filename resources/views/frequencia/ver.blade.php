@@ -29,7 +29,16 @@
                     @csrf
                         <input type="hidden" name="aluno" value="{{$frequencia['id']}}" />
                         <input type="hidden" name="dia" value="{{$chamada->id}}" />
-                        <button type="submit" formaction="{{route('frequencia.update')}}">Alterar</button>
+
+                        @php 
+                            if($frequencia["chamada"] == "P"){
+                                $classebotao = "btn btn-success btn-sm";
+                            }else{
+                                $classebotao = "btn btn-warning btn-sm";
+                            }
+                        @endphp
+
+                        <button type="submit" class="{{$classebotao}}" formaction="{{route('frequencia.update')}}">Alterar</button>
                     </form>
                 </td>
             </tr>

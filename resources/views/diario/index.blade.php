@@ -50,6 +50,7 @@
                         <form method="GET" action="{{route('diario.print')}}">
                             @csrf
                             <input type="hidden" name="componente" value="{{$key['componente_id']}}" />
+                            <br/>
                             <button class="btn btn-warning btn-sm" type="submit">Imprimir</button>
                         </form>
                     </td>

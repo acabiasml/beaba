@@ -17,20 +17,39 @@
 
 <div>
     <form method="GET" action="{{route('media.store')}}">
-    @csrf
-        <input type="hidden" name="periodo" value="{{$periodo->id}}" />
-        <input type="hidden" name="componente" value="{{$componente->id}}" />
+        <div class="row">
+            @csrf
         
-        <label for="aluno">Estudante: </label>
-        <select name="aluno" id="selectaluno">
-            @foreach ($ativos as $aluno)
-                <option value="{{$aluno["id"]}}">{{$aluno["nome"]}}</option>
-            @endforeach
-        </select>
+            <input type="hidden" name="periodo" value="{{$periodo->id}}" />
+            <input type="hidden" name="componente" value="{{$componente->id}}" />
+            
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="aluno">Estudante: </label>
+                    <select name="aluno" class="form-control" id="selectaluno">
+                        @foreach ($ativos as $aluno)
+                            <option value="{{$aluno["id"]}}">{{$aluno["nome"]}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
-        <label for="nota">Média: </label><input type="number" step="0.01" name="nota" id="nota">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="nota">Média: </label>
+                    <input class="form-control" type="number" step="0.01" name="nota" id="nota">
+                </div>
+            </div>
 
-        <button type="submit" id="registrar">Registrar</button>
+            <div class="col-sm">
+                <div class="form-group">
+                    <br/>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-warning" id="registrar">Registrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 
@@ -40,17 +59,17 @@
     <table class="table table-responsive-sm">
     <thead>
         <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nome</th>
-        <th scope="col" style="text-align: center">Média</th>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">ID</th>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Nome</th>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col" style="text-align: center">Média</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($ativos as $aluno)
             <tr>
-                <td>{{$aluno["id"]}}</td>
+                <td style="text-align: center">{{$aluno["id"]}}</td>
                 <td class="select-change" id="{{$aluno['id']}}">{{$aluno["nome"]}}</td>
-                <td style="text-align: center">{{$aluno["media"]}}</td>
+                <td style="text-align: center" style="text-align: center">{{$aluno["media"]}}</td>
             </tr>
         @endforeach
     </tbody>
