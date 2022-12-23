@@ -116,85 +116,103 @@ class RelatorioController extends Controller
                 
                 $estudante = User::where("id", $matricula->users_id)->first();
                 
-                $estealuno = array();
-                $estealuno["aluno"] = $estudante;
+                if($matricula->tipo == "regular"){
 
-                $estealuno["areas"] = array();
-                foreach($areas as $area){
-                    $estaarea["nome"] = $area->nome;
-                    
-                    $estaarea["componentes"] = array();
-                    foreach($componentes as $componente){
-                        if($componente->area_id == $area->id){
-                            $estecomponente["nome"] = $componente->nome;
-                            $estecomponente["CHP"] = $componente->horas;
+                    $estealuno = array();
+                    $estealuno["aluno"] = $estudante;
+                    $estealuno["totalhoras"] = 0;
+                    $estealuno["totalhorascumpridas"] = 0;
+                    $contadorReprovado = 0;
 
-                            $estecomponente["notas"] = array();
-                            $media = 0;
-                            $totalfaltas = 0;
-                            $contador = 0;
+                    $estealuno["areas"] = array();
+                    foreach($areas as $area){
+                        $estaarea["nome"] = $area->nome;
+                        
+                        $estaarea["componentes"] = array();
+                        foreach($componentes as $componente){
+                            if($componente->area_id == $area->id){
 
-                            foreach($periodos as $periodo){
-                                $esteperiodo["nome"] = $periodo->nome;
-                                
-                                $consulta = Media::where("users_id", $matricula->users_id)
-                                    ->where("componentes_id", $componente->id)
-                                    ->where("periodos_id", $periodo->id)->first();
-                    
-                                if($consulta == null){
-                                    $esteperiodo["periodo-media"] = "-";
-                                }else{
-                                    $esteperiodo["periodo-media"] = $consulta->nota;
-                                    $media = $media + $consulta->nota;
-                                    $contador = $contador + 1;
-                                }
+                                $estealuno["totalhoras"] = $estealuno["totalhoras"] + $componente->horas;
 
-                                $diasbimestre = Diario::where("componentes_id", $componente->id)
-                                                        ->where("data", ">=", $periodo->inicio)
-                                                        ->where("data", "<=", $periodo->fim)
-                                                        ->get();
+                                $estecomponente["nome"] = $componente->nome;
+                                $estecomponente["CHP"] = $componente->horas;
 
-                                $esteperiodo["periodo-faltas"] = 0;
-                                foreach($diasbimestre as $dia){
+                                $estecomponente["notas"] = array();
+                                $media = 0;
+                                $totalfaltas = 0;
+                                $contador = 0;
 
-                                    $verifica = Frequencia::where("users_id", $matricula->users_id)
-                                                        ->where("diarios_id", $dia->id)->first();
-
-                                    if($verifica != null && $verifica->presenca == "F"){
-                                        $totalfaltas = $totalfaltas + 1;
-                                        $esteperiodo["periodo-faltas"] =  $esteperiodo["periodo-faltas"] + 1;
+                                foreach($periodos as $periodo){
+                                    $esteperiodo["nome"] = $periodo->nome;
+                                    
+                                    $consulta = Media::where("users_id", $matricula->users_id)
+                                        ->where("componentes_id", $componente->id)
+                                        ->where("periodos_id", $periodo->id)->first();
+                        
+                                    if($consulta == null){
+                                        $esteperiodo["periodo-media"] = "-";
+                                    }else{
+                                        $esteperiodo["periodo-media"] = $consulta->nota;
+                                        $media = $media + $consulta->nota;
+                                        $contador = $contador + 1;
                                     }
+
+                                    $diasbimestre = Diario::where("componentes_id", $componente->id)
+                                                            ->where("data", ">=", $periodo->inicio)
+                                                            ->where("data", "<=", $periodo->fim)
+                                                            ->get();
+
+                                    $esteperiodo["periodo-faltas"] = 0;
+                                    foreach($diasbimestre as $dia){
+
+                                        $verifica = Frequencia::where("users_id", $matricula->users_id)
+                                                            ->where("diarios_id", $dia->id)->first();
+
+                                        if($verifica != null && $verifica->presenca == "F"){
+                                            $totalfaltas = $totalfaltas + 1;
+                                            $esteperiodo["periodo-faltas"] =  $esteperiodo["periodo-faltas"] + 1;
+                                        }
+                                    }
+
+                                    array_push($estecomponente["notas"], $esteperiodo);
                                 }
 
-                                array_push($estecomponente["notas"], $esteperiodo);
-                            }
+                                $estecomponente["TF"] = $totalfaltas;
+                                $estecomponente["MF"] = round(number_format($media / count($periodos), 2, '.', ''));
 
-                            $estecomponente["TF"] = $totalfaltas;
-                            $estecomponente["MF"] = round(number_format($media / count($periodos), 2, '.', ''));
-
-                            if($matricula->status != "transferido"){
-                                if($estecomponente["MF"] >= 5.5){
-                                    $estecomponente["RF"] = "APROV.";
+                                if($matricula->status != "transferido"){
+                                    if($estecomponente["MF"] >= 5.5){
+                                        $estecomponente["RF"] = "APROV.";
+                                    }else{
+                                        $contadorReprovado = $contadorReprovado + 1;
+                                        $estecomponente["RF"] = "REPROV.";
+                                    }
                                 }else{
-                                    $estecomponente["RF"] = "REPROV.";
+                                    $estecomponente["RF"] = "-";
                                 }
-                            }else{
-                                $estecomponente["RF"] = "-";
+
+                                #$horasfull = count(Diario::where("componentes_id", $componente->id)->get());
+
+                                $estecomponente["CHC"] = $componente->horas - $totalfaltas;
+                                $estealuno["totalhorascumpridas"] = $estealuno["totalhorascumpridas"] + $estecomponente["CHC"];
+
+                                array_push($estaarea["componentes"], $estecomponente);
                             }
-
-                            #$horasfull = count(Diario::where("componentes_id", $componente->id)->get());
-
-                            $estecomponente["CHC"] = $componente->horas - $totalfaltas;
-                            
-
-                            array_push($estaarea["componentes"], $estecomponente);
                         }
+
+                        array_push($estealuno["areas"], $estaarea);
                     }
 
-                    array_push($estealuno["areas"], $estaarea);
-                }
+                    if($contadorReprovado == 0){
+                        $estealuno["resultado"] = "APROVADO";
+                    }else if($contadorReprovado < 2){
+                        $estealuno["resultado"] = "APROVADO COM DEPENDÊNCIA";
+                    }else{
+                        $estealuno["resultado"] = "RETIDO";
+                    }
 
-                array_push($individual, $estealuno);
+                    array_push($individual, $estealuno);
+                }
             }
 
             #dd(json_encode($individual, JSON_PRETTY_PRINT));
