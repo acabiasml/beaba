@@ -127,7 +127,8 @@ class RelatorioController extends Controller
                     foreach($componentes as $componente){
                         if($componente->area_id == $area->id){
                             $estecomponente["nome"] = $componente->nome;
-                            
+                            $estecomponente["CHP"] = $componente->horas;
+
                             $estecomponente["notas"] = array();
                             $media = 0;
                             $totalfaltas = 0;
@@ -160,12 +161,28 @@ class RelatorioController extends Controller
                                                         ->where("diarios_id", $dia->id)->first();
 
                                     if($verifica != null && $verifica->presenca == "F"){
+                                        $totalfaltas = $totalfaltas + 1;
                                         $esteperiodo["periodo-faltas"] =  $esteperiodo["periodo-faltas"] + 1;
                                     }
                                 }
 
                                 array_push($estecomponente["notas"], $esteperiodo);
                             }
+
+                            $estecomponente["TF"] = $totalfaltas;
+                            $estecomponente["MF"] = round(number_format($media / count($periodos), 2, '.', ''));
+
+                            if($matricula->status != "transferido" && $estecomponente["MF"] >= 5.5){
+                                $estecomponente["RF"] = "APROV.";
+                            }else{
+                                $estecomponente["RF"] = "-";
+                            }
+
+                            #$horasfull = count(Diario::where("componentes_id", $componente->id)->get());
+
+                            $estecomponente["CHC"] = $componente->horas - $totalfaltas;
+                            
+
                             array_push($estaarea["componentes"], $estecomponente);
                         }
                     }
@@ -177,6 +194,9 @@ class RelatorioController extends Controller
             }
 
             #dd(json_encode($individual, JSON_PRETTY_PRINT));
+
+            #return View::make("relatorio.fichaindividual")->with("dados", $individual)->with("curso", $curso);
+            
             $arquivo = $pdf->loadView("relatorio.fichaindividual", ["dados" => $individual, "curso" => $curso])->setPaper('a4', 'portrait');
 
         }else if($request->opcao == "matricula"){

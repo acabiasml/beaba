@@ -40,7 +40,7 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 2.5cm;
+            height: 5cm;
 
             text-align: center;
         }
@@ -62,10 +62,6 @@
 
         h1{
             font-size: 18px;
-        }
-
-        th.rotate {
-            height: 80px;
         }
 
         th.rotate > div {
@@ -103,6 +99,8 @@
     </header>
 
     <footer style="clear:both">
+        <p style="font-size: 11pt">Diretor(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp; Secretário(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <br/><br/><br/><br/>
         <hr style="margin-bottom: -10px" />
         <p>Ficha gerada para impressão por: {{Auth::user()->nome}}, em {{$agora->format('d/m/Y')}} às {{$agora->format('H:i')}}.</p>
         <p style="text-align: center; margin-top: -10pt">CTJJ. Endereço de Correspondência: Caixa Postal 338. CEP 78700-970. Rondonópolis-MT.</p>
@@ -126,6 +124,108 @@
                 </p>
                 <p style="margin-top: -8px"><b>Genitora: </b>{{$matricula['aluno']->genitora}}. <b>Genitor: </b>{{$matricula['aluno']->genitor}}.</p>
                 <p style="margin-top: -8px"><b>CPF: </b> {{$matricula['aluno']->cpf}} | <b>Tel.: </b> {{$matricula['aluno']->respontel1}}</p>
+
+
+                @php
+
+                    $contoutra = 0;
+
+                    $conte = 0;
+                    foreach($matricula['areas'] as $area){
+                            $conte = $conte + 1;
+                            
+                            if($area["nome"] != "Parte Diversificada" && $area["nome"] != "Itinerário Formativo"){
+                                $contoutra = $contoutra + count($area['componentes']);
+                            }
+                    }
+
+                    $contoutra = $contoutra + $conte;
+    
+                    $conte2 = 0;
+                    foreach($matricula['areas'] as $area){
+                        if($area["nome"] == "Parte Diversificada" || $area["nome"] == "Itinerário Formativo"){
+                            $conte2 = $conte2 + count($area['componentes']);
+                        }
+                    }
+                @endphp
+
+
+                <br/>
+                <table border="3px">
+                    <tr>
+                        <td rowspan="2" colspan="3" style="text-transform:uppercase;">Componentes Curriculares</td>
+                        @foreach ($matricula['areas'][0]['componentes'][0]['notas'] as $bimestre)
+                            <td colspan="2">{{$bimestre['nome']}}<td>
+                        @endforeach
+                        <td rowspan="2">MF</td>
+                        <td rowspan="2">TF</td>
+                        <td rowspan="2">CHP</td>
+                        <td rowspan="2">CHC</td>
+                        <td rowspan="2">RF</td>
+                    </tr>
+                    <tr>
+                        @foreach ($matricula['areas'][0]['componentes'][0]['notas'] as $bimestre)
+                            <td>N</td>
+                            <td>F</td>
+                            <td></td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <th rowspan="{{$contoutra}}" style="text-transform:uppercase;" class="rotate" width="125px"><div>Base Nacional Comum (Lei nº 9.394/96)</div></th>
+                    </tr>
+
+                    @foreach ($matricula["areas"] as $area)
+                        @if($area["nome"] != "Parte Diversificada" && $area["nome"] != "Itinerário Formativo")
+                            <tr>
+                                <th rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</th>
+                            </tr>
+                            @foreach ($area['componentes'] as $componente)
+                                <tr>
+                                    <td style="text-transform:uppercase;">{{$componente['nome']}}</td>
+
+                                    @foreach ($componente['notas'] as $bimestre)
+                                        <td>{{$bimestre['periodo-media']}}</td>
+                                        <td>{{$bimestre['periodo-faltas']}}</td>
+                                        <td></td>
+                                    @endforeach
+
+                                    <td>{{$componente['MF']}}</td>
+                                    <td>{{$componente['TF']}}</td>
+                                    <td>{{$componente['CHP']}}</td>
+                                    <td>{{$componente['CHC']}}</td>
+                                    <td>{{$componente['RF']}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    @endforeach
+
+                    @foreach ($matricula["areas"] as $area)
+                        @if($area["nome"] == "Parte Diversificada" || $area["nome"] == "Itinerário Formativo")
+                            <tr>
+                                <th colspan="2" rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</th>
+                            </tr>
+                            @foreach ($area['componentes'] as $componente)
+                                <tr>
+                                    <td style="text-transform:uppercase;">{{$componente['nome']}}</td>
+                                    
+                                    @foreach ($componente['notas'] as $bimestre)
+                                        <td>{{$bimestre['periodo-media']}}</td>
+                                        <td>{{$bimestre['periodo-faltas']}}</td>
+                                        <td></td>
+                                    @endforeach
+
+                                    <td>{{$componente['MF']}}</td>
+                                    <td>{{$componente['TF']}}</td>
+                                    <td>{{$componente['CHP']}}</td>
+                                    <td>{{$componente['CHC']}}</td>
+                                    <td>{{$componente['RF']}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    @endforeach
+
+                </table>
+
 
                 @php
                     $i = $i + 1;
