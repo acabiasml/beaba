@@ -172,8 +172,12 @@ class RelatorioController extends Controller
                             $estecomponente["TF"] = $totalfaltas;
                             $estecomponente["MF"] = round(number_format($media / count($periodos), 2, '.', ''));
 
-                            if($matricula->status != "transferido" && $estecomponente["MF"] >= 5.5){
-                                $estecomponente["RF"] = "APROV.";
+                            if($matricula->status != "transferido"){
+                                if($estecomponente["MF"] >= 5.5){
+                                    $estecomponente["RF"] = "APROV.";
+                                }else{
+                                    $estecomponente["RF"] = "REPROV.";
+                                }
                             }else{
                                 $estecomponente["RF"] = "-";
                             }
