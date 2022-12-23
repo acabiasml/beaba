@@ -231,7 +231,18 @@
 
                 <p><b>Dias letivos:</b> 200</p>
                 <p><b>Carga horária total prevista:</b> {{$matricula["totalhoras"]}} h | <b>Carga horária total cumprida:</b> {{$matricula["totalhorascumpridas"]}} h</p>
-                <p><b>Resultado:</b> {{$matricula["resultado"]}}</p>
+                <p>
+                    <b>Data da matrícula:</b> {{date('d-m-Y', strtotime($matricula["datamatricula"]))}} | 
+                    <b>Resultado:</b> {{$matricula["resultado"]}}
+                    
+                    @if ($matricula["resultado"] == "TRANSFERIDO")
+                        <b>Data da transferência:</b> {{date('d-m-Y', strtotime($matricula["datatransferencia"]))}}
+                    @endif
+            
+                </p>
+
+                <p style="text-weight: normal; font-size: 11px">Legenda: <br/>N (nota); F (falta); MF (média final); TF (total de faltas); CHP (carga-horária prevista); CHC (carga-horária cursada); RF (resultado final).</p>
+                <br/>
 
 
                 @php

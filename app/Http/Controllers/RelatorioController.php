@@ -120,8 +120,13 @@ class RelatorioController extends Controller
 
                     $estealuno = array();
                     $estealuno["aluno"] = $estudante;
+
+                    $estealuno["datamatricula"] = $matricula->datamatricula;
+                    $estealuno["datatransferencia"] = $matricula->datatransf;
+
                     $estealuno["totalhoras"] = 0;
                     $estealuno["totalhorascumpridas"] = 0;
+                    
                     $contadorReprovado = 0;
 
                     $estealuno["areas"] = array();
@@ -180,12 +185,7 @@ class RelatorioController extends Controller
                                 $estecomponente["TF"] = $totalfaltas;
                                 $estecomponente["MF"] = number_format(round($media / count($periodos)), 2, '.', '');
 
-                                if($matricula->status != "transferido"){
-
-                                    if($matricula->status == "reclassificado"){
-                                        $estecomponente["RF"] = "RECLASS.";
-                                    }
-
+                                if($matricula->status != "transferido" && $matricula->status != "reclassificado"){
                                     if($estecomponente["MF"] >= 5.5){
                                         $estecomponente["RF"] = "APROV.";
                                     }else{
@@ -221,6 +221,8 @@ class RelatorioController extends Controller
                             $estealuno["resultado"] = "RETIDO";
                         }
                     }
+
+
 
                     array_push($individual, $estealuno);
                 }
