@@ -49,7 +49,7 @@
             page-break-after: always;
         }
 
-        table, th, td {
+        table, td {
             border: 1px solid black;
             border-collapse: collapse;
             text-align: center;
@@ -64,7 +64,7 @@
             font-size: 18px;
         }
 
-        th.rotate > div {
+        td.rotate > div {
             font-weight: normal;
             transform: 
                 rotate(270deg);
@@ -171,13 +171,13 @@
                         @endforeach
                     </tr>
                     <tr>
-                        <th rowspan="{{$contoutra}}" style="text-transform:uppercase;" class="rotate" width="125px"><div>Base Nacional Comum (Lei nº 9.394/96)</div></th>
+                        <td rowspan="{{$contoutra}}" style="text-transform:uppercase;" class="rotate" width="125px"><div>Base Nacional Comum (Lei nº 9.394/96)</div></td>
                     </tr>
 
                     @foreach ($matricula["areas"] as $area)
                         @if($area["nome"] != "Parte Diversificada" && $area["nome"] != "Itinerário Formativo")
                             <tr>
-                                <th rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</th>
+                                <td rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</td>
                             </tr>
                             @foreach ($area['componentes'] as $componente)
                                 <tr>
@@ -202,7 +202,7 @@
                     @foreach ($matricula["areas"] as $area)
                         @if($area["nome"] == "Parte Diversificada" || $area["nome"] == "Itinerário Formativo")
                             <tr>
-                                <th colspan="2" rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</th>
+                                <td colspan="2" rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</td>
                             </tr>
                             @foreach ($area['componentes'] as $componente)
                                 <tr>
