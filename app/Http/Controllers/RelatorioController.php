@@ -152,7 +152,7 @@ class RelatorioController extends Controller
                                     if($consulta == null){
                                         $esteperiodo["periodo-media"] = "-";
                                     }else{
-                                        $esteperiodo["periodo-media"] = $consulta->nota;
+                                        $esteperiodo["periodo-media"] = number_format($consulta->nota, 2, '.', '');
                                         $media = $media + $consulta->nota;
                                         $contador = $contador + 1;
                                     }
@@ -178,9 +178,14 @@ class RelatorioController extends Controller
                                 }
 
                                 $estecomponente["TF"] = $totalfaltas;
-                                $estecomponente["MF"] = round(number_format($media / count($periodos), 2, '.', ''));
+                                $estecomponente["MF"] = number_format(round($media / count($periodos)), 2, '.', '');
 
                                 if($matricula->status != "transferido"){
+
+                                    if($matricula->status == "reclassificado"){
+                                        $estecomponente["RF"] = "RECLASS.";
+                                    }
+
                                     if($estecomponente["MF"] >= 5.5){
                                         $estecomponente["RF"] = "APROV.";
                                     }else{
@@ -203,12 +208,18 @@ class RelatorioController extends Controller
                         array_push($estealuno["areas"], $estaarea);
                     }
 
-                    if($contadorReprovado == 0){
-                        $estealuno["resultado"] = "APROVADO";
-                    }else if($contadorReprovado < 2){
-                        $estealuno["resultado"] = "APROVADO COM DEPENDÊNCIA";
+                    if($matricula->status == "transferido"){
+                        $estealuno["resultado"] = "TRANSFERIDO";
+                    }else if($matricula->status == "reclassificado"){
+                            $estealuno["resultado"] = "RECLASSIFICADO";
                     }else{
-                        $estealuno["resultado"] = "RETIDO";
+                        if($contadorReprovado == 0){
+                            $estealuno["resultado"] = "APROVADO";
+                        }else if($contadorReprovado < 2){
+                            $estealuno["resultado"] = "APROVADO COM DEPENDÊNCIA";
+                        }else{
+                            $estealuno["resultado"] = "RETIDO";
+                        }
                     }
 
                     array_push($individual, $estealuno);

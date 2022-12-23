@@ -100,6 +100,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/destroyturma', [TurmaController::class, 'destroy'])->name('turma.destroy');
     Route::post('/incluiturma', [TurmaController::class, 'store'])->name('turma.store');
     Route::post('/atualizaturma', [TurmaController::class, 'update'])->name('turma.update');
+    Route::post('/reclassificar', [TurmaController::class, 'reclassificar'])->name('turma.reclassificar');
 
     Route::get('/diarios', [DiarioController::class,'index'])->name('diarios');
     Route::get('/verdiario', [DiarioController::class,'ver'])->name('diario.ver');

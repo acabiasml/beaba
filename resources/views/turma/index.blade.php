@@ -52,4 +52,31 @@ Turma
     </x:form::form>
 </div>
 
+<br/><h3 style="background-color: #F1E6B2; color: #6B3D2E; text-align: center">Reclassificar</h3>
+
+<form action="{{route('turma.reclassificar')}}" method="post">
+@csrf
+
+    <input type="hidden" name="antigocurso" value="{{$curso->id}}" />
+
+    Readequar
+    <select class="form-group" name="aluno">
+        <optgroup label="Regularmente matriculados">
+            @foreach ($correr as $matriculado)
+                <option value="{{$matriculado->id}}">{{$matriculado->nome}}</option>
+            @endforeach
+        </optgroup>
+    </select>
+    para a turma 
+    <select class="form-group" name="novocurso">
+        <optgroup label="Turmas do mesmo calendário">
+            @foreach ($cursos as $curso)
+                <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} do ENSINO {{strtoupper($curso->modalidade)}} - {{$curso->calendario->ano}}</option>
+            @endforeach
+        </optgroup>
+    </select>
+
+    <input type="submit" class="btn btn-success" value="Reclassificar">
+
+</form>
 @endsection
