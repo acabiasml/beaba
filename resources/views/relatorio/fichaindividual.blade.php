@@ -122,7 +122,7 @@
                     <b>Nacionalidade:</b> {{$matricula['aluno']->nacionalidade}}.
                     <b>Data de Nascimento:</b> {{date('d-m-Y', strtotime($matricula['aluno']->nascimento))}}.
                 </p>
-                <p style="margin-top: -8px"><b>Genitora: </b>{{$matricula['aluno']->genitora}}. <b>Genitor: </b>{{$matricula['aluno']->genitor}}.</p>
+                <p style="margin-top: -8px"><b>Mãe: </b>{{$matricula['aluno']->genitora}}. <b>Pai: </b>{{$matricula['aluno']->genitor}}.</p>
                 <p style="margin-top: -8px"><b>CPF: </b> {{$matricula['aluno']->cpf}} | <b>Tel.: </b> {{$matricula['aluno']->respontel1}}</p>
 
 
