@@ -46,6 +46,8 @@ class DiarioController extends Controller
             $este["componente_nome_curso"] = $curso->nome;
             $este["componente_status_curso"] = $curso->status;
 
+            $este["componente_ano"] = $curso->calendario->ano;
+
             $este["componente_cumprido"] = Diario::where("componentes_id", $componente->id)->get()->count() + Diario::where("componentes_id", $componente->id)->where("geminada", 2)->get()->count();
 
             $inicio = Periodo::where("id", $curso->inicio)->pluck("inicio")->first();

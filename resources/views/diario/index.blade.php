@@ -14,6 +14,7 @@
     <table class="table table-responsive-sm">
     <thead>
         <tr>
+            <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Ano</th>
             <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Nome</th>
             <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Horas</th>
             <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7" style="text-align: center" scope="col">Curso</th>
@@ -23,11 +24,12 @@
     </thead>
     <tbody>
         @foreach ($doProfessor as $key)
-            <tr>
-                <td style="text-align: center">{{$key["componente_nome"]}}</td>
-                <td style="text-align: center">{{$key["componente_cumprido"]}}/{{$key["componente_horas"]}}</td>
-                <td style="text-align: center">{{$key["componente_nome_curso"]}} - {{$key["componente_status_curso"]}}</td>
-                @if ($key["componente_status_curso"] == "iniciado")
+            @if ($key["componente_status_curso"] != "finalizado")
+                <tr>
+                    <td style="text-align: center">{{$key["componente_ano"]}}</td>
+                    <td style="text-align: center">{{$key["componente_nome"]}}</td>
+                    <td style="text-align: center">{{$key["componente_cumprido"]}}/{{$key["componente_horas"]}}</td>
+                    <td style="text-align: center">{{$key["componente_nome_curso"]}} - {{$key["componente_status_curso"]}}</td>
                     <td>
                         Período: 
                         <form method="GET">
@@ -54,8 +56,8 @@
                             <button class="btn btn-warning btn-sm" type="submit">Imprimir</button>
                         </form>
                     </td>
-                @endif
-            </tr>
+                </tr>
+            @endif                
         @endforeach
     </tbody>
     </table>
