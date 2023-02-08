@@ -26,11 +26,23 @@
             </div>
             <div class="col-md-6">
                 <select name="curso" name="relturm" class="form-control form-control-sm">
-                    <optgroup label="Turmas ativas">
+                    
                     @foreach ($cursos as $curso)
-                        <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>
+                        <optgroup label="Turmas ativas">
+                        @if ($curso->status 'ativo')
+                            <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>
+                        @endif
+                        </optgroup>
                     @endforeach
-                    </optgroup>
+                    
+                    @foreach ($cursos as $curso)
+                        <optgroup label="Turmas suspensas">
+                        @if ($curso->status 'suspenso')
+                            <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>
+                        @endif
+                        </optgroup>
+                    @endforeach
+
                 </select>
             </div>
         </div><br/>

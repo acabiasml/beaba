@@ -20,7 +20,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class RelatorioController extends Controller
 {
     public function index(){
-        $cursos = Curso::where("status", "iniciado")->get();
+        $cursos = Curso::where("status", "!=", "finalizado")->get();
         $professores = User::where('tipo', '!=' ,'estud')->get();
         return View::make("relatorio.index")
                         ->with("professores", $professores)
