@@ -28,7 +28,7 @@
                 <select name="curso" name="relturm" class="form-control form-control-sm">
                     <optgroup label="Turmas ativas">
                     @foreach ($cursos as $curso)
-                        @if ($curso->status == 'ativo')
+                        @if ($curso->status == 'iniciado')
                             <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>
                         @endif
                     @endforeach
