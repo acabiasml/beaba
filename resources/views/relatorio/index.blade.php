@@ -29,7 +29,7 @@
                     
                     @foreach ($cursos as $curso)
                         <optgroup label="Turmas ativas">
-                        @if ($curso->status 'ativo')
+                        @if ($curso->status == 'ativo')
                             <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>
                         @endif
                         </optgroup>
@@ -37,7 +37,7 @@
                     
                     @foreach ($cursos as $curso)
                         <optgroup label="Turmas suspensas">
-                        @if ($curso->status 'suspenso')
+                        @if ($curso->status == 'suspenso')
                             <option value="{{$curso->id}}">{{strtoupper($curso->nome)}} - {{strtoupper($curso->modalidade)}} ({{$curso->calendario->ano}})</option>
                         @endif
                         </optgroup>
