@@ -10,4 +10,5 @@
        <p> {{$aniversariante->nome}} - {{$aniversariante->nascimento}}</p>
     @endforeach
 </p>
+<p>Que</p>
 @endsection
