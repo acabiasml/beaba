@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use \App\Tables\UsersTable;
 use \App\Tables\EscolasTable;
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ class DashboardController extends Controller
 {
     public function home()
     {
-        return view("principais.home");
+        $aniversariantes = User::whereMonth("nascimento","=", date('m'))->orderBy("nascimento", "asc")->get();
+        return view("principais.home", ['aniversariantes' => $aniversariantes]);
     }
 
     public function biblioteca()

@@ -5,6 +5,9 @@
 
 @section('content')
 <p>
-<h1>Conteúdo!</h1>
+<h1>Aniversariantes do mês</h1>
+    @foreach ($aniversariantes as $aniversariante)
+       <p> {{$aniversariante->nome}} - {{$aniversariante->nascimento}}</p>
+    @endforeach
 </p>
 @endsection
