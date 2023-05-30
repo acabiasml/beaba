@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function home()
     {
-        $aniversariantes = User::whereMonth("nascimento","=", date('m'))->orderBy("nascimento", "asc")->get();
+        $aniversariantes = User::get();
         return view("principais.home", ['aniversariantes' => $aniversariantes]);
     }
 
