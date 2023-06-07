@@ -6,11 +6,15 @@
 @section('content')
 
 <div class="row">
-  <div class="col-xl-8">
-    <div id='calendar'></div>
-  </div>
   <div class="col-xl-4">
     <p style="text-align: center; font-weight: bold; text-transform: uppercase;">Avisos</p>
+    <ul>
+      <li><p>Atenção professores! As provas de recuperação devem ser feitas até dia 30/06 (trinta de junho)</p></li>
+      <li><p>As férias dos meninos do internato começarão dia 01/07 (primeiro de julho).</p></li>
+  </ul>
+  </div>
+  <div class="col-xl-8">
+    <div id='calendar'></div>
   </div>
 </div>
 @endsection
