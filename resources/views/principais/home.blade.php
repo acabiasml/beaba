@@ -4,15 +4,24 @@
 @section('icon', 'ni-tv-2')
 
 @section('content')
-<p>
+
+<div class="row">
+  <div class="col-xl-8">
     <div id='calendar'></div>
-</p>
+  </div>
+  <div class="col-xl-4">
+    <p style="text-align: center; font-weight: bold; text-transform: uppercase;">Avisos</p>
+  </div>
+</div>
 @endsection
 
 @section('script')
 var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
       initialView: "dayGridMonth",
       selectable: true,
+      select: function(info) {
+        alert('selected ' + info.startStr + ' to ' + info.endStr);
+      },
       locale: 'pt-br',
       events: [
         @foreach ($aniversariantes as $aniversariante)
@@ -48,5 +57,9 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
       },
     });
 
-    calendar.render();
+  calendar.render();
+
+  calendar.on('dateClick', function(info) {
+    alert('clicked on ' + info.dateStr);
+  });
 @endsection
