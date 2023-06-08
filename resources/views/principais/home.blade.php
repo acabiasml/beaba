@@ -9,8 +9,9 @@
   <div class="col-xl-4">
     <p style="text-align: center; font-weight: bold; text-transform: uppercase;">Avisos</p>
     <ul>
-      <li><p>Atenção professores! As provas de recuperação devem ser feitas até dia 30/06 (trinta de junho)</p></li>
-      <li><p>As férias dos meninos do internato começarão dia 01/07 (primeiro de julho).</p></li>
+      @foreach ($avisos as $aviso)
+        <li><p>{{$aviso->aviso}}</p></li>
+      @endforeach
   </ul>
   </div>
   <div class="col-xl-8">
@@ -24,7 +25,7 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
       initialView: "dayGridMonth",
       selectable: true,
       select: function(info) {
-        alert('selected ' + info.startStr + ' to ' + info.endStr);
+        //alert('selected ' + info.startStr + ' to ' + info.endStr);
       },
       locale: 'pt-br',
       events: [
@@ -33,7 +34,7 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
             title: '{{$aniversariante->nome}}',
             start: "{{date('Y').date('-m-d', strtotime($aniversariante->nascimento))}}",
             end: "{{date('Y').date('-m-d', strtotime($aniversariante->nascimento))}}",
-            className: 'bg-gradient-danger'
+            className: ['bg-gradient-danger', 'marcado']
             },
         @endforeach
       ],
@@ -63,7 +64,8 @@ var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
 
   calendar.render();
 
-  calendar.on('dateClick', function(info) {
-    alert('clicked on ' + info.dateStr);
+  $(".marcado").on("click", function(info){
+    alert(info.currentTarget.fcSeg.eventRange.def.title);
   });
+  
 @endsection
