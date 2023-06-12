@@ -23,6 +23,7 @@
 @section('script')
 var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
       initialView: "dayGridMonth",
+      contentHeight: 500,
       selectable: true,
       select: function(info) {
         //alert('selected ' + info.startStr + ' to ' + info.endStr);
