@@ -19,9 +19,9 @@
             <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio', 'bibli' => 'Biblioteca']" />
             <x:form::input id="email" type="email" name="email" label="E-mail: " :placeholder="false"/>
             <x:form::input id="password" type="password" name="password" label="Senha: " :placeholder="false"/>
-            <x:form::input name="cpf" label="Número do CPF: " :placeholder="false"/>
-            <x:form::input name="telefone1" label="Telefone de Contato (1): " :placeholder="false"/>
-            <x:form::input name="telefone2" label="Telefone de Contato (2)" :placeholder="false"/>
+            <x:form::input name="cpf" class="cpf" label="Número do CPF: " :placeholder="false"/>
+            <x:form::input name="telefone1" class="phone" label="Telefone de Contato (1): " :placeholder="false"/>
+            <x:form::input name="telefone2" class="phone" label="Telefone de Contato (2)" :placeholder="false"/>
             <x:form::input name="identidade" label="Número do RG (identidade): " :placeholder="false"/>
             <x:form::input name="identemissor" label="Órgão Emissor do RG: " :placeholder="false"/>
             <x:form::select name="identuf" label="Estado Emissor: " :options="['AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MT' => 'MT', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']" />
@@ -51,16 +51,16 @@
             <x:form::input name="genitora" label="Nome da Genitora: " :placeholder="false"/>
             <x:form::input name="genitor" label="Nome do Genitor: " :placeholder="false"/>
             <x:form::input name="responsavel" label="Nome do Responsável: " :placeholder="false"/>
-            <x:form::input name="responcpf" label="Número de CPF do Responsável: " :placeholder="false"/>
-            <x:form::input name="respontel1" label="Telefone (1) do Responsável: " :placeholder="false"/>
-            <x:form::input name="respontel2" label="Telefone (2) do Responsável: " :placeholder="false"/>
+            <x:form::input name="responcpf" class="cpf" label="Número de CPF do Responsável: " :placeholder="false"/>
+            <x:form::input name="respontel1" class="phone" label="Telefone (1) do Responsável: " :placeholder="false"/>
+            <x:form::input name="respontel2" class="phone" label="Telefone (2) do Responsável: " :placeholder="false"/>
             <x:form::input name="endereco" label="Logradouro: " :placeholder="false"/>
             <x:form::input name="endnumero" label="Número do Logradouro: " :placeholder="false"/>
             <x:form::input name="endbairro" label="Bairro: " :placeholder="false"/>
             <x:form::input name="endcidade" label="Cidade: " :placeholder="false"/>
             <x:form::select name="enduf" label="Estado do Endereço: " :options="['AC' => 'AC', 'AL' => 'AL', 'AP' => 'AP', 'AM' => 'AM', 'BA' => 'BA', 'CE' => 'CE', 'DF' => 'DF', 'ES' => 'ES', 'GO' => 'GO', 'MA' => 'MA', 'MS' => 'MS', 'MT' => 'MT', 'MG' => 'MG', 'PA' => 'PA', 'PB' => 'PB', 'PR' => 'PR', 'PE' => 'PE', 'PI' => 'PI', 'RR' => 'RR', 'RO' => 'RO', 'RJ' => 'RJ', 'RN' => 'RN', 'RS' => 'RS', 'SC' => 'SC', 'SP' => 'SP', 'SE' => 'SE', 'TO' => 'TO']" />
             <x:form::input name="endcomplemento" label="Complemento do Endereço: " :placeholder="false"/>
-            <x:form::input name="endcep" label="Código de Endereçamento Postal (CEP): " :placeholder="false"/>
+            <x:form::input name="endcep" class="cep" label="Código de Endereçamento Postal (CEP): " :placeholder="false"/>
             <x:form::input name="titulo" label="Número do Título de Eleitor: " :placeholder="false"/>
             <x:form::input name="titulozona" label="Zona do Título de Eleitor: " :placeholder="false"/>
             <x:form::input name="titulosessao" label="Sessão do Título de Eleitor: " :placeholder="false"/>
@@ -78,8 +78,17 @@
     </x:form::form>
 </div>
 
-<script>
+@endsection
+
+@section('script')
     $(document).ready(function() {
+
+        $(".cpf").mask('000.000.000-00', {reverse: true});
+
+        $('.phone').mask('(00) 00000-0000');
+
+        $('.cep').mask('00000-000');
+
         $(":submit").on("click", function(e) {
             e.preventDefault();
 
@@ -96,6 +105,4 @@
             return false;
         });
     });
-</script>
-
 @endsection
