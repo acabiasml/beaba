@@ -217,4 +217,34 @@ class UserController extends Controller
         $arquivo = Pdf::loadView("user.print", ['usuario' => $usuario])->setPaper('a4', 'portrait');
         return $arquivo->download('ficha-user' . $usuario->id . time() . '.pdf');
     }
+
+    public function codigo($id){
+        
+        $user = User::where("id", $id)->first();
+
+        #letra
+        $inicial = $user->nome[0];
+
+        #numero
+        $ultimo = User::orderBy("codigo", "desc")->where("codigo", 'LIKE', $inicial.'%')->first();
+
+        $preparado = "0001";
+
+        if($ultimo != NULL){
+            $numero = explode("-", $ultimo->codigo)[1] + 1;
+            if($numero < 10){
+                $preparado = "000".$numero;
+            }else{
+                if($numero < 100){
+                    $preparado = "00".$numero;
+                }else{
+                    if($numero < 1000){
+                        $preparado = "0".$numero;
+                    }
+                }
+            }
+        }
+
+        return "novo código: ".$inicial."-".$preparado;
+    }
 }

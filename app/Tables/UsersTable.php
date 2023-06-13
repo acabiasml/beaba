@@ -36,11 +36,30 @@ class UsersTable extends AbstractTable
 
     protected function columns(Table $table): void
     {
-        $table->column('id')->title("id");
-        $table->column('nome')->title("Nome")->sortable(true, 'asc')->searchable();
-        $table->column('tipo')->title("Função")->sortable();
-        $table->column('telefone1')->title("Telefone");
-        $table->column('cpf')->title("CPF")->searchable();
+        $table->column("id")->title("id");
+        $table->column("nome")->title("Nome")->sortable(true, 'asc')->searchable();
+        $table->column("tipo")->title("Função")->sortable();
+        $table->column("telefone1")->title("Telefone");
+        $table->column("cpf")->title("CPF")->searchable();
+
+        $table->column()->title("código")->html(function (User $user) {
+
+            $caminho = route("user.codigo", $user->id);
+
+            if($user->codigo == NULL){
+                $string = "<a href='" . $caminho . "'>gerar código</a>";  
+            }else{
+                $string = $user->codigo;
+            }
+
+            if($user->arquivado == NULL or $user->arquivado == 0){
+                $string = $string . " 🟢";
+            }else{
+                $string = $string . " 🟡";
+            }
+
+            return $string;
+        });
     }
 
     protected function resultLines(Table $table): void
