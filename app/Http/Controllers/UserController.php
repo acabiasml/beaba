@@ -218,6 +218,25 @@ class UserController extends Controller
         return $arquivo->download('ficha-user' . $usuario->id . time() . '.pdf');
     }
 
+    public function arquiva($id){
+
+        $user = User::findOrFail($id);
+
+        $codigo = 1;
+
+        if($user->arquivado != NULL){
+            if($user->arquivado == 1){
+                $codigo = 0;
+            }
+        }
+
+        $user->update([
+            "arquivado" => $codigo,
+        ]);
+
+        return redirect('pessoas');
+    }
+
     public function codigo($id){
         
         $user = User::where("id", $id)->first();
@@ -245,6 +264,10 @@ class UserController extends Controller
             }
         }
 
-        return "novo código: ".$inicial."-".$preparado;
+        $user->update([
+            "codigo" => $inicial."-".$preparado
+        ]);
+
+        return redirect('pessoas');
     }
 }

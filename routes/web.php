@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/inclui', [UserController::class, 'storeUser'])->name('user.store.user');
     Route::post('/atualiza', [UserController::class, 'update'])->name('user.update.user');
     Route::get('/codigo/{id}', [UserController::class, 'codigo'])->name('user.codigo');
+    Route::get('/arquiva/{id}', [UserController::class, 'arquiva'])->name('user.arquiva');
 
     Route::get('/escolas', [DashboardController::class,'escolas'])->name('escolas');
     Route::get('/createescola', [EscolaController::class, 'create'])->name('escola.create');

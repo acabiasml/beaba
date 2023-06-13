@@ -45,6 +45,7 @@ class UsersTable extends AbstractTable
         $table->column()->title("código")->html(function (User $user) {
 
             $caminho = route("user.codigo", $user->id);
+            $rota = route("user.arquiva", $user->id);
 
             if($user->codigo == NULL){
                 $string = "<a href='" . $caminho . "'>gerar código</a>";  
@@ -52,10 +53,10 @@ class UsersTable extends AbstractTable
                 $string = $user->codigo;
             }
 
-            if($user->arquivado == NULL or $user->arquivado == 0){
-                $string = $string . " 🟢";
+            if($user->arquivado == NULL or $user->arquivado == "0"){
+                $string = $string . " <a href='".$rota."'>🟢</a>";
             }else{
-                $string = $string . " 🟡";
+                $string = $string . " <a href='".$rota."'>🟡</a>";
             }
 
             return $string;
