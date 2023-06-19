@@ -244,8 +244,13 @@ class UserController extends Controller
         #letra
         $inicial = $user->nome[0];
 
-        #numero
-        $ultimo = User::orderBy("codigo", "desc")->where("codigo", 'LIKE', $inicial.'%')->first();
+        if($user->tipo == "estud"){
+            $tipo = "ES";
+            $ultimo = User::orderBy("codigo", "desc")->where("codigo", 'LIKE', $inicial.'%')->where("tipo", "estud")->first();
+        }else{
+            $tipo = "FU";
+            $ultimo = User::orderBy("codigo", "desc")->where("codigo", 'LIKE', $inicial.'%')->where("tipo", "<>", "estud")->first();
+        }
 
         $preparado = "0001";
 
@@ -265,7 +270,7 @@ class UserController extends Controller
         }
 
         $user->update([
-            "codigo" => $inicial."-".$preparado
+            "codigo" => $inicial.$tipo."-".$preparado,
         ]);
 
         return redirect('pessoas');
