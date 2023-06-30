@@ -21,7 +21,7 @@ class RelatorioController extends Controller
 {
     public function index(){
         $cursos = Curso::where("status", "!=", "finalizado")->get();
-        $professores = User::where('tipo', '!=' ,'estud')->get();
+        $professores = User::where('tipo', '!=' ,'estud')->orderBy('nome', 'asc')->get();
         return View::make("relatorio.index")
                         ->with("professores", $professores)
                         ->with("cursos", $cursos);

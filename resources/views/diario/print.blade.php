@@ -175,17 +175,12 @@
                         @php
                             $cont2 = $cont2 + 1;
                         @endphp
-                        @if($umdia->geminada == 2)
-                            @php
-                                $cont2 = $cont2 + 1;
-                            @endphp
-                        @endif
                     @endforeach  
                 
                     <div class="page-break"></div>
                     <h1 style="text-align: center; text-transform:uppercase;">FREQUÊNCIA {{$periodos[$cont]->nome}}</h1>
 
-                    <table style="margin-left: auto; margin-right: auto">
+                    <table style="margin-left: auto; margin-right: auto; font-size: 9px">
                         <tr>
                             <th rowspan="3">&nbsp;ID&nbsp;</th>
                             <th rowspan="3">Estudante</th>
@@ -194,18 +189,12 @@
                         </tr>
                         <tr>
                             @foreach($bimestre as $umdia)
-                                <td style="text-align: center; font-size: 9px">&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
-                                @if($umdia->geminada == 2)
-                                    <td style="text-align: center; font-size: 9px">&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
-                                @endif
+                                <td style="text-align: center">&nbsp;{{strftime("%d", strtotime($umdia->data))}}&nbsp;</td>
                             @endforeach
                         </tr>
                         <tr>
                             @foreach($bimestre as $umdia)
-                                <td style="text-align: center; font-size: 9px">&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
-                                @if($umdia->geminada == 2)
-                                    <td style="text-align: center; font-size: 9px">&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
-                                @endif
+                                <td style="text-align: center">&nbsp;{{strftime("%m", strtotime($umdia->data))}}&nbsp;</td>
                             @endforeach
                         </tr>                    
                         @foreach ($infos as $t)
@@ -213,10 +202,7 @@
                                 <td style="text-align: center">{{$t['codigo']}}</td>
                                 <td>&nbsp;{{$t['nome']}}</td>
                                 @foreach($t['diasletivos'][$cont] as $alunochamada)
-                                    @if($umdia->geminada == 2)
-                                    <td style="text-align: center; font-size: 9px">{{$alunochamada['chamada']}}</td>
-                                    @endif
-                                    <td style="text-align: center; font-size: 9px">{{$alunochamada['chamada']}}</td>
+                                    <td style="text-align: center">{{$alunochamada['chamada']}}</td>
                                 @endforeach
                                 <td style="text-align: center">{{$t['faltanessebim'][$cont]}}</td>
                             <tr>

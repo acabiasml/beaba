@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function home()
     {
-        $aniversariantes = User::get();
+        $aniversariantes = User::where("arquivado", "!=", "1")->get();
         $avisos = Aviso::get();
         return view("principais.home", ['aniversariantes' => $aniversariantes, "avisos" => $avisos]);
     }

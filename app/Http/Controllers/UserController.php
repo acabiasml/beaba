@@ -31,6 +31,7 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "codigo" => $request->codigo,
+            "arquivado" => "0",
             "tipo" => $request->tipo,
             "inep" => $request->inep,
             "nomesocial" => $request->nomesocial,
