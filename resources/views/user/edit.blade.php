@@ -14,6 +14,7 @@
     <x:form::form :bind="$usuario" class="row" method="POST" :action="route('user.update.user')">
         <div class="col-md-6">
             <x:form::input type="hidden" name="id" />
+            <x:form::input type="hidden" name="codigo" />
             <x:form::input id="nome" name="nome" label="Nome Completo: " :placeholder="false"/>
             <x:form::input name="nomesocial" label="Nome Social: " :placeholder="false"/>
             <x:form::select name="tipo" label="Tipo: " :options="['admin' => 'Administrador', 'prof' => 'Professor', 'estud' => 'Estudante', 'apoio' => 'Apoio', 'bibli' => 'Biblioteca']" />
