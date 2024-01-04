@@ -3,6 +3,10 @@
 @section('title', 'CONTEÚDOS')
 @section('icon', 'ni-collection')
 
+@section('script')
+    $("#dia").focus();
+@endsection
+
 @section('content')
 
 <a href="{{route('diarios')}}">{{$componente->nome}} - {{$curso->nome}}</a> >> Conteúdos
@@ -28,7 +32,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="dia">Data: </label>
-                    <input class="form-control" type="date" name="dia">
+                    <input class="form-control" type="date" name="dia" id="dia">
                     
                     <label for="geminada">Tipo: </label>
                     <select class="form-control" name="geminada">
