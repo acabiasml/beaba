@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\FrequenciaController;
+use App\Http\Controllers\HistoricoController;
 
 Route::post('/incluir', [UserController::class, 'storeFirst'])->name('user.store.first');
 
@@ -119,4 +120,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/relatorios', [RelatorioController::class,'index'])->name('relatorios');
     Route::get('/seleciona', [RelatorioController::class,'select'])->name('relatorio.boletim');
+
+    Route::get('/historicos', [HistoricoController::class,'index'])->name('historicos');
 });

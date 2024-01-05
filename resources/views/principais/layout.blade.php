@@ -81,6 +81,12 @@
                 <span class="nav-link-text">Relatórios</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('historicos')}}">
+                <i class="ni ni-map-big text-grey"></i>
+                <span class="nav-link-text">Históricos</span>
+              </a>
+            </li>
           </ul>
           @endif
           @if(Auth::user()->tipo != 'bibli')

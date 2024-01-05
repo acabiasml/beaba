@@ -28,21 +28,19 @@ class MediaController extends Controller
             if(($matricula->status == "transferido" || $matricula->status == "reclassificado") && $matricula->datatransf < $periodo->inicio){
                 array_push($transferidos, $matricula->users_id);
             }else{
-                if($matricula->datamatricula <= $periodo->fim){
-                    $media = Media::where("componentes_id", $componente->id)
-                    ->where("periodos_id", $periodo->id)
-                    ->where("users_id", $matricula->users_id)->first();
+                $media = Media::where("componentes_id", $componente->id)
+                                ->where("periodos_id", $periodo->id)
+                                ->where("users_id", $matricula->users_id)->first();
                 
-                    $aluno = User::where("id", $matricula->users_id)->first();  
+                $aluno = User::where("id", $matricula->users_id)->first();  
                     
-                    $nota = 0;
+                $nota = 0;
 
-                    if($media){
-                        $nota = $media->nota;
-                    }
-
-                    array_push($ativos, ["id" => $aluno->id, "nome" => $aluno->nome, "media" => $nota]);
+                if($media){
+                    $nota = $media->nota;
                 }
+
+                array_push($ativos, ["id" => $aluno->id, "nome" => $aluno->nome, "media" => $nota]);
             }
         }
 
