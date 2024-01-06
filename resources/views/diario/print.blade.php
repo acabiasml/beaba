@@ -141,13 +141,19 @@
                             <td style="text-align: center">{{$t['codigo']}}</td>
                             <td>&nbsp;{{$t['nome']}}&nbsp;&nbsp;</td>
                             @foreach ($t['notas'] as $nota)
-                                <td style="text-align: center">{{$nota}}</td>
+                                <td style="text-align: center">
+                                    @if(round(floatval($nota), 1) == 0)
+                                        -
+                                    @else
+                                        {{number_format(floatval($nota), 2, '.', ' ')}}
+                                    @endif
+                                </td>
                             @endforeach
                             <td style="text-align: center">
                                 @if(round(floatval($t['media']), 1) == 0)
                                     -
                                 @else
-                                    {{round(floatval($t['media']), 1)}}
+                                    {{number_format(floatval($t['media']), 2, '.', ' ')}}
                                 @endif
                             </td>
                             @foreach ($t['faltas'] as $falta)

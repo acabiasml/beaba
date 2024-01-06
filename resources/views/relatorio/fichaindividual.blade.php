@@ -19,30 +19,8 @@
         body {
             font-family: roboto-serif, sans-serif;
             font-size: 10pt;
-
-            margin-top: 3.5cm;
-            margin-left: 1.5cm;
-            margin-right: 1.5cm;
-            margin-bottom: 2.5cm;
-        }
-
-        header {
-            position: fixed;
-            top: 35px;
-            left: 0cm;
-            right: 0cm;
-            height: 3cm;
-            text-align: center;
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0cm;
-            left: 0cm;
-            right: 0cm;
-            height: 5cm;
-
-            text-align: center;
+            margin-left: 2cm;
+            margin-right: 2cm;
         }
 
         .page-break {
@@ -56,7 +34,7 @@
         }
 
         table{
-            font-size: 10px;
+            font-size: 9px;
             width: 100%;
         }
 
@@ -66,8 +44,12 @@
 
         td.rotate > div {
             font-weight: normal;
-            transform: 
-                rotate(270deg);
+            transform: rotate(270deg);
+        }
+
+        .column {
+            float: left;
+            padding: 2px;
         }
     </style>
 </head>
@@ -80,39 +62,30 @@
         $i = 0;
     @endphp
 
-    <header>
-        <div style="clear:both; position:relative; padding-left: 16px; padding-right: 16px">
-            <div style="position:absolute; left:-30pt; width:200pt;">
-                <img src="{{public_path('assets/img/ctjj.jpg')}}" style="height: 80px; margin-top: 5px">
-            </div>
-            <div style="width: 100%; display: block; float: left">
-                <p>Centro Técnico Juvenil de Jarudore</p>
-                <p style="font-size: 12pt; margin-top: -14pt"><b>{{$curso->calendario->escola->nome}}</b></p>
-                <p style="margin-top: -13pt">CNPJ: {{$curso->calendario->escola->cnpj}}. Fundação: {{strftime("%d de %b de %Y", strtotime($curso->calendario->escola->fundacao))}}.</p>
-                <p style="margin-top: -10pt">Tel.: {{$curso->calendario->escola->telefone}}. E-mail: {{$curso->calendario->escola->email}} | Site: {{$curso->calendario->escola->site}}</p>
-                <p style="margin-top: -10pt">{{$curso->calendario->escola->info}}.</p>
-            </div>
-            <div style="width: 180%; display: block; float: left">
-                <img src="{{public_path('assets/img/lsf.jpg')}}" style="height: 70px; margin-top: 5px">
-            </div>
-        </div>
-    </header>
-
-    <footer style="clear:both">
-        <p style="font-size: 11pt">Diretor(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp; Secretário(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp;</p>
-        <br/><br/><br/><br/>
-        <hr style="margin-bottom: -10px" />
-        <p>Ficha gerada para impressão por: {{Auth::user()->nome}}, em {{$agora->format('d/m/Y')}} às {{$agora->format('H:i')}}.</p>
-        <p style="text-align: center; margin-top: -10pt">CTJJ. Endereço de Correspondência: Caixa Postal 338. CEP 78700-970. Rondonópolis-MT.</p>
-    </footer>
-
     <main>
         <div style="clear:both; position:relative">
             @foreach ($dados as $matricula)
                 @if ($i != 0)
                     <div class="page-break"></div>
+                    <div style="height: 20px" ></div>
                 @endif
                 
+                <div style="text-align: center; margin-top: 1cm; display: table; clear: both; width: 100%; font-size: 9pt">
+                    <div class="column" style="width: 10%">
+                        <img src="../assets/img/ctjj.jpg" style="height: 60px; margin-top: 5px; vertical-align: top;">
+                    </div>
+                    <div class="column" style="width: 77%">
+                        <p>Centro Técnico Juvenil de Jarudore</p>
+                        <p style="font-size: 12pt; margin-top: -8pt"><b>{{$curso->calendario->escola->nome}}</b></p>
+                        <p style="margin-top: -8pt">CNPJ: {{$curso->calendario->escola->cnpj}}. Fundação: {{strftime("%d de %b de %Y", strtotime($curso->calendario->escola->fundacao))}}.</p>
+                        <p style="margin-top: -8pt">Tel.: {{$curso->calendario->escola->telefone}}. E-mail: {{$curso->calendario->escola->email}} | Site: {{$curso->calendario->escola->site}}</p>
+                        <p style="margin-top: -8pt">{{$curso->calendario->escola->info}}.</p>
+                    </div>
+                    <div class="column" style="width: 10%">
+                        <img src="../assets/img/lsf.jpg" style="height: 60px; vertical-align: top;">
+                    </div>
+                </div>
+
                 <h1 style="text-align: center">FICHA INDIVIDUAL</h1>
                 <h3 style="text-align: center; font-weight:normal; margin-top: -10px; text-transform:uppercase;">{{$curso->nome}} do ensino {{$curso->modalidade}}. {{$curso->calendario->nome}}, {{$curso->calendario->ano}}</h3>
                 
@@ -151,6 +124,7 @@
 
 
                 <br/>
+
                 <table border="3px">
                     <tr>
                         <td rowspan="2" colspan="3" style="text-transform:uppercase;">Componentes Curriculares</td>
@@ -171,13 +145,13 @@
                         @endforeach
                     </tr>
                     <tr>
-                        <td rowspan="{{$contoutra}}" style="text-transform:uppercase;" class="rotate" width="125px"><div>Base Nacional Comum (Lei nº 9.394/96)</div></td>
+                        <td rowspan="{{$contoutra}}" style="text-transform:uppercase; max-width: 2cm;"><div>Base Nacional Comum <br/> (Lei nº 9.394/96)</div></td>
                     </tr>
 
                     @foreach ($matricula["areas"] as $area)
                         @if($area["nome"] != "Parte Diversificada" && $area["nome"] != "Itinerário Formativo")
                             <tr>
-                                <td rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</td>
+                                <td rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase; max-width: 3cm;">{{$area["nome"]}}</td>
                             </tr>
                             @foreach ($area['componentes'] as $componente)
                                 <tr>
@@ -202,11 +176,11 @@
                     @foreach ($matricula["areas"] as $area)
                         @if($area["nome"] == "Parte Diversificada" || $area["nome"] == "Itinerário Formativo")
                             <tr>
-                                <td colspan="2" rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase;">{{$area["nome"]}}</td>
+                                <td colspan="2" rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase; ">{{$area["nome"]}}</td>
                             </tr>
                             @foreach ($area['componentes'] as $componente)
                                 <tr>
-                                    <td style="text-transform:uppercase;">{{$componente['nome']}}</td>
+                                    <td style="text-transform:uppercase; max-width: 4cm;">{{$componente['nome']}}</td>
                                     
                                     @foreach ($componente['notas'] as $bimestre)
                                         <td>{{$bimestre['periodo-media']}}</td>
@@ -241,9 +215,15 @@
             
                 </p>
 
-                <p style="text-weight: normal; font-size: 11px">Legenda: <br/>N (nota); F (falta); MF (média final); TF (total de faltas); CHP (carga-horária prevista); CHC (carga-horária cursada); RF (resultado final).</p>
+                <p style="text-weight: normal; font-size: 8pt">Legenda: <br/>N (nota); F (falta); MF (média final); TF (total de faltas); CHP (carga-horária prevista); CHC (carga-horária cursada); RF (resultado final).</p>
                 <br/>
 
+                <div style="text-align: center">
+                    <p style="margin-top: 0.5cm; margin-bottom: 2cm">Diretor(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp; Secretário(a): _________________________ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <hr  />
+                    <p style="margin-top: -5pt">Ficha gerada para impressão por: {{Auth::user()->nome}}, em {{$agora->format('d/m/Y')}} às {{$agora->format('H:i')}}.</p>
+                    <p style="text-align: center; margin-top: -10pt">CTJJ. Endereço de Correspondência: Caixa Postal 338. CEP 78700-970. Rondonópolis-MT.</p>
+                </div>
 
                 @php
                     $i = $i + 1;

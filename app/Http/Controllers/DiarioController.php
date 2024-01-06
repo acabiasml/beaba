@@ -226,21 +226,29 @@ class DiarioController extends Controller
                     array_push($faltasporbimestre, $faltadessealuno);
                 }
 
-                $dados["faltanessebim"] = $faltasporbimestre;
-                $dados["diasletivos"] = $diasletivos;
-                $dados["notas"] = $notas;
-
-                if($matricula->status == "transferido"){
+                if($matricula->status == "transferido" || $matricula->status == "reclassificado"){
                     $dados["media"] = "-";
                 }else{
-                    $dados["media"] = $media / count($periodos);
+                    $media = $media / $contador;
+                    $inteiro = intval($media);
+
+                    $calculo = $media - $inteiro;
+
+                    if($calculo >= 0.75){
+                        $media = $inteiro + 1;
+                    }else{
+                        if($calculo >= 0.50 || $calculo >= 0.25){
+                            $media = $inteiro + 0.50;
+                        }else{
+                            $media = $inteiro;
+                        }
+                    }
+
+                    $dados["media"] = number_format($media, 2, '.', ' ');
                 }
 
-                $dados["faltas"] = $faltas;
-                $dados["totalfaltas"] = $totalfaltas;
-
-                if($matricula->status != "transferido" && $contador == count($periodos)){
-                    if(($media / count($periodos)) >= 5.5){
+                if($matricula->status != "transferido" && $matricula->status != "reclassificado"){
+                    if($media >= 6){
                         $dados["resultado"] = "aprovado";
                     }else{
                         $dados["resultado"] = "reprovado";
@@ -249,6 +257,12 @@ class DiarioController extends Controller
                     $dados["resultado"] = $matricula->status;
                 }
 
+                $dados["faltanessebim"] = $faltasporbimestre;
+                $dados["diasletivos"] = $diasletivos;
+                $dados["notas"] = $notas;
+                $dados["faltas"] = $faltas;
+                $dados["totalfaltas"] = $totalfaltas;
+                
                 array_push($infos, $dados);
             } 
         }
