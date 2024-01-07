@@ -155,8 +155,6 @@ class RelatorioController extends Controller
                                         ->where("componentes_id", $componente->id)
                                         ->where("periodos_id", $periodo->id)->first();
                         
-                                    
-
                                     if($consulta == null){
                                         $esteperiodo["periodo-media"] = "-";
                                     }else{
@@ -245,8 +243,7 @@ class RelatorioController extends Controller
                                     $estecomponente["CHC"] = "-";
                                 }else{
                                     if($contador < count($periodos)){
-                                        $parcial = ($componente->horas * $contador) / $totalperiodos;
-                                        $estecomponente["CHC"] = $componente->horas - $parcial;
+                                        $estecomponente["CHC"] = ($componente->horas * $contador) / $totalperiodos;
                                     }else{
                                         $estecomponente["CHC"] = $componente->horas - $totalfaltas;
                                     }
