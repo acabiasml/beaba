@@ -98,7 +98,6 @@
                 <p style="margin-top: -8px"><b>Mãe: </b>{{$matricula['aluno']->genitora}}. <b>Pai: </b>{{$matricula['aluno']->genitor}}.</p>
                 <p style="margin-top: -8px"><b>CPF: </b> {{$matricula['aluno']->cpf}} | <b>Tel.: </b> {{$matricula['aluno']->respontel1}}</p>
 
-
                 @php
 
                     $contoutra = 0;
@@ -121,7 +120,6 @@
                         }
                     }
                 @endphp
-
 
                 <br/>
 
@@ -200,7 +198,6 @@
 
                 </table>
 
-
                 <br/>
 
                 <p><b>Dias letivos:</b> 200</p>
@@ -212,7 +209,6 @@
                     @if ($matricula["resultado"] == "TRANSFERIDO")
                         <b>Data da transferência:</b> {{date('d/m/Y', strtotime($matricula["datatransferencia"]))}}
                     @endif
-            
                 </p>
 
                 <p style="text-weight: normal; font-size: 8pt">Legenda: <br/>N (nota); F (falta); MF (média final); TF (total de faltas); CHP (carga-horária prevista); CHC (carga-horária cursada); RF (resultado final).</p>
