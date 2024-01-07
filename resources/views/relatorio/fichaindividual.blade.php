@@ -206,7 +206,7 @@
                 <p><b>Dias letivos:</b> 200</p>
                 <p><b>Carga horária total prevista:</b> {{$matricula["totalhoras"]}} h | <b>Carga horária total cumprida:</b> {{$matricula["totalhorascumpridas"]}} h</p>
                 <p>
-                    <b>Data da matrícula:</b> {{date('d-m-Y', strtotime($matricula["datamatricula"]))}} | 
+                    <b>Data da matrícula:</b> {{date('d/m/Y', strtotime($matricula["datamatricula"]))}} | 
                     <b>Resultado:</b> {{$matricula["resultado"]}}
                     
                     @if ($matricula["resultado"] == "TRANSFERIDO")
