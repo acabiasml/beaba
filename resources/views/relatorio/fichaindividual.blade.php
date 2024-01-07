@@ -210,7 +210,7 @@
                     <b>Resultado:</b> {{$matricula["resultado"]}}
                     
                     @if ($matricula["resultado"] == "TRANSFERIDO")
-                        <b>Data da transferência:</b> {{date('d-m-Y', strtotime($matricula["datatransferencia"]))}}
+                        <b>Data da transferência:</b> {{date('d/m/Y', strtotime($matricula["datatransferencia"]))}}
                     @endif
             
                 </p>
