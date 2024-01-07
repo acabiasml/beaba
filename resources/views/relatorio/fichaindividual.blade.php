@@ -93,7 +93,7 @@
                 <p style="margin-top: -8px">
                     <b>Naturalidade: </b>{{$matricula['aluno']->naturalidade}}, {{$matricula['aluno']->naturaif}}.
                     <b>Nacionalidade:</b> {{$matricula['aluno']->nacionalidade}}.
-                    <b>Data de Nascimento:</b> {{date('d-m-Y', strtotime($matricula['aluno']->nascimento))}}.
+                    <b>Data de Nascimento:</b> {{date('d/m/Y', strtotime($matricula['aluno']->nascimento))}}.
                 </p>
                 <p style="margin-top: -8px"><b>Mãe: </b>{{$matricula['aluno']->genitora}}. <b>Pai: </b>{{$matricula['aluno']->genitor}}.</p>
                 <p style="margin-top: -8px"><b>CPF: </b> {{$matricula['aluno']->cpf}} | <b>Tel.: </b> {{$matricula['aluno']->respontel1}}</p>
@@ -125,7 +125,7 @@
 
                 <br/>
 
-                <table border="3px">
+                <table>
                     <tr>
                         <td rowspan="2" colspan="3" style="text-transform:uppercase;">Componentes Curriculares</td>
                         @foreach ($matricula['areas'][0]['componentes'][0]['notas'] as $bimestre)
