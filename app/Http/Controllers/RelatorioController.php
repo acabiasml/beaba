@@ -198,9 +198,7 @@ class RelatorioController extends Controller
                                     $estecomponente["TF"] = $totalfaltas;
 
                                     $media = $media / $contador;
-
                                     $inteiro = intval($media);
-
                                     $calculo = $media - $inteiro;
 
                                     if($calculo >= 0.75){
@@ -237,17 +235,10 @@ class RelatorioController extends Controller
                                     $estecomponente["RF"] = "-";
                                 }
 
-                                #$horasfull = count(Diario::where("componentes_id", $componente->id)->get());
-
                                 if($contador == 0){
                                     $estecomponente["CHC"] = "-";
                                 }else{
-                                    if($contador < count($periodos)){
-                                        $estecomponente["CHC"] = ($componente->horas * $contador) / $totalperiodos;
-                                    }else{
-                                        $estecomponente["CHC"] = $componente->horas - $totalfaltas;
-                                    }
-
+                                    $estecomponente["CHC"] = (($componente->horas * $contador) / $totalperiodos) - $totalfaltas;
                                     $estealuno["totalhorascumpridas"] = $estealuno["totalhorascumpridas"] + $estecomponente["CHC"];
                                 }
 
