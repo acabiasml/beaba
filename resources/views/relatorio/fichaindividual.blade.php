@@ -142,11 +142,25 @@
                             <td></td>
                         @endforeach
                     </tr>
+
+                    @php
+
+                    foreach($matricula['areas'] as $area){
+                        if($area["nome"] == "Parte Diversificada" || $area["nome"] == "Itinerário Formativo"){
+                            $tamanho = $contoutra;
+                        }else{
+                            $tamanho = $contoutra + 1;
+                        }
+                    }
+
+                    @endphp
+
                     <tr>
-                        <td rowspan="{{$contoutra}}" style="text-transform:uppercase; max-width: 2cm;"><div>Base Nacional Comum <br/> (Lei nº 9.394/96)</div></td>
+                        <td rowspan="{{$tamanho}}" style="text-transform:uppercase; max-width: 2cm;"><div>Base Nacional Comum <br/> (Lei nº 9.394/96)</div></td>
                     </tr>
 
                     @foreach ($matricula["areas"] as $area)
+
                         @if($area["nome"] != "Parte Diversificada" && $area["nome"] != "Itinerário Formativo")
                             <tr>
                                 <td rowspan="{{count($area['componentes']) +1}}" style="text-transform:uppercase; max-width: 3cm;">{{$area["nome"]}}</td>
