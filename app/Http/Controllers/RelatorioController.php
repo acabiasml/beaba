@@ -275,6 +275,167 @@ class RelatorioController extends Controller
             
             #$arquivo = $pdf->loadView("relatorio.fichaindividual", ["dados" => $individual, "curso" => $curso])->setPaper('a4', 'portrait');
 
+        }else if($request->opcao == "fichaentregar"){
+
+            $individual = array();
+
+            foreach ($turma as $matricula){
+                
+                $estudante = User::where("id", $matricula->users_id)->first();
+                
+                if($matricula->tipo == "regular"){
+
+                    $estealuno = array();
+                    $estealuno["aluno"] = $estudante;
+
+                    $estealuno["datamatricula"] = $matricula->datamatricula;
+                    $estealuno["datatransferencia"] = $matricula->datatransf;
+
+                    $estealuno["totalhoras"] = 0;
+                    $estealuno["totalhorascumpridas"] = 0;
+                    
+                    $contadorReprovado = 0;
+
+                    $estealuno["areas"] = array();
+                    foreach($areas as $area){
+                        $estaarea["nome"] = $area->nome;
+                        
+                        $estaarea["componentes"] = array();
+                        foreach($componentes as $componente){
+                            if($componente->area_id == $area->id){
+
+                                $estealuno["totalhoras"] = $estealuno["totalhoras"] + $componente->horas;
+
+                                $estecomponente["nome"] = $componente->nome;
+                                $estecomponente["CHP"] = $componente->horas;
+
+                                $estecomponente["notas"] = array();
+                                $media = 0;
+                                $totalfaltas = 0;
+                                $contador = 0;
+                                $totalperiodos = count($periodos);
+
+                                foreach($periodos as $periodo){
+                                    $esteperiodo["nome"] = $periodo->nome;
+                                    
+                                    $consulta = Media::where("users_id", $matricula->users_id)
+                                        ->where("componentes_id", $componente->id)
+                                        ->where("periodos_id", $periodo->id)->first();
+                        
+                                    if($consulta == null){
+                                        $esteperiodo["periodo-media"] = "-";
+                                    }else{
+                                        if($consulta->nota == 0){
+                                            $esteperiodo["periodo-media"] = "-";
+                                        }else{
+                                            $esteperiodo["periodo-media"] = number_format($consulta->nota, 2, '.', '');
+                                            $media = $media + $consulta->nota;
+                                            $contador = $contador + 1;
+                                        }
+                                    }
+
+                                    if($esteperiodo["periodo-media"] == "-"){
+                                        $esteperiodo["periodo-faltas"] = "-";
+                                    }else{
+                                        $esteperiodo["periodo-faltas"] = 0;
+
+                                        $diasbimestre = Diario::where("componentes_id", $componente->id)
+                                                                ->where("data", ">=", $periodo->inicio)
+                                                                ->where("data", "<=", $periodo->fim)
+                                                                ->get();
+
+                                        foreach($diasbimestre as $dia){
+                                            $verifica = Frequencia::where("users_id", $matricula->users_id)
+                                                                ->where("diarios_id", $dia->id)->first();
+
+                                            if($verifica != null && $verifica->presenca == "F"){
+                                                $totalfaltas = $totalfaltas + 1;
+                                                $esteperiodo["periodo-faltas"] =  $esteperiodo["periodo-faltas"] + 1;
+                                            }
+                                        }                        
+                                    }
+
+                                    array_push($estecomponente["notas"], $esteperiodo);
+                                }                                
+
+                                if($contador == 0 || $contador == null){
+                                    $estecomponente["TF"] = "-";
+                                    $estecomponente["MF"] = "-";
+                                }else{
+                                    $estecomponente["TF"] = $totalfaltas;
+
+                                    $media = $media / $contador;
+                                    $inteiro = intval($media);
+                                    $calculo = $media - $inteiro;
+
+                                    if($calculo >= 0.75){
+                                        $media = $inteiro + 1;
+                                    }else{
+                                        if($calculo >= 0.50 || $calculo >= 0.25){
+                                            $media = $inteiro + 0.50;
+                                        }else{
+                                            $media = $inteiro;
+                                        }
+                                    }
+
+                                    if($matricula->status == "transferido" || $matricula->status == "reclassificado"){
+                                        $estecomponente["MF"] = "-";
+                                    }else{
+                                        $estecomponente["MF"] = number_format($media, 2, '.', ' ');
+                                    }
+                                }
+
+                                if($matricula->status != "transferido" && $matricula->status != "reclassificado"){
+
+                                    if($contador == 0){
+                                        $estecomponente["RF"] = "-";
+                                    }else{
+                                        if($estecomponente["MF"] >= 6){
+                                            $estecomponente["RF"] = "APROV.";
+                                        }else{
+                                            $contadorReprovado = $contadorReprovado + 1;
+                                            $estecomponente["RF"] = "REPROV.";
+                                        }
+                                    }
+                                    
+                                }else{
+                                    $estecomponente["RF"] = "-";
+                                }
+
+                                if($contador == 0){
+                                    $estecomponente["CHC"] = "-";
+                                }else{
+                                    $estecomponente["CHC"] = (($componente->horas * $contador) / $totalperiodos) - $totalfaltas;
+                                    $estealuno["totalhorascumpridas"] = $estealuno["totalhorascumpridas"] + $estecomponente["CHC"];
+                                }
+
+                                array_push($estaarea["componentes"], $estecomponente);
+                            }
+                        }
+
+                        array_push($estealuno["areas"], $estaarea);
+                    }
+
+                    if($matricula->status == "transferido"){
+                        $estealuno["resultado"] = "TRANSFERIDO";
+                    }else if($matricula->status == "reclassificado"){
+                            $estealuno["resultado"] = "RECLASSIFICADO";
+                    }else{
+                        if($contadorReprovado == 0){
+                            $estealuno["resultado"] = "APROVADO";
+                        }else if($contadorReprovado < 2){
+                            $estealuno["resultado"] = "APROVADO COM DEPENDÊNCIA";
+                        }else{
+                            $estealuno["resultado"] = "RETIDO";
+                        }
+                    }
+
+                    array_push($individual, $estealuno);
+                }
+            }
+
+            return View::make("relatorio.fichaentregar")->with("dados", $individual)->with("curso", $curso);
+
         }else if($request->opcao == "matricula"){
 
         }else if($request->opcao == "chamada"){

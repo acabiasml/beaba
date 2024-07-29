@@ -16,6 +16,7 @@
             <div class="col-md-6">
                 <select name="opcao" name="reldisp" class="form-control form-control-sm">
                     <optgroup label="Relatórios disponíveis">
+                        <option value="fichaentregar">Boletim para entregar</option>
                         <option value="boletim">Boletim por período</option>
                         <option value="boletimconc">Boletim conceitual por período</option>
                         <option value="individual">Ficha individual</option>
