@@ -229,7 +229,9 @@ class DiarioController extends Controller
                 if($matricula->status == "transferido" || $matricula->status == "reclassificado"){
                     $dados["media"] = "-";
                 }else{
-                    $media = $media / $contador;
+                    // Alunos sem notas lancadas devem continuar aparecendo no diario.
+                    // Nesse caso, considera media zero e evita divisao por zero.
+                    $media = $contador > 0 ? $media / $contador : 0;
                     $inteiro = intval($media);
 
                     $calculo = $media - $inteiro;
